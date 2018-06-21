@@ -38,7 +38,7 @@ __이후는 교육진행과 관련된 내용입니다.__
 ## 5. branch 생성후 master에서  본인의 branch를 checkout 합니다.
   * 아래와 같이 master 에서 1,2,3 을 순서대로 누르면 원하는 branch를 받을 수 있습니다. 
   * 
-![intern6](/uploads/7fcb0735473284161d60928f25e6e772/intern6.png)
+![intern6](/uploads/d501c3750cf56039bb9d15be35119fb0/intern6.png)
   
 <br/>
 ## 6. 작성하는 동안 계속 commit & push 하시고, 최종 마무리 되었으면 final tag를 달아주세요.
