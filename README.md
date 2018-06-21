@@ -24,14 +24,14 @@
 
 ![intern4](/uploads/64aaab703361159dcd4c5ce390266156/intern4.png)
 
-![intern2](/uploads/a89baae7cf152c86f59e6e03f04a5f02/intern2.png)
+![intern2](/uploads/af4e3fad31e83a3117d41e5ab54559e9/intern2.png)
 
 
 <br/>
 
 __이후는 교육진행과 관련된 내용입니다.__
 ## 4. 제출하는 과제는 branch로 작성합니다. 
-![intern5](/uploads/58399a260f9c786bbe7ae76ae3d8e24f/intern5.png)
+![intern5](/uploads/d288d381a6b8f5f7d3bcc8aaa738d8ed/intern5.png)
   * branch명은 __과정(숫자)_이름(한글)__로 작성합니다. (ex. 1_허태식 )
 
 <br/>
