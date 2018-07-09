@@ -20,13 +20,12 @@ public class TodayServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
-		out.print("<html style='height:100%'><body><a href='/aboutme/index.html'>메인화면</a><br>");
+		out.print("<html style='height:100%'><body><a href='/aboutme/index.html'></a><br>");
 		LocalDateTime ldt = LocalDateTime.now();
 		Formatter f = new Formatter();
 		f.format("%tY/%tm/%te %tk:%tM", ldt, ldt, ldt, ldt, ldt);
 		out.print("<div style='position:relative;top:50%;left:50%'>");
-		out.print("현재시간 : " + f.toString());
+		out.print(" : " + f.toString());
 		out.print("</div></body></html>");
 		f.close();
 	}
