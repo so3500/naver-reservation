@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html {
+	background: gray;
+	text-align: center;
+}
+
+header {
+	background: #ffffff;
+	text-align: right;
+	margin: 10px 10px 10px 10px;
+	height: 150px;
+}
+
+footer {
+	background: #ffffff;
+	height: 150px;
+	margin: 10px 10px 10px 10px;
+	color: gray;
+}
+
+div {
+	background: #ffffff;
+	margin: 10px 10px 10px 10px;
+}
+
+form {
+	display: inline;
+}
+
+input {
+	width: 150px;
+	cursor: pointer;
+	background: #8dbac6;
+	box-shadow: 2px 2px #000000;
+	border: 1px;
+	padding: 5px 5px 5px 5px;
+}
+
+input.header {
+	color: purple;
+	height: 50px;
+	position: relative;
+	top: 33%;
+}
+
+input.section {
+	color: #ffffff;
+	height: 150px;
+}
+</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+		<form>
+			<input class="header" type="button" value="홈"
+				onclick="window.location.href='/aboutme/index.html'" />
+		</form>
+		<form>
+			<input class="header" type="button" value="자기소개"
+				onclick="window.location.href='/aboutme/aboutme.html'" />
+		</form>
+		<form>
+			<input class="header" type="button" value="내사진"
+				onclick="window.location.href='/aboutme/photo.html'" />
+		</form>
+		<form>
+			<input class="header" type="button" value="몇시에요"
+				onclick="window.location.href='/aboutme/today'" />
+		</form>
+	</header>
+	<div></div>
+	<div>
+		<h1>웹프론트엔드 개발자~! 석정음</h1>
+		<h2>함께 개발하고 같이 성장하고 싶어요</h2>
+		<h2>인천광역시 미추홀구 주안로 어딘가 살고 있어요!</h2>
+		<form>
+			<input class="section" type="button" value="자기소개"
+				onclick="window.location.href='/aboutme/aboutme.html'" />
+		</form>
+		<form>
+			<input class="section" type="button" value="내사진"
+				onclick="window.location.href='/aboutme/photo.html'" />
+		</form>
+		<br> <br> <img src="/aboutme/0.PNG"></img>
+	</div>
+	<div></div>
+	<footer>
+		<p>jeongeumseok@naver.com</p>
+		<p>https://github.com/seokjeongeum</p>
+	</footer>
+</body>
+</html>
