@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html {
+	background: gray;
+	text-align: center;
+}
+
+header {
+	background: #ffffff;
+	text-align: right;
+	margin: 10px 10px 10px 10px;
+	height: 150px;
+}
+
+footer {
+	background: #ffffff;
+	height: 150px;
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px; 
+	clear: left;
+	color: gray;
+}
+
+div {
+	background: #ffffff;
+	text-align: left;
+}
+
+form {
+	display: inline;
+}
+
+input {
+	width: 150px;
+	cursor: pointer;
+	background: #8dbac6;
+	box-shadow: 2px 2px #000000;
+	border: 1px;
+	padding: 5px 5px 5px 5px;
+	color: purple;
+	height: 50px;
+	position: relative;
+	top: 33%;
+}
+
+.left, .right, .realright {
+	float: left;
+	height: 400px;
+}
+
+.left {
+	width: 50%;
+}
+
+.right {
+	width: 50%;
+	text-align: left;
+}
+
+img {
+	border: 5px solid #999;
+}
+</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+		<form>
+			<input class="header" type="button" value="홈"
+				onclick="window.location.href='/aboutme/index.html'" />
+		</form>
+		<form>
+			<input class="header" type="button" value="자기소개"
+				onclick="window.location.href='/aboutme/aboutme.html'" />
+		</form>
+		<form>
+			<input class="header" type="button" value="내사진"
+				onclick="window.location.href='/aboutme/photo.html'" />
+		</form>
+		<form>
+			<input class="header" type="button" value="몇시에요"
+				onclick="window.location.href='/aboutme/today'" />
+		</form>
+	</header>
+	<div class="left">
+		<img src="/aboutme/0.PNG"></img>
+	</div>
+	<div class="right">
+		2001.03.11<br>Lorem ipsum dolor sit amet, consectetur adipiscing
+		elit. Donec placerat porttitor lectus vel hendrerit. Morbi malesuada
+		magna vitae quam varius, non dictum nulla consectetur. Proin viverra
+		ut magna sit amet blandit. Integer cursus turpis libero, sit amet
+		varius ipsum laoreet vitae. Donec eget metus auctor, fermentum orci
+		semper, tempor arcu. Nam cursus mollis lectus, porttitor aliquam neque
+		fringilla vitae. Praesent enim magna, elementum at dapibus eu, rutrum
+		non quam.
+	</div>
+	<div class="left">
+		<img src="/aboutme/0.PNG"></img>
+	</div>
+	<div class="right">
+		2001.03.11<br>Lorem ipsum dolor sit amet, consectetur adipiscing
+		elit. Donec placerat porttitor lectus vel hendrerit. Morbi malesuada
+		magna vitae quam varius, non dictum nulla consectetur. Proin viverra
+		ut magna sit amet blandit. Integer cursus turpis libero, sit amet
+		varius ipsum laoreet vitae. Donec eget metus auctor, fermentum orci
+		semper, tempor arcu. Nam cursus mollis lectus, porttitor aliquam neque
+		fringilla vitae. Praesent enim magna, elementum at dapibus eu, rutrum
+		non quam.
+	</div>
+	<footer>
+		<p>jeongeumseok@naver.com</p>
+		<p>https://github.com/seokjeongeum</p>
+	</footer>
+</body>
+</html>
