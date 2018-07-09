@@ -20,6 +20,7 @@ public class TodayServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		
 		out.print("<html style='height:100%'><body><a href='/aboutme/index.html'>메인화면</a><br>");
 		LocalDateTime ldt = LocalDateTime.now();
 		Formatter f = new Formatter();
