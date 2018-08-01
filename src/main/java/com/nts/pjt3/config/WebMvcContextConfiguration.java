@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.nts.pjt3.controller", "com.nts.pjt3.controller.api"})
+@ComponentScan(basePackages = {"com.nts.pjt3.controller"})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
