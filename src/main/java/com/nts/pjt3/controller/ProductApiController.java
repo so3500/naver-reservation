@@ -35,7 +35,7 @@ public class ProductApiController {
 
 		map.put("totalCount", productService.getProductsCount());
 		map.put("productsCount", products.size());
-		map.put("items", products);
+		map.put("products", products);
 
 		return map;
 	}

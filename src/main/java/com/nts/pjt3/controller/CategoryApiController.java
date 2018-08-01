@@ -21,10 +21,10 @@ public class CategoryApiController {
 
 	@GetMapping
 	public Map<String, Object> getCategories() {
-		List<Category> categories = categoryService.getAllCategories();
+		List<Category> categories = categoryService.getCategories();
 
 		Map<String, Object> map = new HashMap<>();
-		map.put("items", categories);
+		map.put("categories", categories);
 		map.put("size", categories.size());
 
 		return map;

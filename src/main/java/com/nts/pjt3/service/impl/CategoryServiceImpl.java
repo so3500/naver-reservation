@@ -16,7 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryDao categoryDao;
 
 	@Override
-	public List<Category> getAllCategories() {
+	public List<Category> getCategories() {
 		return categoryDao.findAll();
 	}
 
