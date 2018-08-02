@@ -45,4 +45,12 @@ public class ProductDao {
 		return jdbc.queryForObject(ProductDaoSqls.SELECT_ALL_COUNT, Collections.emptyMap(), Integer.class);
 	}
 
+	public int countByCategoryId(int categoryId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("categoryId", categoryId);
+		return jdbc.queryForObject(ProductDaoSqls.SELECT_ALL_COUNT_BY_CATEGORY_ID, params, Integer.class);
+	}
+	
+	// TODO: findByDisplayInfoId 추가, EmptyResultDataAccessException 처리
+
 }

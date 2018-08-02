@@ -9,4 +9,5 @@ public interface ProductService {
 	public List<Product> getProducts(int start);
 	public List<Product> getProductsByCategoryId(int start, int categoryId);
 	public int getProductsCount();
+	public int getProductsCountByCategoryId(int categoryId);
 }
