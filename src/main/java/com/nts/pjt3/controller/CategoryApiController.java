@@ -21,9 +21,8 @@ public class CategoryApiController {
 
 	@GetMapping
 	public Map<String, Object> getCategories() {
-		List<Category> categories = categoryService.getCategories();
-
 		Map<String, Object> map = new HashMap<>();
+		List<Category> categories = categoryService.getCategories();
 		map.put("categories", categories);
 		map.put("size", categories.size());
 

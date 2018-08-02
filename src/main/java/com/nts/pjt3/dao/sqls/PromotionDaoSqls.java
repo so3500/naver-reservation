@@ -1,8 +1,11 @@
 package com.nts.pjt3.dao.sqls;
 
 public class PromotionDaoSqls {
-	public static final String SELECT_ALL = "SELECT pm.id AS id, p.id AS product_id, c.id AS category_id," +
-		" c.name AS category_name, p.description, pi.id AS product_image_id" +
-		" FROM promotion AS pm, product AS p, category AS c, product_image AS pi" +
-		" WHERE pm.product_id = p.id AND p.category_id = c.id AND p.id = pi.product_id";
+	public static final String SELECT_ALL = 
+		"SELECT product.id AS product_id, product.description, " +
+		" promotion.id AS id," +
+		" category.id AS category_id,category.name AS category_name," +
+		" pimg.id AS product_image_id" +
+		" FROM promotion, product, category, product_image AS pimg" +
+		" WHERE promotion.product_id = product.id AND product.category_id = category.id AND product.id = pimg.product_id AND pimg.type = 'ma'";
 }
