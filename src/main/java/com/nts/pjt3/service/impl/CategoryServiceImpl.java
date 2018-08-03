@@ -13,7 +13,7 @@ import com.nts.pjt3.service.CategoryService;
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
-	CategoryDao categoryDao;
+	private CategoryDao categoryDao;
 
 	@Override
 	public List<Category> getCategories() {
