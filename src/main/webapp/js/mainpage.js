@@ -4,13 +4,13 @@ let eventSection = document.querySelector(".section_event_lst");
 let eventBox = document.querySelectorAll(".lst_event_box");
 let leftEventBox = eventBox[LEFT];
 let rightEventBox = eventBox[RIGHT];
+let moreProductsButton = document.querySelector(".more .btn");
 
 document.addEventListener("DOMContentLoaded", function() {
     // TODO loadPromotions();
     loadCateogires();
     loadProducts();
 
-    moreProductsButton = document.querySelector(".more .btn");
     moreProductsButton.addEventListener("click", loadProducts);
 
     categoryTabs = document.querySelector(".event_tab_lst, .tab_lst_min");
@@ -48,11 +48,28 @@ function loadProducts() {
         const productsCount = response.productsCount;
 
         addProductsToEventBox(products);
-        updateStartProudctNo(productsCount);
+        startProductNo = updateStartProudctNo(productsCount);
         updateEventCount(totalCount);
+        if (startProductNo >= totalCount) {
+            hideElement(moreProductsButton);
+        } else {
+            showElement(moreProductsButton);
+        }
     });
     productRequest.open("GET", GET_PRODUCTS_URL);
     productRequest.send();
+}
+
+function hideElement(element) {
+    if(element.classList.contains("blind") === false){
+        element.classList.toggle("blind");
+    }
+}
+
+function showElement(element) {
+    if(element.classList.contains("blind") === true){
+        element.classList.toggle("blind");
+    }
 }
 
 function addProductsToEventBox(products) {
@@ -74,6 +91,7 @@ function addProductsToEventBox(products) {
 
 function updateStartProudctNo(loadedProductsCount) {
     eventSection.dataset.startProductNo = parseInt(eventSection.dataset.startProductNo) + loadedProductsCount;
+    return parseInt(eventSection.dataset.startProductNo);
 }
 
 function updateEventCount(eventCount) {
