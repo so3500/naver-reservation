@@ -7,13 +7,13 @@ let rightEventBox = eventBox[RIGHT];
 let moreProductsButton = document.querySelector(".more .btn");
 
 document.addEventListener("DOMContentLoaded", function() {
-    // TODO loadPromotions();
+    loadPromotions();
     loadCateogires();
     loadProducts();
 
     moreProductsButton.addEventListener("click", loadProducts);
 
-    categoryTabs = document.querySelector(".event_tab_lst, .tab_lst_min");
+    categoryTabs = document.querySelector(".event_tab_lst.tab_lst_min");
     categoryTabs.addEventListener("click", function(event) {
         let category = event.target.closest(".item");
         let categoryTab = event.target.closest(".anchor");
@@ -30,6 +30,25 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 });
 
+function loadPromotions() {
+    const GET_PROMOTIONS_URL = "/reservation/api/promotions";
+    let promotionRequest = new XMLHttpRequest();
+    promotionRequest.addEventListener("load", function() {
+        let promotionBox = document.querySelector(".visual_img");
+        const response = JSON.parse(this.responseText);
+        const promotions = response.promotions;
+
+        let promotionsHtml = "";
+        promotions.forEach((promotion) => {
+            promotionsHtml += getPromotionHtml(promotion);
+        });
+        promotionBox.innerHTML = promotionsHtml;
+    });
+
+    promotionRequest.open("GET", GET_PROMOTIONS_URL);
+    promotionRequest.send();
+}
+
 function activateCategoryTab(toActivatingCategoryTab) {
     let currentActivatingCategoryTab = document.querySelector(".anchor.active");
     currentActivatingCategoryTab.classList.toggle("active");
@@ -39,7 +58,7 @@ function activateCategoryTab(toActivatingCategoryTab) {
 function loadProducts() {
     let startProductNo = parseInt(eventSection.dataset.startProductNo);
     let categoryId = eventSection.dataset.categoryId;
-    const GET_PRODUCTS_URL = `http://localhost:8080/reservation/api/products?categoryId=${categoryId}&start=${startProductNo}`;
+    const GET_PRODUCTS_URL = `/reservation/api/products?categoryId=${categoryId}&start=${startProductNo}`;
     let productRequest = new XMLHttpRequest();
     productRequest.addEventListener("load", function() {
         const response = JSON.parse(this.responseText);
@@ -101,7 +120,7 @@ function updateEventCount(eventCount) {
 }
 
 function loadCateogires() {
-    const GET_CATEGORIES_URL = "http://localhost:8080/reservation/api/categories"
+    const GET_CATEGORIES_URL = "/reservation/api/categories"
     let categoryRequest = new XMLHttpRequest();
     categoryRequest.addEventListener("load", addCategoryToEventTab);
     categoryRequest.open("GET", GET_CATEGORIES_URL);
@@ -142,6 +161,20 @@ function getCategoryHtml(category) {
     return `
     <li class="item" data-category-id="${category.id}">
     <a class="anchor"> <span>${category.name}</span> </a>
+    </li>
+    `;
+}
+
+function getPromotionHtml(promotion){
+    return `
+    <li class="item" style="background-image: url(http://211.249.62.123/productImages/${promotion.productId}/${promotion.productImageId});">
+        <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
+        <div class="event_txt">
+            <h4 class="event_txt_tit"></h4>
+            <p class="event_txt_adr"></p>
+            <p class="event_txt_dsc"></p>
+        </div>
+    </a>
     </li>
     `;
 }
