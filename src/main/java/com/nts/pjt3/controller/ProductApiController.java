@@ -19,19 +19,19 @@ import com.nts.pjt3.service.ProductService;
 public class ProductApiController {
 
 	@Autowired
-	ProductService productService;
+	private ProductService productService;
 
-	final int ALL_CATEGORY = 0;
+	private final int ALL_CATEGORY = 0;
 
 	@GetMapping
 	public Map<String, Object> getProducts(
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start,
 		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId) {
 		List<Product> products = Collections.emptyList();
-		int productsCount = 0;
-		if (productService.getProductsCount() > 0) {
+		
+		int productsCount = getProductsCountByCategoryId(categoryId);
+		if (productsCount > 0) {
 			products = getProductsByCategoryId(start, categoryId);
-			productsCount = getProductsCountByCategoryId(categoryId);
 		}
 
 		Map<String, Object> map = new HashMap<>();

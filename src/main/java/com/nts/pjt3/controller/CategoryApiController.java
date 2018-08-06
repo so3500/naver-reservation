@@ -17,7 +17,7 @@ import com.nts.pjt3.service.CategoryService;
 public class CategoryApiController {
 
 	@Autowired
-	CategoryService categoryService;
+	private CategoryService categoryService;
 
 	@GetMapping
 	public Map<String, Object> getCategories() {

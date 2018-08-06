@@ -17,7 +17,7 @@ import com.nts.pjt3.service.PromotionService;
 public class PromotionApiController {
 
 	@Autowired
-	PromotionService promotionService;
+	private PromotionService promotionService;
 
 	@GetMapping
 	public Map<String, Object> getPromotions() {
