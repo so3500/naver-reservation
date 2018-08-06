@@ -1,5 +1,6 @@
 package com.nts.pjt3.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,27 +21,41 @@ public class ProductApiController {
 	@Autowired
 	ProductService productService;
 
+	final int ALL_CATEGORY = 0;
+
 	@GetMapping
 	public Map<String, Object> getProducts(
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start,
 		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId) {
-		Map<String, Object> map = new HashMap<>();
-		List<Product> products;
+		List<Product> products = Collections.emptyList();
 		int productsCount = 0;
-
-		if (categoryId == 0) {
-			products = productService.getProducts(start);
-			productsCount = productService.getProductsCount();
-		} else {
-			products = productService.getProductsByCategoryId(start, categoryId);
-			productsCount = productService.getProductsCountByCategoryId(categoryId);
+		if (productService.getProductsCount() > 0) {
+			products = getProductsByCategoryId(start, categoryId);
+			productsCount = getProductsCountByCategoryId(categoryId);
 		}
 
+		Map<String, Object> map = new HashMap<>();
 		map.put("totalCount", productsCount);
 		map.put("productsCount", products.size());
 		map.put("products", products);
 
 		return map;
+	}
+
+	private List<Product> getProductsByCategoryId(int start, int categoryId) {
+		if (categoryId == ALL_CATEGORY) {
+			return productService.getProducts(start);
+		} else {
+			return productService.getProductsByCategoryId(start, categoryId);
+		}
+	}
+
+	private int getProductsCountByCategoryId(int categoryId) {
+		if (categoryId == ALL_CATEGORY) {
+			return productService.getProductsCount();
+		} else {
+			return productService.getProductsCountByCategoryId(categoryId);
+		}
 	}
 
 }
