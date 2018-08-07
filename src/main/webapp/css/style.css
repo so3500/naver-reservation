@@ -1240,7 +1240,7 @@ button {
 .form_horizontal .inline_form .inline_control.tel_wrap {
     position: relative;
 }
-    
+
 
 .form_horizontal .inline_form .inline_control.tel_wrap .warning_msg {
     position: relative;
@@ -1280,7 +1280,7 @@ button {
     min-height: 210px;
     font: 0/0 a;
     color: #fff;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 .group_visual .visual_img .item {
@@ -2985,7 +2985,7 @@ button {
     overflow: hidden;
     position: relative;
     display: inline-block;
-    width: 84.4%;
+    width: 100%;
     height: 177px;
     background-repeat: no-repeat;
     background-position: center center;

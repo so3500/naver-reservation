@@ -1,10 +1,10 @@
 const LEFT = 0;
 const RIGHT = 1;
-let eventSection = document.querySelector(".section_event_lst");
-let eventBox = document.querySelectorAll(".lst_event_box");
+let eventSection = document.querySelector("div.section_event_lst");
+let eventBox = document.querySelectorAll("ul.lst_event_box");
 let leftEventBox = eventBox[LEFT];
 let rightEventBox = eventBox[RIGHT];
-let moreProductsButton = document.querySelector(".more .btn");
+let moreProductsButton = document.querySelector("div.more > button");
 
 document.addEventListener("DOMContentLoaded", function() {
     loadPromotions();
@@ -12,45 +12,72 @@ document.addEventListener("DOMContentLoaded", function() {
     loadProducts();
 
     moreProductsButton.addEventListener("click", loadProducts);
+categoryTabs = document.querySelector("ul.event_tab_lst.tab_lst_min");
+categoryTabs.addEventListener("click", function(event) {
+let category = event.target.closest(".item");
+let categoryTab = event.target.closest(".anchor");
+if (category != null && categoryTab != null) {
+    let categoryId = parseInt(category.dataset.categoryId);
+    leftEventBox.innerHTML = "";
+    rightEventBox.innerHTML = "";
+    eventSection.dataset.categoryId = categoryId;
+    eventSection.dataset.startProductNo = 0;
 
-    categoryTabs = document.querySelector(".event_tab_lst.tab_lst_min");
-    categoryTabs.addEventListener("click", function(event) {
-        let category = event.target.closest(".item");
-        let categoryTab = event.target.closest(".anchor");
-        if (category != null && categoryTab != null) {
-            let categoryId = parseInt(category.dataset.categoryId);
-            leftEventBox.innerHTML = "";
-            rightEventBox.innerHTML = "";
-            eventSection.dataset.categoryId = categoryId;
-            eventSection.dataset.startProductNo = 0;
-
-            activateCategoryTab(categoryTab);
-            loadProducts();
-        }
-    })
+    activateCategoryTab(categoryTab);
+    loadProducts();
+}
+})
 });
 
 function loadPromotions() {
     const GET_PROMOTIONS_URL = "/reservation/api/promotions";
     let promotionRequest = new XMLHttpRequest();
     promotionRequest.addEventListener("load", function() {
-        let promotionBox = document.querySelector(".visual_img");
+        let promotionBox = document.querySelector(".container_visual ul.visual_img");
         const response = JSON.parse(this.responseText);
         const promotions = response.promotions;
+        const promotionCount = response.size;
 
         let promotionsHtml = "";
         promotions.forEach((promotion) => {
             promotionsHtml += getPromotionHtml(promotion);
         });
         promotionBox.innerHTML = promotionsHtml;
+
+        setPromotionBoxSlideShow(promotionBox, promotionCount);
     });
 
     promotionRequest.open("GET", GET_PROMOTIONS_URL);
     promotionRequest.send();
 }
 
+function setPromotionBoxSlideShow(promotionBox, promotionCount) {
+    const PROMOTION_ITEM_WIDTH = promotionBox.offsetWidth;
+    const SLIDE_SHOW_SPEED_CONTROLLER = 4; // 값이 커질수록 slide show의 속도는 느려짐
+    const DURATION = PROMOTION_ITEM_WIDTH * promotionCount * SLIDE_SHOW_SPEED_CONTROLLER;
+    let slideShowFrame = getSlideShowFrame(PROMOTION_ITEM_WIDTH, promotionCount);
+    let options = {
+        duration: DURATION,
+        iterations: Infinity
+    };
+    promotionBox.animate(slideShowFrame, options);
+}
+
+function getSlideShowFrame(promotionItemWidth, promotionCount) {
+    let slideShowFrame = [{
+        transform: "translateX(0px)"
+    }];
+    for (let idx = 0; idx < promotionCount; idx++) {
+        slideShowFrame.push({
+            transform: `translateX(-${promotionItemWidth * idx}px)`,
+            easing: "ease-out"
+        });
+    }
+    return slideShowFrame;
+}
+
 function activateCategoryTab(toActivatingCategoryTab) {
-    let currentActivatingCategoryTab = document.querySelector(".anchor.active");
+    let currentActivatingCategoryTab = document.querySelector("a.anchor.active");
     currentActivatingCategoryTab.classList.toggle("active");
     toActivatingCategoryTab.classList.toggle("active");
 }
@@ -114,7 +141,7 @@ function updateStartProudctNo(loadedProductsCount) {
 }
 
 function updateEventCount(eventCount) {
-    let eventText = document.querySelector(".event_lst_txt");
+    let eventText = document.querySelector("p.event_lst_txt");
     let eventHtml = `바로 예매 가능한 행사가 <span class="pink">${eventCount}개</span> 있습니다`;
     eventText.innerHTML = eventHtml;
 }
@@ -136,7 +163,7 @@ function addCategoryToEventTab() {
         categoriesHtml += getCategoryHtml(category);
     });
 
-    let eventTab = document.querySelector(".event_tab_lst");
+    let eventTab = document.querySelector("ul.event_tab_lst");
     eventTab.innerHTML += categoriesHtml;
 }
 
