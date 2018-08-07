@@ -30,7 +30,7 @@ public class ProductDao {
 		Map<String, Integer> params = new HashMap<>();
 		params.put("start", start);
 		params.put("limit", ProductService.LIMIT);
-		return jdbc.query(ProductDaoSqls.SELECT_ALL, params, rowMapper);
+		return jdbc.query(ProductDaoSqls.SELECT_PRODUCTS, params, rowMapper);
 	}
 
 	public List<Product> findAllByCategoryId(int start, int categoryId) {
@@ -38,19 +38,23 @@ public class ProductDao {
 		params.put("start", start);
 		params.put("limit", ProductService.LIMIT);
 		params.put("categoryId", categoryId);
-		return jdbc.query(ProductDaoSqls.SELECT_ALL_BY_CATEGORY_ID, params, rowMapper);
+		return jdbc.query(ProductDaoSqls.SELECT_PRODUCTS_BY_CATEGORY_ID, params, rowMapper);
 	}
 
 	public int count() {
-		return jdbc.queryForObject(ProductDaoSqls.SELECT_ALL_COUNT, Collections.emptyMap(), Integer.class);
+		return jdbc.queryForObject(ProductDaoSqls.SELECT_PRODUCTS_COUNT, Collections.emptyMap(), Integer.class);
 	}
 
 	public int countByCategoryId(int categoryId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("categoryId", categoryId);
-		return jdbc.queryForObject(ProductDaoSqls.SELECT_ALL_COUNT_BY_CATEGORY_ID, params, Integer.class);
+		return jdbc.queryForObject(ProductDaoSqls.SELECT_PRODUCTS_COUNT_BY_CATEGORY_ID, params, Integer.class);
 	}
 	
-	// TODO: findByDisplayInfoId 추가, EmptyResultDataAccessException 처리
+	public Product findByDisplayInfoId(int displayInfoId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("displayInfoId", displayInfoId);
+		return jdbc.queryForObject(ProductDaoSqls.SELECT_PRODUCT_BY_DISPLAY_INFO_ID, params, rowMapper);
+	}
 
 }

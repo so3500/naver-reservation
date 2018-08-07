@@ -23,7 +23,7 @@ public class CategoryDao {
 	}
 
 	public List<Category> findAll() {
-		return jdbc.query(CategoryDaoSqls.SELECT_ALL, rowMapper);
+		return jdbc.query(CategoryDaoSqls.SELECT_CATEGORIES, rowMapper);
 	}
 
 }

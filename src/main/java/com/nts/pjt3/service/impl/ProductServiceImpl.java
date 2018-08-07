@@ -34,4 +34,10 @@ public class ProductServiceImpl implements ProductService {
 	public int getProductsCountByCategoryId(int categoryId) {
 		return productDao.countByCategoryId(categoryId);
 	}
+
+	@Override
+	public Product getProductByDisplayInfoId(int displayInfoId) {
+		return productDao.findByDisplayInfoId(displayInfoId);
+	}
+
 }

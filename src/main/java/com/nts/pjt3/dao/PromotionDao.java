@@ -23,6 +23,6 @@ public class PromotionDao {
 	}
 
 	public List<Promotion> findAll() {
-		return jdbc.query(PromotionDaoSqls.SELECT_ALL, rowMapper);
+		return jdbc.query(PromotionDaoSqls.SELECT_PROMOTIONS, rowMapper);
 	}
 }

@@ -7,11 +7,18 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nts.pjt3.dto.DisplayInfoImage;
 import com.nts.pjt3.dto.Product;
+import com.nts.pjt3.dto.ProductImage;
+import com.nts.pjt3.dto.ProductPrice;
+import com.nts.pjt3.service.DisplayInfoImageService;
+import com.nts.pjt3.service.ProductImageService;
+import com.nts.pjt3.service.ProductPriceService;
 import com.nts.pjt3.service.ProductService;
 
 @RestController
@@ -21,6 +28,15 @@ public class ProductApiController {
 	@Autowired
 	private ProductService productService;
 
+	@Autowired
+	private ProductImageService productImageService;
+	
+	@Autowired
+	private DisplayInfoImageService displayInfoImageService;
+	
+	@Autowired
+	private ProductPriceService productPriceService;
+
 	private final int ALL_CATEGORY = 0;
 
 	@GetMapping
@@ -28,7 +44,7 @@ public class ProductApiController {
 		@RequestParam(name = "start", required = false, defaultValue = "0") int start,
 		@RequestParam(name = "categoryId", required = false, defaultValue = "0") int categoryId) {
 		List<Product> products = Collections.emptyList();
-		
+
 		int productsCount = getProductsCountByCategoryId(categoryId);
 		if (productsCount > 0) {
 			products = getProductsByCategoryId(start, categoryId);
@@ -42,19 +58,43 @@ public class ProductApiController {
 		return map;
 	}
 
+	@GetMapping("/{displayInfoId}")
+	private Map<String, Object> getProduct(
+		@PathVariable(name = "displayInfoId") int displayInfoId) {
+		
+		// TODO: product EmptyResultDataAccessException 예외처리
+		Product product = productService.getProductByDisplayInfoId(displayInfoId);
+		List<ProductImage> productImages = productImageService.getProductImagesByDisplayInfoId(displayInfoId);
+		List<DisplayInfoImage> displayInfoImages = displayInfoImageService.getDisplayInfoImagesByDisplayInfoId(displayInfoId);
+		List<ProductPrice> productPrices = productPriceService.getProductPricesByDisplayInfoId(displayInfoId);
+		// TODO comments, avgScore
+		List<Object> comments = Collections.emptyList();
+		double avgScore = 0.0;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("product", product);
+		map.put("productImages", productImages);
+		map.put("avgScore", avgScore);
+		map.put("comments", comments);
+		map.put("displayInfoImages", displayInfoImages);
+		map.put("productPrices", productPrices);
+		
+		return map;
+	}
+
 	private List<Product> getProductsByCategoryId(int start, int categoryId) {
-		if (categoryId == ALL_CATEGORY) {
-			return productService.getProducts(start);
-		} else {
+		if (categoryId != ALL_CATEGORY) {
 			return productService.getProductsByCategoryId(start, categoryId);
+		} else {
+			return productService.getProducts(start);
 		}
 	}
 
 	private int getProductsCountByCategoryId(int categoryId) {
-		if (categoryId == ALL_CATEGORY) {
-			return productService.getProductsCount();
-		} else {
+		if (categoryId != ALL_CATEGORY) {
 			return productService.getProductsCountByCategoryId(categoryId);
+		} else {
+			return productService.getProductsCount();
 		}
 	}
 
