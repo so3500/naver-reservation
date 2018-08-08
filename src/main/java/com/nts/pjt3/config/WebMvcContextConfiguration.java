@@ -17,8 +17,6 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/html/**").addResourceLocations("/html/")
-		.setCachePeriod(31556926);
 		registry.addResourceHandler("/css/**").addResourceLocations("/css/")
 			.setCachePeriod(31556926);
 		registry.addResourceHandler("/img/**").addResourceLocations("/img/")
@@ -45,7 +43,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	public InternalResourceViewResolver getInternalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".html");
+		resolver.setSuffix(".jsp");
 		return resolver;
 	}
 }
