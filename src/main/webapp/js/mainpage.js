@@ -12,21 +12,22 @@ document.addEventListener("DOMContentLoaded", function() {
     loadProducts();
 
     moreProductsButton.addEventListener("click", loadProducts);
-categoryTabs = document.querySelector("ul.event_tab_lst.tab_lst_min");
-categoryTabs.addEventListener("click", function(event) {
-let category = event.target.closest(".item");
-let categoryTab = event.target.closest(".anchor");
-if (category != null && categoryTab != null) {
-    let categoryId = parseInt(category.dataset.categoryId);
-    leftEventBox.innerHTML = "";
-    rightEventBox.innerHTML = "";
-    eventSection.dataset.categoryId = categoryId;
-    eventSection.dataset.startProductNo = 0;
+    categoryTabs = document.querySelector("ul.event_tab_lst.tab_lst_min");
+    categoryTabs.addEventListener("click", function(event) {
+        let clickedTagName = event.target.tagName;
+        if (clickedTagName === "A" || clickedTagName === "SPAN") {
+            let category = event.target.closest(".item");
+            let categoryTab = event.target.closest(".anchor");
+            let categoryId = parseInt(category.dataset.categoryId);
+            leftEventBox.innerHTML = "";
+            rightEventBox.innerHTML = "";
+            eventSection.dataset.categoryId = categoryId;
+            eventSection.dataset.startProductNo = 0;
 
-    activateCategoryTab(categoryTab);
-    loadProducts();
-}
-})
+            activateCategoryTab(categoryTab);
+            loadProducts();
+        }
+    });
 });
 
 function loadPromotions() {
@@ -73,6 +74,9 @@ function getSlideShowFrame(promotionItemWidth, promotionCount) {
             easing: "ease-out"
         });
     }
+    slideShowFrame.push({
+        transform: `translateX(-${promotionItemWidth * (promotionCount - 1)}px)`
+    })
     return slideShowFrame;
 }
 
@@ -107,13 +111,13 @@ function loadProducts() {
 }
 
 function hideElement(element) {
-    if(element.classList.contains("blind") === false){
+    if (element.classList.contains("blind") === false) {
         element.classList.toggle("blind");
     }
 }
 
 function showElement(element) {
-    if(element.classList.contains("blind") === true){
+    if (element.classList.contains("blind") === true) {
         element.classList.toggle("blind");
     }
 }
@@ -192,7 +196,7 @@ function getCategoryHtml(category) {
     `;
 }
 
-function getPromotionHtml(promotion){
+function getPromotionHtml(promotion) {
     return `
     <li class="item" style="background-image: url(http://211.249.62.123/productImages/${promotion.productId}/${promotion.productImageId});">
         <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
