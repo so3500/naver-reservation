@@ -30,11 +30,12 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+let promotionBox = document.querySelector(".container_visual ul.visual_img");
+
 function loadPromotions() {
     const GET_PROMOTIONS_URL = "/reservation/api/promotions";
     let promotionRequest = new XMLHttpRequest();
     promotionRequest.addEventListener("load", function() {
-        let promotionBox = document.querySelector(".container_visual ul.visual_img");
         const response = JSON.parse(this.responseText);
         const promotions = response.promotions;
         const promotionCount = response.size;
@@ -53,31 +54,35 @@ function loadPromotions() {
 }
 
 function setPromotionBoxSlideShow(promotionBox, promotionCount) {
-    const PROMOTION_ITEM_WIDTH = promotionBox.offsetWidth;
-    const SLIDE_SHOW_SPEED_CONTROLLER = 4; // 값이 커질수록 slide show의 속도는 느려짐
-    const DURATION = PROMOTION_ITEM_WIDTH * promotionCount * SLIDE_SHOW_SPEED_CONTROLLER;
-    let slideShowFrame = getSlideShowFrame(PROMOTION_ITEM_WIDTH, promotionCount);
-    let options = {
-        duration: DURATION,
-        iterations: Infinity
-    };
-    promotionBox.animate(slideShowFrame, options);
+    if (promotionCount >= 2) {
+        promotionBox.addEventListener("transitionend", initSlideShowPosition);
+        requestAnimationFrame(promotionBoxSlideShow);
+    }
 }
 
-function getSlideShowFrame(promotionItemWidth, promotionCount) {
-    let slideShowFrame = [{
-        transform: "translateX(0px)"
-    }];
-    for (let idx = 0; idx < promotionCount; idx++) {
-        slideShowFrame.push({
-            transform: `translateX(-${promotionItemWidth * idx}px)`,
-            easing: "ease-out"
-        });
+function initSlideShowPosition() {
+    this.style.transitionDuration = "0s";
+    this.style.transform = "translateX(0)";
+    this.insertAdjacentElement("beforeend", this.firstElementChild);
+}
+
+let slideShowStartTime = 0;
+const SLIDE_SHOW_DELAY = 1500;
+const SLIDE_SHOW_DURATION = "2s";
+let promotionBoxSlideShow = function(timestamp) {
+    if (slideShowStartTime === 0) {
+        slideShowStartTime = timestamp;
     }
-    slideShowFrame.push({
-        transform: `translateX(-${promotionItemWidth * (promotionCount - 1)}px)`
-    })
-    return slideShowFrame;
+    let progress = timestamp - slideShowStartTime;
+
+    if (progress > SLIDE_SHOW_DELAY) {
+        const PROMOTION_ITEM_WIDTH = promotionBox.firstElementChild.offsetWidth;
+        promotionBox.style.transitionDuration = SLIDE_SHOW_DURATION;
+        promotionBox.style.transform = `translateX(-${PROMOTION_ITEM_WIDTH}px)`;
+        slideShowStartTime = 0;
+    }
+
+    requestAnimationFrame(promotionBoxSlideShow);
 }
 
 function activateCategoryTab(toActivatingCategoryTab) {
@@ -174,7 +179,7 @@ function addCategoryToEventTab() {
 function getProductHtml(product) {
     return `
     <li class="item">
-        <a href="detail.html?id=${product.id}" class="item_book">
+        <a href="./detail?id=${product.displayInfoId}" class="item_book">
             <div class="item_preview">
                 <img alt="${product.description}" class="img_thumb" src="http://211.249.62.123/productImages/${product.id}?type=th">
                 <span class="img_border"></span>
