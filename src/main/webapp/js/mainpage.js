@@ -129,8 +129,8 @@ let category = {
 
     activateCategoryTab(toActivatingCategoryTab) {
         let currentActivatingCategoryTab = document.querySelector("a.anchor.active");
-        currentActivatingCategoryTab.classList.toggle("active");
-        toActivatingCategoryTab.classList.toggle("active");
+        utils.deactivateElement(currentActivatingCategoryTab);
+        utils.activateElement(toActivatingCategoryTab);
     }
 }
 
@@ -149,25 +149,13 @@ function loadProducts() {
         startProductNo = updateStartProudctNo(productsCount);
         updateEventCount(totalCount);
         if (startProductNo >= totalCount) {
-            hideElement(moreProductsButton);
+            utils.bliendElement(moreProductsButton);
         } else {
-            showElement(moreProductsButton);
+            utils.notBlindElement(moreProductsButton);
         }
     });
     productRequest.open("GET", GET_PRODUCTS_URL);
     productRequest.send();
-}
-
-function hideElement(element) {
-    if (element.classList.contains("blind") === false) {
-        element.classList.toggle("blind");
-    }
-}
-
-function showElement(element) {
-    if (element.classList.contains("blind") === true) {
-        element.classList.toggle("blind");
-    }
 }
 
 function addProductsToEventBox(products) {

@@ -116,6 +116,7 @@
 	</script>
 
 	<script src="./js/handlebars-v4.0.11.js"></script>
+	<script src="./js/utils.js"></script>
     <script src="./js/mainpage.js"></script>
 </body>
 

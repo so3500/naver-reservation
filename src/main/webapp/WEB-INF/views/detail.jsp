@@ -149,17 +149,6 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area no_img">
-                                            <h4 class="resoc_name"></h4>
-                                            <p class="review">좋은 공연이었습니다. <br>머큐쇼역활 하신분의 열창이 기억에 남는 반면에,,, 로미오는 별로 기억에 남지 않네요..</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">4.0</span> <span class="name">xero****</span> <span class="date">2017.3.4. 방문</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
@@ -168,12 +157,12 @@
                 </div>
                 <div class="section_info_tab">
                     <!-- [D] tab 선택 시 anchor에 active 추가 -->
-                    <ul class="info_tab_lst">
+                    <ul class="info_tab_lst" data-current-activated-info-tab-item="_detail">
                         <li class="item active _detail">
-                            <a href="#" class="anchor active"> <span>상세정보</span> </a>
+                            <a class="anchor active"> <span>상세정보</span> </a>
                         </li>
                         <li class="item _path">
-                            <a href="#" class="anchor"> <span>오시는길</span> </a>
+                            <a class="anchor"> <span>오시는길</span> </a>
                         </li>
                     </ul>
                     <!-- [D] 상세정보 외 다른 탭 선택 시 detail_area_wrap에 hide 추가 -->
@@ -248,6 +237,10 @@
         </div>
     </footer>
     <div id="photoviwer"></div>
+
+    <script src="./js/handlebars-v4.0.11.js"></script>
+	<script src="./js/utils.js"></script>
+    <script src="./js/detail.js"></script>
 </body>
 
 
