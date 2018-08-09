@@ -15,7 +15,7 @@
 <body>
     <div id="container">
         <div class="header">
-            <header class="header_tit">
+        	<header class="header_tit">
                 <h1 class="logo">
                     <a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                     <a href="./myreservation" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
@@ -82,6 +82,40 @@
         </div>
     </footer>
 
+	<script type="rv-template" id="promotion_template">
+		<li class="item" style="background-image: url(http://211.249.62.123/productImages/{{productId}}/{{productImageId}};">
+			<a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
+				<div class="event_txt">
+					<h4 class="event_txt_tit"></h4>
+					<p class="event_txt_adr"></p>
+					<p class="event_txt_dsc"></p>
+				</div>
+			</a>
+		</li>
+	</script>
+
+	<script type="rv-template" id="product_template">
+		<li class="item">
+			<a href="detail?id={{id}}" class="item_book">
+				<div class="item_preview">
+					<img alt="{{description}}" class="img_thumb" src="http://211.249.62.123/productImages/{{id}}?type=th">
+					<span class="img_border"></span>
+				</div>
+				<div class="event_txt">
+					<h4 class="event_txt_tit"> <span>{{description}}</span> <small class="sm">{{placeName}}</small> </h4>
+					<p class="event_txt_dsc">{{content}}</p>
+				</div>
+			</a>
+		</li>
+	</script>
+
+	<script type="rv-template" id="category_template">
+		<li class="item" data-category-id="{{id}}">
+	    <a class="anchor"> <span>{{name}}</span> </a>
+	    </li>
+	</script>
+
+	<script src="./js/handlebars-v4.0.11.js"></script>
     <script src="./js/mainpage.js"></script>
 </body>
 
