@@ -38,10 +38,4 @@ public class ProductImageDao {
 		return jdbc.queryForObject(ProductImageDaoSqls.SELECT_PRODUCT_IMAGES_BY_DISPLAY_INFO_ID_AND_TYPE, params, rowMapper);
 	}
 	
-	public ProductImage findByProductIdAndProductImageId(int productId, int productImageId) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("productId", productId);
-		params.put("productImageId", productImageId);
-		return jdbc.queryForObject(ProductImageDaoSqls.SELECT_PRODUCT_IMAGE_BY_PRODUCT_ID_AND_PRODUCT_IMAGE_ID, params, rowMapper);
-	}
 }

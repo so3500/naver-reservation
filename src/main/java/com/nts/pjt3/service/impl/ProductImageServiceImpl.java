@@ -24,10 +24,5 @@ public class ProductImageServiceImpl implements ProductImageService {
 	public ProductImage getProductImageByDisplayInfoIdAndType(int displayInfoId, String type) {
 		return productImageDao.findByDisplayInfoIdAndType(displayInfoId, type);
 	}
-
-	@Override
-	public ProductImage getProductImageByProductIdAndProductImageId(int productId, int productImageId) {
-		return productImageDao.findByProductIdAndProductImageId(productId, productImageId);
-	}
-
+	
 }
