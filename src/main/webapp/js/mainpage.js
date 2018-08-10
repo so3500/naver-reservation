@@ -149,7 +149,7 @@ function loadProducts() {
         startProductNo = updateStartProudctNo(productsCount);
         updateEventCount(totalCount);
         if (startProductNo >= totalCount) {
-            utils.bliendElement(moreProductsButton);
+            utils.blindElement(moreProductsButton);
         } else {
             utils.notBlindElement(moreProductsButton);
         }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,7 +29,7 @@
                 <a href="#" class="btn_my"> <span title="예약확인">예약확인</span> </a>
             </header>
         </div>
-        <div class="ct main">
+        <div class="ct main" data-display-info-id=${displayInfoId}>
             <div>
                 <div class="section_visual">
                     <header>
@@ -49,22 +50,6 @@
                         <div>
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img detail_swipe">
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src=""> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span>${product.description}</span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src=""> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span><span>${product.description}</span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="prev">
@@ -194,11 +179,13 @@
                     <!-- [D] 오시는길 외 다른 탭 선택 시 detail_location에 hide 추가 -->
                     <div class="detail_location hide">
                         <div class="box_store_info no_topline">
-                            <a href="#" class="store_location" title="지도웹으로 연결">
-                                <img class="store_map img_thumb" alt="map" src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150">
-                                <span class="img_border"></span>
-                                <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
-                            </a>
+                            <c:forEach var="displayInfoImage" items="${displayInfoImages}">
+	                            <a href="#" class="store_location" title="지도웹으로 연결">
+	                                <img class="store_map img_thumb" alt="map" src="${displayInfoImage.saveFileName}">
+	                                <span class="img_border"></span>
+	                                <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
+	                            </a>
+                            </c:forEach>
                             <h3 class="store_name">엔에이치엔티켓링크(주)</h3>
                             <div class="store_info">
                                 <div class="store_addr_wrap">
@@ -237,6 +224,25 @@
         </div>
     </footer>
     <div id="photoviwer"></div>
+
+	<script type="rv-template" id="product_image_template">
+		<li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
+			<div class="visual_txt">
+				<div class="visual_txt_inn">
+					<h2 class="visual_txt_tit"> <span><span>{{description}}</span> </h2>
+					<p class="visual_txt_dsc"></p>
+				</div>
+			</div>
+		</li>
+	</script>
+
+	<script type="rv-template" id="display_info_image_template">
+		<a href="#" class="store_location" title="지도웹으로 연결">
+			<img class="store_map img_thumb" alt="map" src="{{saveFileName}}">
+			<span class="img_border"></span>
+			<span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
+		</a>
+	</script>
 
     <script src="./js/handlebars-v4.0.11.js"></script>
 	<script src="./js/utils.js"></script>

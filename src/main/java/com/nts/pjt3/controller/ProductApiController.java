@@ -2,6 +2,7 @@ package com.nts.pjt3.controller;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,10 +31,10 @@ public class ProductApiController {
 
 	@Autowired
 	private ProductImageService productImageService;
-	
+
 	@Autowired
 	private DisplayInfoImageService displayInfoImageService;
-	
+
 	@Autowired
 	private ProductPriceService productPriceService;
 
@@ -59,18 +60,18 @@ public class ProductApiController {
 	}
 
 	@GetMapping("/{displayInfoId}")
-	private Map<String, Object> getProduct(
+	public Map<String, Object> getProduct(
 		@PathVariable(name = "displayInfoId") int displayInfoId) {
-		
+
 		// TODO: product EmptyResultDataAccessException 예외처리
 		Product product = productService.getProductByDisplayInfoId(displayInfoId);
-		List<ProductImage> productImages = productImageService.getProductImagesByDisplayInfoId(displayInfoId);
+		List<ProductImage> productImages = getProductImagesByDisplayInfoId(displayInfoId);
 		List<DisplayInfoImage> displayInfoImages = displayInfoImageService.getDisplayInfoImagesByDisplayInfoId(displayInfoId);
 		List<ProductPrice> productPrices = productPriceService.getProductPricesByDisplayInfoId(displayInfoId);
 		// TODO comments, avgScore
 		List<Object> comments = Collections.emptyList();
 		double avgScore = 0.0;
-		
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("product", product);
 		map.put("productImages", productImages);
@@ -78,7 +79,8 @@ public class ProductApiController {
 		map.put("comments", comments);
 		map.put("displayInfoImages", displayInfoImages);
 		map.put("productPrices", productPrices);
-		
+		map.put("displayInfoId", displayInfoId);
+
 		return map;
 	}
 
@@ -96,6 +98,16 @@ public class ProductApiController {
 		} else {
 			return productService.getProductsCount();
 		}
+	}
+	
+	private List<ProductImage> getProductImagesByDisplayInfoId(int displayInfoId){
+		List<ProductImage> productImages = new LinkedList<>();
+		ProductImage productMainImage = productImageService.getProductImageByDisplayInfoIdAndType(displayInfoId, "ma");
+		List<ProductImage> productThumImages = productImageService.getProductImagesByDisplayInfoIdAndType(displayInfoId, "et");
+		productImages.add(productMainImage);
+		productImages.addAll(productThumImages);
+		
+		return productImages;
 	}
 
 }

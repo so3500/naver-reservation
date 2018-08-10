@@ -76,7 +76,7 @@ public class ProductDaoSqls {
 		" WHERE" +
 		" product.id = dpinfo.product_id AND" +
 		" product.category_id = category.id AND" +
-		" product.id = :displayInfoId";
+		" dpinfo.id = :displayInfoId";
 
 	public static final String SELECT_PRODUCTS_COUNT = 
 		"SELECT" +

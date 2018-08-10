@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.nts.pjt3.dao.sqls.ProductImageSqls;
+import com.nts.pjt3.dao.sqls.ProductImageDaoSqls;
 import com.nts.pjt3.dto.ProductImage;
 
 @Repository
@@ -24,9 +24,24 @@ public class ProductImageDao {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<ProductImage> findAllByDisplayInfoId(int displayInfoId) {
-		Map<String, Integer> params = new HashMap<>();
+	public List<ProductImage> findAllByDisplayInfoIdAndType(int displayInfoId, String type) {
+		Map<String, Object> params = new HashMap<>();
 		params.put("displayInfoId", displayInfoId);
-		return jdbc.query(ProductImageSqls.SELECT_MA_TYPE_PRODUCT_IMAGES_BY_DISPLAY_INFO_ID, params, rowMapper);
+		params.put("type", type);
+		return jdbc.query(ProductImageDaoSqls.SELECT_PRODUCT_IMAGES_BY_DISPLAY_INFO_ID_AND_TYPE, params, rowMapper);
+	}
+	
+	public ProductImage findByDisplayInfoIdAndType(int displayInfoId, String type) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("displayInfoId", displayInfoId);
+		params.put("type", type);
+		return jdbc.queryForObject(ProductImageDaoSqls.SELECT_PRODUCT_IMAGES_BY_DISPLAY_INFO_ID_AND_TYPE, params, rowMapper);
+	}
+	
+	public ProductImage findByProductIdAndProductImageId(int productId, int productImageId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("productId", productId);
+		params.put("productImageId", productImageId);
+		return jdbc.queryForObject(ProductImageDaoSqls.SELECT_PRODUCT_IMAGE_BY_PRODUCT_ID_AND_PRODUCT_IMAGE_ID, params, rowMapper);
 	}
 }

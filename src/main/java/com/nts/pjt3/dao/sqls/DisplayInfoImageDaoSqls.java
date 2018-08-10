@@ -1,6 +1,6 @@
 package com.nts.pjt3.dao.sqls;
 
-public class DisplayInfoImageSqls {
+public class DisplayInfoImageDaoSqls {
 
 	public static final String SELECT_DISPLAY_INFO_IMAGES_BY_DISPLAY_INFO_ID =
 		"SELECT" +

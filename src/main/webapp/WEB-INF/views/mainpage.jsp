@@ -83,7 +83,7 @@
     </footer>
 
 	<script type="rv-template" id="promotion_template">
-		<li class="item" style="background-image: url(http://211.249.62.123/productImages/{{productId}}/{{productImageId}};">
+		<li class="item" style="background-image: url(img/{{productId}}_ma_{{productImageId}}.png)">
 			<a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
 				<div class="event_txt">
 					<h4 class="event_txt_tit"></h4>
@@ -96,9 +96,9 @@
 
 	<script type="rv-template" id="product_template">
 		<li class="item">
-			<a href="detail?id={{id}}" class="item_book">
+			<a href="detail?id={{displayInfoId}}" class="item_book">
 				<div class="item_preview">
-					<img alt="{{description}}" class="img_thumb" src="http://211.249.62.123/productImages/{{id}}?type=th">
+					<img alt="{{description}}" class="img_thumb" src="productImages/{{displayInfoId}}?type=th">
 					<span class="img_border"></span>
 				</div>
 				<div class="event_txt">

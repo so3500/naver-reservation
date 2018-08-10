@@ -11,13 +11,23 @@ import com.nts.pjt3.service.ProductImageService;
 
 @Service
 public class ProductImageServiceImpl implements ProductImageService {
-
+	
 	@Autowired
 	private ProductImageDao productImageDao;
 
 	@Override
-	public List<ProductImage> getProductImagesByDisplayInfoId(int displayInfoId) {
-		return productImageDao.findAllByDisplayInfoId(displayInfoId);
+	public List<ProductImage> getProductImagesByDisplayInfoIdAndType(int displayInfoId, String type) {
+		return productImageDao.findAllByDisplayInfoIdAndType(displayInfoId, type);
+	}
+	
+	@Override
+	public ProductImage getProductImageByDisplayInfoIdAndType(int displayInfoId, String type) {
+		return productImageDao.findByDisplayInfoIdAndType(displayInfoId, type);
+	}
+
+	@Override
+	public ProductImage getProductImageByProductIdAndProductImageId(int productId, int productImageId) {
+		return productImageDao.findByProductIdAndProductImageId(productId, productImageId);
 	}
 
 }

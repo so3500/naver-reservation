@@ -15,7 +15,7 @@ let utils = {
         element.classList.remove("hide");
     },
 
-    bliendElement(element) {
+    blindElement(element) {
         element.classList.add("blind");
     },
 
