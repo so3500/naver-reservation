@@ -28,7 +28,7 @@ let promotion = {
     },
 
     loadPromotions() {
-        const GET_PROMOTIONS_URL = "/reservation/api/promotions";
+        const GET_PROMOTIONS_URL = "/api/promotions";
         let promotionRequest = new XMLHttpRequest();
         promotionRequest.addEventListener("load", function() {
             const response = JSON.parse(this.responseText);
@@ -88,7 +88,7 @@ let category = {
     },
 
     loadCateogires() {
-        const GET_CATEGORIES_URL = "/reservation/api/categories"
+        const GET_CATEGORIES_URL = "/api/categories"
         let categoryRequest = new XMLHttpRequest();
         categoryRequest.addEventListener("load", this.addCategoryToEventTab);
         categoryRequest.open("GET", GET_CATEGORIES_URL);
@@ -137,7 +137,7 @@ let category = {
 function loadProducts() {
     let startProductNo = parseInt(eventSection.dataset.startProductNo);
     let categoryId = eventSection.dataset.categoryId;
-    const GET_PRODUCTS_URL = `/reservation/api/products?categoryId=${categoryId}&start=${startProductNo}`;
+    const GET_PRODUCTS_URL = `/api/products?categoryId=${categoryId}&start=${startProductNo}`;
     let productRequest = new XMLHttpRequest();
     productRequest.addEventListener("load", function() {
         const response = JSON.parse(this.responseText);

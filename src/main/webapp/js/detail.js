@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function loadDetailPage() {
     displayInfoId = document.querySelector(".ct.main").dataset.displayInfoId;
-    const GET_PRODUCT_URL = `/reservation/api/products/${displayInfoId}`;
+    const GET_PRODUCT_URL = `/api/products/${displayInfoId}`;
     let productRequest = new XMLHttpRequest();
     productRequest.addEventListener("load", function() {
         const response = JSON.parse(this.responseText);
