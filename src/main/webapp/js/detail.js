@@ -32,8 +32,12 @@ let productImage = {
     productImageBox: document.querySelector(".visual_img.detail_swipe"),
     prevButton: document.querySelector(".prev_inn"),
     nextButton: document.querySelector(".nxt_inn"),
-    pageNumberLeft: document.querySelector(".pagination > .figure_pagination > .num"),
-    PageNumberRight: document.querySelector(".pagination > .figure_pagination > .num.off > span"),
+    leftImageNumber: document.querySelector(".pagination > .figure_pagination > .num"),
+    rightImageNumber: document.querySelector(".pagination > .figure_pagination > .num.off > span"),
+    SLIDE_SHOW_DURATION: "0.1s",
+    slideDirection: "",
+    PREV: 0,
+    NEXT: 1,
 
     init() {
         let productImageTemplate = document.querySelector("#product_image_template").innerText;
@@ -42,60 +46,105 @@ let productImage = {
 
     loadImages(productImages, description) {
         let productImageHtml = "";
-
-        productImage.addProductMainImagetoProductImageBox(productImages, description);
+        let imageNumber = 1;
+        this.addProductMainImagetoProductImageBox(productImages, description, imageNumber);
         if (productImages.length >= 2) {
-            productImage.addEtcProductImageToProductImageBox(productImages, description);
-            productImage.bindClickEventToPrevNextButton();
+            this.addEtcProductImageToProductImageBox(productImages, description, imageNumber + 1);
+            this.setProductImageBoxSlideShow();
         } else {
-            productImage.setPageNumber(productImage.PageNumberRight, 1);
-            utils.blindElement(productImage.prevButton);
-            utils.blindElement(productImage.nextButton);
+            this.setElementInnerTextValue(this.rightImageNumber, 1);
+            utils.blindElement(this.prevButton);
+            utils.blindElement(this.nextButton);
         }
     },
 
-    addProductMainImagetoProductImageBox(productImages, description) {
-        let productImageHtml = "";
-        let productMainImage = productImage.getProductMainImage(productImages);
-        productMainImage["description"] = description;
-
-        productImageHtml = productImage.bindProductImageTemplate(productMainImage);
-        productImage.productImageBox.innerHTML += productImageHtml;
+    setElementInnerTextValue(element, value) {
+        element.innerText = value;
     },
 
-    addEtcProductImageToProductImageBox(productImages, description) {
+    addProductMainImagetoProductImageBox(productImages, description, imageNumber) {
         let productImageHtml = "";
-        let productEtcImage = productImage.getProductEtcImage(productImages);
-        productEtcImage["description"] = description;
+        let productMainImage = this.getProductMainImage(productImages);
+        productMainImage["description"] = description;
+        productMainImage["imageNumber"] = imageNumber;
 
-        productImageHtml = productImage.bindProductImageTemplate(productEtcImage);
-        productImage.productImageBox.innerHTML += productImageHtml;
+        productImageHtml = this.bindProductImageTemplate(productMainImage);
+        this.productImageBox.innerHTML += productImageHtml;
+    },
+
+    addEtcProductImageToProductImageBox(productImages, description, imageNumber) {
+        let productImageHtml = "";
+        let productEtcImage = this.getProductEtcImage(productImages);
+        productEtcImage["description"] = description;
+        productEtcImage["imageNumber"] = imageNumber;
+
+        productImageHtml = this.bindProductImageTemplate(productEtcImage);
+        this.productImageBox.innerHTML += productImageHtml;
     },
 
     getProductMainImage(productImages) {
-        return productImages.find((productImage) => productImage.type === "ma");
+        return productImages.find((productImageItem) => productImageItem.type === "ma");
     },
 
     getProductEtcImage(productImages) {
-        return productImages.find((productImage) => productImage.type === "et");
+        return productImages.find((productImageItem) => productImageItem.type === "et");
     },
 
-    bindClickEventToPrevNextButton() {
-        productImage.prevButton.addEventListener("click", productImage.goImagesPrev);
-        productImage.nextButton.addEventListener("click", productImage.goImagesNext);
+    setProductImageBoxSlideShow() {
+        this.prevButton.addEventListener("click", function() {
+            this.slideDirection = this.PREV;
+            this.initSlideShowPosition();
+            setTimeout(function() {
+                this.moveImagePrev();
+                this.changeImageNumber();
+            }.bind(this), 0);
+        }.bind(this));
+
+        this.nextButton.addEventListener("click", function() {
+            this.slideDirection = this.NEXT;
+            this.moveImageNext();
+            setTimeout(function() {
+                this.initSlideShowPosition();
+                this.changeImageNumber();
+            }.bind(this), 100);
+        }.bind(this));
     },
 
-    // TODO 무한 슬라이딩 구현
-    goImagesPrev() {
-
+    initSlideShowPosition() {
+        switch (this.slideDirection) {
+            case this.PREV:
+                this.initMoveImagePrev();
+                break;
+            case this.NEXT:
+                this.initMoveImageNext();
+                break;
+        }
     },
 
-    goImagesNext() {
-
+    initMoveImagePrev() {
+        this.productImageBox.insertAdjacentElement("afterbegin", this.productImageBox.lastElementChild);
+        this.productImageBox.style.transitionDuration = "0s";
+        this.productImageBox.style.transform = "translateX(-100%)";
     },
 
-    setPageNumber(element, number) {
-        element.innerText = number;
+    initMoveImageNext() {
+        this.productImageBox.insertAdjacentElement("beforeend", this.productImageBox.firstElementChild);
+        this.productImageBox.style.transitionDuration = "0s";
+        this.productImageBox.style.transform = "translateX(0)";
+    },
+
+    moveImagePrev() {
+        this.productImageBox.style.transition = `all ${this.SLIDE_SHOW_DURATION} ease`;
+        this.productImageBox.style.transform = "translateX(0)";
+    },
+
+    moveImageNext() {
+        this.productImageBox.style.transition = `all ${this.SLIDE_SHOW_DURATION} ease`;
+        this.productImageBox.style.transform = "translateX(-100%)";
+    },
+
+    changeImageNumber() {
+        this.setElementInnerTextValue(this.leftImageNumber, this.productImageBox.firstElementChild.dataset.imageNumber);
     },
 
 }

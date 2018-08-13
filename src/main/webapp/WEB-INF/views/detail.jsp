@@ -181,7 +181,7 @@
                         <div class="box_store_info no_topline">
                             <c:forEach var="displayInfoImage" items="${displayInfoImages}">
 	                            <a href="#" class="store_location" title="지도웹으로 연결">
-	                                <img class="store_map img_thumb" alt="map" src="${displayInfoImage.saveFileName}">
+	                                <img class="store_map img_thumb" alt="map" src="/${displayInfoImage.saveFileName}">
 	                                <span class="img_border"></span>
 	                                <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
 	                            </a>
@@ -226,7 +226,7 @@
     <div id="photoviwer"></div>
 
 	<script type="rv-template" id="product_image_template">
-		<li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="{{saveFileName}}"> <span class="img_bg"></span>
+		<li class="item" style="width: 414px;" data-image-number="{{imageNumber}}"> <img alt="" class="img_thumb" src="/{{saveFileName}}"> <span class="img_bg"></span>
 			<div class="visual_txt">
 				<div class="visual_txt_inn">
 					<h2 class="visual_txt_tit"> <span><span>{{description}}</span> </h2>
@@ -238,7 +238,7 @@
 
 	<script type="rv-template" id="display_info_image_template">
 		<a href="#" class="store_location" title="지도웹으로 연결">
-			<img class="store_map img_thumb" alt="map" src="{{saveFileName}}">
+			<img class="store_map img_thumb" alt="map" src="/{{saveFileName}}">
 			<span class="img_border"></span>
 			<span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
 		</a>
