@@ -244,7 +244,8 @@
 		</a>
 	</script>
 
-    <script src="./js/handlebars-v4.0.11.js"></script>
+    <script src="./js/lib/handlebars-v4.0.11.js"></script>
+    <script src="./js/lib/jquery-3.3.1.min.js"></script>
 	<script src="./js/utils.js"></script>
     <script src="./js/detail.js"></script>
 </body>

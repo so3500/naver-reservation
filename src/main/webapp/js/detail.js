@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
+    loadDetailPage();
+
     infoTab.init();
     productImage.init();
     infoTab.setInfoTabClickEvent();
-
-    loadDetailPage();
+    detailContent.setCloseDetailEvent();
+    detailContent.setOpenDetailEvent();
 });
 
 function loadDetailPage() {
@@ -147,6 +149,24 @@ let productImage = {
         this.setElementInnerTextValue(this.leftImageNumber, this.productImageBox.firstElementChild.dataset.imageNumber);
     },
 
+}
+
+let detailContent = {
+    setOpenDetailEvent() {
+        $("a.bk_more._open").click(() => {
+            $("div.store_details.close3").toggleClass("close3");
+            $("a.bk_more._open").css("display", "none");
+            $("a.bk_more._close").css("display", "block");
+        });
+    },
+
+    setCloseDetailEvent() {
+        $("a.bk_more._close").click(() => {
+            $("div.store_details").toggleClass("close3");
+            $("a.bk_more._close").css("display", "none");
+            $("a.bk_more._open").css("display", "block");
+        });
+    }
 }
 
 let discountEvent = {
