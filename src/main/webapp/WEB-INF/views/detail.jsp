@@ -29,7 +29,7 @@
                 <a href="#" class="btn_my"> <span title="예약확인">예약확인</span> </a>
             </header>
         </div>
-        <div class="ct main" data-display-info-id=${displayInfoId}>
+        <div class="ct main" data-display-info-id=${displayInfoId} data-product-id=${product.id}>
             <div>
                 <div class="section_visual">
                     <header>

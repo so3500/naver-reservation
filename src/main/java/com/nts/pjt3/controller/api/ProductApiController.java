@@ -17,10 +17,12 @@ import com.nts.pjt3.dto.DisplayInfoImage;
 import com.nts.pjt3.dto.Product;
 import com.nts.pjt3.dto.ProductImage;
 import com.nts.pjt3.dto.ProductPrice;
+import com.nts.pjt3.dto.ReservationUserComment;
 import com.nts.pjt3.service.DisplayInfoImageService;
 import com.nts.pjt3.service.ProductImageService;
 import com.nts.pjt3.service.ProductPriceService;
 import com.nts.pjt3.service.ProductService;
+import com.nts.pjt3.service.ReservationUserCommentService;
 
 @RestController
 @RequestMapping(path = "/api/products")
@@ -37,6 +39,9 @@ public class ProductApiController {
 
 	@Autowired
 	private ProductPriceService productPriceService;
+
+	@Autowired
+	private ReservationUserCommentService reservationUserCommentService;
 
 	private final int ALL_CATEGORY = 0;
 
@@ -66,11 +71,12 @@ public class ProductApiController {
 		// TODO: product EmptyResultDataAccessException 예외처리
 		Product product = productService.getProductByDisplayInfoId(displayInfoId);
 		List<ProductImage> productImages = getProductImagesByDisplayInfoId(displayInfoId);
-		List<DisplayInfoImage> displayInfoImages = displayInfoImageService.getDisplayInfoImagesByDisplayInfoId(displayInfoId);
+		List<DisplayInfoImage> displayInfoImages = displayInfoImageService
+			.getDisplayInfoImagesByDisplayInfoId(displayInfoId);
 		List<ProductPrice> productPrices = productPriceService.getProductPricesByDisplayInfoId(displayInfoId);
-		// TODO comments, avgScore
-		List<Object> comments = Collections.emptyList();
-		double avgScore = 0.0;
+		List<ReservationUserComment> comments = reservationUserCommentService
+			.getReservationUserCommentsByProductId(product.getId());
+		double avgScore = reservationUserCommentService.getAvgScoreFromReservationUserComments(comments);
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("product", product);
@@ -99,14 +105,15 @@ public class ProductApiController {
 			return productService.getProductsCount();
 		}
 	}
-	
-	private List<ProductImage> getProductImagesByDisplayInfoId(int displayInfoId){
+
+	private List<ProductImage> getProductImagesByDisplayInfoId(int displayInfoId) {
 		List<ProductImage> productImages = new LinkedList<>();
 		ProductImage productMainImage = productImageService.getProductImageByDisplayInfoIdAndType(displayInfoId, "ma");
-		List<ProductImage> productThumImages = productImageService.getProductImagesByDisplayInfoIdAndType(displayInfoId, "et");
+		List<ProductImage> productThumImages = productImageService.getProductImagesByDisplayInfoIdAndType(displayInfoId,
+			"et");
 		productImages.add(productMainImage);
 		productImages.addAll(productThumImages);
-		
+
 		return productImages;
 	}
 
