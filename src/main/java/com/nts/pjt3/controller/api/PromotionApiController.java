@@ -1,4 +1,4 @@
-package com.nts.pjt3.controller;
+package com.nts.pjt3.controller.api;
 
 import java.util.HashMap;
 import java.util.List;

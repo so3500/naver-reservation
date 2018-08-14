@@ -1,4 +1,4 @@
-package com.nts.pjt3.controller;
+package com.nts.pjt3.controller.api;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,8 +14,8 @@ import com.nts.pjt3.dto.ProductImage;
 import com.nts.pjt3.service.ProductImageService;
 
 @RestController
-@RequestMapping(path = "/productImages")
-public class ProductImageController {
+@RequestMapping(path = "/api/productImages")
+public class ProductImageApiController {
 
 	@Autowired
 	private ProductImageService productImageService;

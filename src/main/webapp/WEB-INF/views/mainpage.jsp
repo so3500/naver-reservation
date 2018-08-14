@@ -98,7 +98,7 @@
 		<li class="item">
 			<a href="detail?id={{displayInfoId}}" class="item_book">
 				<div class="item_preview">
-					<img alt="{{description}}" class="img_thumb" src="/productImages/{{displayInfoId}}?type=th">
+					<img alt="{{description}}" class="img_thumb" src="/api/productImages/{{displayInfoId}}?type=th">
 					<span class="img_border"></span>
 				</div>
 				<div class="event_txt">
