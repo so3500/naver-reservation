@@ -26,6 +26,9 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 		for (ReservationUserComment comment : comments) {
 			comment.setReservationUserCommentImages(reservationUserCommentImageDao
 				.getReservationUserCommentImagesByReservationUserCommentId(comment.getId()));
+			
+			String modifiredReservationEmail = getModifidReservationEmail(comment.getReservationEmail());
+			comment.setReservationEmail(modifiredReservationEmail);
 		}
 		return comments;
 	}
@@ -40,4 +43,7 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 		return avgScore;
 	}
 
+	private String getModifidReservationEmail(String reservationEmail) {
+		return reservationEmail.substring(0, 4).concat("****");
+	}
 }
