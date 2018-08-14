@@ -186,7 +186,7 @@
 	                                <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
 	                            </a>
                             </c:forEach>
-                            <h3 class="store_name">엔에이치엔티켓링크(주)</h3>
+                            <h3 class="store_name">${product.description}</h3>
                             <div class="store_info">
                                 <div class="store_addr_wrap">
                                     <span class="fn fn-pin2"></span>
