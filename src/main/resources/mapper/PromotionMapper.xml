@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.pjt3.dao.PromotionDao">
+	<select id="getPromotions" resultType="Promotion">
+		SELECT
+			product.id AS product_id,
+			product.description,
+			promotion.id AS id,
+			category.id AS category_id,
+			category.name AS category_name,
+			pimg.id AS product_image_id
+		FROM
+			promotion, product, category, product_image pimg
+		WHERE
+			promotion.product_id = product.id AND
+			product.category_id = category.id AND
+			product.id = pimg.product_id AND
+			pimg.type = 'ma'
+	</select>
+</mapper>
+    

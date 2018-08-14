@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.pjt3.dao.ProductImageDao">
+	<select id="getProductImagesByDisplayInfoIdAndType" parameterType="map" resultType="ProductImage">
+		SELECT
+			prdimg.product_id,
+			prdimg.id AS product_image_id,
+			prdimg.type,
+			prdimg.file_id AS file_info_id,
+			finfo.file_name,
+			finfo.save_file_name,
+			finfo.content_type,
+			finfo.delete_flag,
+			finfo.create_date,
+			finfo.modify_date
+		FROM
+			product_image prdimg, file_info finfo, product, display_info dpinfo
+		WHERE
+			product.id = prdimg.product_id AND
+			dpinfo.product_id = product.id AND
+			prdimg.file_id = finfo.id AND
+			prdimg.type = #{type} AND
+			dpinfo.id = #{displayInfoId}
+	</select>
+	
+	<select id="getProductImageByDisplayInfoIdAndType" parameterType="map" resultType="ProductImage">
+		SELECT
+			prdimg.product_id,
+			prdimg.id AS product_image_id,
+			prdimg.type,
+			prdimg.file_id AS file_info_id,
+			finfo.file_name,
+			finfo.save_file_name,
+			finfo.content_type,
+			finfo.delete_flag,
+			finfo.create_date,
+			finfo.modify_date
+		FROM
+			product_image prdimg, file_info finfo, product, display_info dpinfo
+		WHERE
+			product.id = prdimg.product_id AND
+			dpinfo.product_id = product.id AND
+			prdimg.file_id = finfo.id AND
+			prdimg.type = #{type} AND
+			dpinfo.id = #{displayInfoId}
+	</select>
+</mapper>
+    

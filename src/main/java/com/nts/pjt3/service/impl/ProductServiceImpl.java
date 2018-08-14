@@ -17,12 +17,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> getProducts(int start) {
-		return productDao.findAll(start);
+		return productDao.getProducts(start, ProductService.LIMIT);
 	}
 
 	@Override
 	public List<Product> getProductsByCategoryId(int start, int categoryId) {
-		return productDao.findAllByCategoryId(start, categoryId);
+		return productDao.getProductsByCategoryId(start, categoryId, ProductService.LIMIT);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product getProductByDisplayInfoId(int displayInfoId) {
-		return productDao.findByDisplayInfoId(displayInfoId);
+		return productDao.getProductByDisplayInfoId(displayInfoId);
 	}
 
 }

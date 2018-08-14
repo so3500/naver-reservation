@@ -17,12 +17,12 @@ public class ProductImageServiceImpl implements ProductImageService {
 
 	@Override
 	public List<ProductImage> getProductImagesByDisplayInfoIdAndType(int displayInfoId, String type) {
-		return productImageDao.findAllByDisplayInfoIdAndType(displayInfoId, type);
+		return productImageDao.getProductImagesByDisplayInfoIdAndType(displayInfoId, type);
 	}
 	
 	@Override
 	public ProductImage getProductImageByDisplayInfoIdAndType(int displayInfoId, String type) {
-		return productImageDao.findByDisplayInfoIdAndType(displayInfoId, type);
+		return productImageDao.getProductImageByDisplayInfoIdAndType(displayInfoId, type);
 	}
 	
 }

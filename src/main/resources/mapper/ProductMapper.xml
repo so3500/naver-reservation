@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.pjt3.dao.ProductDao">
+	<select id="getProducts" parameterType="map" resultType="Product">
+		SELECT
+			category.name,
+			category.id AS category_id,
+			product.id,
+			product.description,
+			product.content,
+			product.event,
+			product.create_date,
+			product.modify_date,
+			dpinfo.id AS display_info_id,
+			dpinfo.opening_hours,
+			dpinfo.place_name,
+			dpinfo.place_lot,
+			dpinfo.place_street,
+			dpinfo.tel,
+			dpinfo.homepage,
+			dpinfo.email
+		FROM
+			product, display_info dpinfo, category
+		WHERE
+			product.id = dpinfo.product_id AND
+			product.category_id = category.id
+		LIMIT
+			#{start}, #{limit}
+	</select>
+	
+	<select id="getProductsByCategoryId" parameterType="map" resultType="Product">
+		SELECT
+			category.name,
+			category.id AS category_id,
+			product.id,
+			product.description,
+			product.content,
+			product.event,
+			product.create_date,
+			product.modify_date,
+			dpinfo.id AS display_info_id,
+			dpinfo.opening_hours,
+			dpinfo.place_name,
+			dpinfo.place_lot,
+			dpinfo.place_street,
+			dpinfo.tel,
+			dpinfo.homepage,
+			dpinfo.email
+		FROM
+			product, display_info dpinfo, category
+		WHERE
+			product.id = dpinfo.product_id AND
+			product.category_id = category.id AND
+			product.category_id = #{categoryId}
+		LIMIT
+			#{start}, #{limit}
+	</select>
+	
+	<select id="getProductByDisplayInfoId" parameterType="int" resultType="Product">
+		SELECT
+			category.name,
+			category.id AS category_id,
+			product.id,
+			product.description,
+			product.content,
+			product.event,
+			product.create_date,
+			product.modify_date,
+			dpinfo.id AS display_info_id,
+			dpinfo.opening_hours,
+			dpinfo.place_name,
+			dpinfo.place_lot,
+			dpinfo.place_street,
+			dpinfo.tel,
+			dpinfo.homepage,
+			dpinfo.email
+		FROM
+			product, display_info dpinfo, category
+		WHERE
+			product.id = dpinfo.product_id AND
+			product.category_id = category.id AND
+			dpinfo.id = #{displayInfoId}
+	</select>
+	
+	<select id="count" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			product, display_info dpinfo, category
+		WHERE
+			product.id = dpinfo.product_id AND
+			product.category_id = category.id
+	</select>
+	
+	<select id="countByCategoryId" parameterType="int" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			product, display_info dpinfo, category
+		WHERE
+			product.id = dpinfo.product_id AND
+			product.category_id = category.id AND
+			category.id = #{categoryId}
+	</select>
+</mapper>
+    

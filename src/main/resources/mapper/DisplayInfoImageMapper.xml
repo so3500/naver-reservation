@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.pjt3.dao.DisplayInfoImageDao">
+	<select id="getDisplayInfoImagesByDisplayInfoId" parameterType="int" resultType="DisplayInfoImage">
+		SELECT
+			dpinfoimg.id,
+			dpinfoimg.display_info_id,
+			finfo.id AS file_id,
+			finfo.file_name,
+			finfo.save_file_name,
+			finfo.content_type,
+			finfo.delete_flag,
+			finfo.create_date,
+			finfo.modify_date
+		FROM
+			display_info_image dpinfoimg,
+			file_info finfo
+		WHERE
+			dpinfoimg.file_id = finfo.id AND
+			dpinfoimg.display_info_id = #{displayInfoId}
+	</select>
+</mapper>
+    
