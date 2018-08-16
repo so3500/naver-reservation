@@ -198,7 +198,7 @@ let detail = {
         },
 
         setAvgScoreAndGraph(avgScore) {
-            this.reviewAvgScore.innerText = avgScore;
+            this.reviewAvgScore.innerText = avgScore.toFixed(1);
             const AVG_SCORE_RATE = avgScore / this.TOTAL_AVG_SCORE * 100;
             this.reviewAvgScoreGraph.style.width = `${AVG_SCORE_RATE}%`;
         },
