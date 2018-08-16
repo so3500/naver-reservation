@@ -21,7 +21,7 @@
 </head>
 <body>
 	<div id="container">
-		<div class="ct" data-display-info-id=${product.displayInfoId}>
+		<div id="review_main" class="ct" data-product-id=${product.id}>
 			<div class="ct_wrap">
 				<div class="top_title">
 					<a href="/detail?id=${product.displayInfoId}" class="btn_back" title="이전 화면으로 이동">

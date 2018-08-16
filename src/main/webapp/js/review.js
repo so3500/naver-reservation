@@ -20,15 +20,15 @@ let review = {
     },
 
     loadReviewPage() {
-        displayInfoId = document.querySelector("div.ct").dataset.displayInfoId;
-        const GET_REVIEWS_URL = `/api/reservationUserComments/${displayInfoId}`;
-        let productRequest = new XMLHttpRequest();
-        productRequest.addEventListener("load", function() {
+        productId = document.querySelector("#review_main").dataset.productId;
+        const GET_REVIEWS_URL = `/api/reservationUserComments/${productId}`;
+        let reviewRequest = new XMLHttpRequest();
+        reviewRequest.addEventListener("load", function() {
             const response = JSON.parse(this.responseText);
             review.loadReviews(response.comments, response.avgScore);
         })
-        productRequest.open("GET", GET_REVIEWS_URL);
-        productRequest.send();
+        reviewRequest.open("GET", GET_REVIEWS_URL);
+        reviewRequest.send();
     },
 
     loadReviews(reviews, avgScore) {
