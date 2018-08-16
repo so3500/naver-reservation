@@ -34,6 +34,7 @@ let productImage = {
     slideDirection: "",
     PREV: 0,
     NEXT: 1,
+    IMAGE_BOX_HEIGHT: document.querySelector("div.group_visual").offsetHeight,
 
     init() {
         let productImageTemplate = document.querySelector("#product_image_template").innerText;
@@ -63,6 +64,7 @@ let productImage = {
         let productMainImage = this.getProductMainImage(productImages);
         productMainImage["description"] = description;
         productMainImage["imageNumber"] = imageNumber;
+        productMainImage["IMAGE_BOX_HEIGHT"] = this.IMAGE_BOX_HEIGHT;
 
         productImageHtml = this.bindProductImageTemplate(productMainImage);
         this.productImageBox.innerHTML += productImageHtml;
@@ -73,6 +75,7 @@ let productImage = {
         let productEtcImage = this.getProductEtcImage(productImages);
         productEtcImage["description"] = description;
         productEtcImage["imageNumber"] = imageNumber;
+        productEtcImage["IMAGE_BOX_HEIGHT"] = this.IMAGE_BOX_HEIGHT;
 
         productImageHtml = this.bindProductImageTemplate(productEtcImage);
         this.productImageBox.innerHTML += productImageHtml;
@@ -200,7 +203,7 @@ let review = {
             let reviewHtml = "";
             reviewHtml = this.bindReviewTemplate(comments.slice(0, 3));
             this.reviewList.innerHTML = reviewHtml;
-        }         
+        }
         if(comments.length <= 3){
             utils.blindElement(this.reviewMoreButton);
         }
