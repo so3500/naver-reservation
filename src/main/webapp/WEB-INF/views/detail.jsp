@@ -10,7 +10,7 @@
     <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <style>
         .container_visual {
             height: 414px;
@@ -23,8 +23,8 @@
         <div class="header fade">
             <header class="header_tit">
                 <h1 class="logo">
-                    <a href="./mainpage" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="./mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                    <a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                    <a href="/mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
                 <a href="#" class="btn_my"> <span title="예약확인">예약확인</span> </a>
             </header>
@@ -34,10 +34,10 @@
                 <div class="section_visual">
                     <header>
                         <h1 class="logo">
-                            <a href="./mainpage" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                            <a href="./mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                            <a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                            <a href="/mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                         </h1>
-                        <a href="./myreservation" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+                        <a href="/myreservation" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
                     </header>
                     <div class="pagination">
                         <div class="bg_pagination"></div>
@@ -94,7 +94,7 @@
                             <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
                         </div>
                         <div class="event_info">
-                            <div class="in_dsc">[네이버예약 특별할인]<br>R석 50%, S석 60% 할인</div>
+                            <div class="in_dsc"></div>
                         </div>
                     </div>
                 </div>
@@ -105,40 +105,16 @@
                         <div class="short_review_area">
                             <div class="grade_area">
                                 <!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
-                                <span class="graph_mask"> <em class="graph_value" style="width: 84%;"></em> </span>
-                                <strong class="text_value"> <span>4.2</span> <em class="total">5.0</em> </strong>
-                                <span class="join_count"><em class="green">52건</em> 등록</span>
+                                <span class="graph_mask"> <em class="graph_value" id="review_avg_score_graph" style="width: 0%;"></em> </span>
+                                <strong class="text_value"> <span id="review_avg_score">0.0</span> <em class="total">5.0</em> </strong>
+                                <span class="join_count"><em id="review_count" class="green">0건</em> 등록</span>
                             </div>
-                            <ul class="list_short_review">
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area">
-                                            <div class="thumb_area">
-                                                <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" alt="리뷰이미지"> </a> <span class="img_count" style="display:none;">1</span>                                                </div>
-                                            <h4 class="resoc_name"></h4>
-                                            <p class="review">2층이어서 걱정했는데 꽤잘보여서 좋았습니다 고미오 너무 멋있었습니다 사진은 커튼콜때 찍었습니다 끝나고 퇴근길도 봐서 너무 좋았어요</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">4.0</span> <span class="name">dbfl****</span> <span class="date">2017.3.5. 방문</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list_item">
-                                    <div>
-                                        <div class="review_area no_img">
-                                            <h4 class="resoc_name"></h4>
-                                            <p class="review">너무 재밌게봤구요~<br>마지막공연 후 뒷풀이도 잘봤습니다</p>
-                                        </div>
-                                        <div class="info_area">
-                                            <div class="review_info"> <span class="grade">5.0</span> <span class="name">yyck****</span> <span class="date">2017.3.5. 방문</span> </div>
-                                        </div>
-                                    </div>
-                                </li>
+                            <ul id="review_list" class="list_short_review">
                             </ul>
                         </div>
-                        <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
+                        <p class="guide"> <i class="spr_book2 ico_bell"></i> <span id="review_guide">네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
                     </div>
-	                    <a class="btn_review_more" href="./review"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
+	                    <a class="btn_review_more" href="/review?id=${product.displayInfoId}"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
                 </div>
                 <div class="section_info_tab">
                     <!-- [D] tab 선택 시 anchor에 active 추가 -->
@@ -236,6 +212,37 @@
 		</li>
 	</script>
 
+	<script type="rv-template" id ="review_template">
+		{{#each this}}
+			<li class="list_item">
+			    <div>
+					{{#if reservationUserCommentImages}}
+					<div class="review_area">
+			        	<div class="thumb_area">
+			            	<a href="#" class="thumb" title="이미지 크게 보기">
+								<img width="90" height="90" class="img_vertical_top" src="/{{firstImageSaveFileName reservationUserCommentImages}}" alt="리뷰이미지">
+							</a>
+							<span class="img_count" style="display:none;">1</span>
+						</div>
+					{{else}}
+					<div class="review_area no_img">
+					{{/if}}
+			            <h4 class="resoc_name">${product.description}</h4>
+			            <p class="review">{{comment}}</p>
+			        </div>
+			        <div class="info_area">
+			        	<div class="review_info">
+							<span class="grade">{{score}}.0</span>
+							<span class="name">{{reservationEmail}}</span>
+							<span class="date">{{reservationDate}} 방문</span>
+						</div>
+					</div>
+			    </div>
+			</li>
+		{{/each}}
+	</script>
+
+
 	<script type="rv-template" id="display_info_image_template">
 		<a href="#" class="store_location" title="지도웹으로 연결">
 			<img class="store_map img_thumb" alt="map" src="/{{saveFileName}}">
@@ -244,10 +251,10 @@
 		</a>
 	</script>
 
-    <script src="./js/lib/handlebars-v4.0.11.js"></script>
-    <script src="./js/lib/jquery-3.3.1.min.js"></script>
-	<script src="./js/utils.js"></script>
-    <script src="./js/detail.js"></script>
+    <script src="/js/lib/handlebars-v4.0.11.js"></script>
+    <script src="/js/lib/jquery-3.3.1.min.js"></script>
+	<script src="/js/utils.js"></script>
+    <script src="/js/detail.js"></script>
 </body>
 
 

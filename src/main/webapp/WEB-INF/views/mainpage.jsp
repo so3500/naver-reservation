@@ -9,7 +9,7 @@
     <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,9 +18,9 @@
         	<header class="header_tit">
                 <h1 class="logo">
                     <a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="./myreservation" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                    <a href="mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="./bookinglogin" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+                <a href="/bookinglogin" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
             </header>
         </div>
         <hr>
@@ -115,10 +115,10 @@
 	    </li>
 	</script>
 
-	<script src="./js/lib/handlebars-v4.0.11.js"></script>
-	<script src="./js/lib/jquery-3.3.1.min.js"></script>
-	<script src="./js/utils.js"></script>
-    <script src="./js/mainpage.js"></script>
+	<script src="/js/lib/handlebars-v4.0.11.js"></script>
+	<script src="/js/lib/jquery-3.3.1.min.js"></script>
+	<script src="/js/utils.js"></script>
+    <script src="/js/mainpage.js"></script>
 </body>
 
 </html>

@@ -28,31 +28,37 @@ public class MainController {
 
 		model.put("product", product);
 		model.put("displayInfoId", displayInfoId);
-		
+
 		return "detail";
 	}
 
-	@GetMapping(path = "bookinglogin")
+	@GetMapping(path = "/review")
+	public String review(@RequestParam(name = "id") int displayInfoId, ModelMap model) {
+		
+		Product product = productService.getProductByDisplayInfoId(displayInfoId);
+		
+		model.put("product", product);
+		
+		return "review";
+	}
+	
+	@GetMapping(path = "/bookinglogin")
 	public String bookinglogin() {
 		return "bookinglogin";
 	}
 
-	@GetMapping(path = "myreservation")
+	@GetMapping(path = "/myreservation")
 	public String myreservation() {
 		return "myreservation";
 	}
 
-	@GetMapping(path = "reserve")
+	@GetMapping(path = "/reserve")
 	public String reserve() {
 		return "reserve";
 	}
 
-	@GetMapping(path = "review")
-	public String review() {
-		return "review";
-	}
 
-	@GetMapping(path = "reviweWrite")
+	@GetMapping(path = "/reviweWrite")
 	public String reviweWrite() {
 		return "reviweWrite";
 	}

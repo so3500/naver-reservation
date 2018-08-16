@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
-    loadDetailPage();
-
     infoTab.init();
     productImage.init();
+    review.init();
     infoTab.setInfoTabClickEvent();
     detailContent.setCloseDetailEvent();
     detailContent.setOpenDetailEvent();
+
+    loadDetailPage();
 });
 
 function loadDetailPage() {
@@ -15,16 +16,9 @@ function loadDetailPage() {
     productRequest.addEventListener("load", function() {
         const response = JSON.parse(this.responseText);
 
-        const product = response.product;
-        const productImages = response.productImages;
-        productImage.loadImages(productImages, product.description);
-        const displayInfoImages = response.displayInfoImages;
-        infoTab.loadDisplayInfoImage(displayInfoImages);
-
-        // TODO 각 object에서 처리
-        const comments = response.comments;
-        const avgScore = response.avgScore;
-        const productPrices = response.productPrices;
+        productImage.loadImages(response.productImages, response.product.description);
+        infoTab.loadDisplayInfoImage(response.displayInfoImages);
+        review.loadComments(response.comments, response.avgScore);
     })
     productRequest.open("GET", GET_PRODUCT_URL);
     productRequest.send();
@@ -169,12 +163,48 @@ let detailContent = {
     }
 }
 
-let discountEvent = {
+let review = {
+    reviewAvgScoreGraph: document.querySelector("#review_avg_score_graph"),
+    reviewAvgScore: document.querySelector("#review_avg_score"),
+    reviewCount: document.querySelector("#review_count"),
+    reviewList: document.querySelector("#review_list"),
+    reviewMoreButton: document.querySelector("a.btn_review_more"),
+    TOTAL_AVG_SCORE: 5.0,
 
-}
+    init() {
+        let reviewTemplate = document.querySelector("#review_template").innerText;
+        this.bindReviewTemplate = Handlebars.compile(reviewTemplate);
+        Handlebars.registerHelper("firstImageSaveFileName", function(reservationUserCommentImages) {
+            return reservationUserCommentImages[0].saveFileName;
+        })
+    },
 
-let comment = {
+    loadComments(comments, avgScore) {
+        this.addThreeReviewsToReviewList(comments);
+        this.setReviewCount(comments.length);
+        this.setAvgScoreAndGraph(avgScore);
+    },
 
+    setReviewCount(totalCount){
+        this.reviewCount.innerText = `${totalCount}건`;
+    },
+
+    setAvgScoreAndGraph(avgScore) {
+        this.reviewAvgScore.innerText = avgScore;
+        const AVG_SCORE_RATE = avgScore / this.TOTAL_AVG_SCORE * 100;
+        this.reviewAvgScoreGraph.style.width = `${AVG_SCORE_RATE}%`;
+    },
+
+    addThreeReviewsToReviewList(comments) {
+        if(comments.length > 0){
+            let reviewHtml = "";
+            reviewHtml = this.bindReviewTemplate(comments.slice(0, 3));
+            this.reviewList.innerHTML = reviewHtml;
+        }         
+        if(comments.length <= 3){
+            utils.blindElement(this.reviewMoreButton);
+        }
+    }
 }
 
 let infoTab = {
