@@ -28,7 +28,7 @@ public class ProductImageApiController {
 	public RedirectView getProductImageFilePath(@PathVariable(name = "displayInfoId") int displayInfoId,
 		@RequestParam(name = "type", required = true) String type,
 		HttpServletRequest request) {
-		ProductImage productImage = productImageService.getProductImageByDisplayInfoIdAndType(displayInfoId, type);
+		ProductImage productImage = productImageService.getByDisplayInfoIdAndType(displayInfoId, type);
 		String filePath = productImage.getSaveFileName();
 		String filePathURL = String.format("%s/%s", request.getContextPath(), filePath);
 

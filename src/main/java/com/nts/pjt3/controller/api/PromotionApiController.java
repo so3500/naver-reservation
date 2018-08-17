@@ -22,7 +22,7 @@ public class PromotionApiController {
 	@GetMapping
 	public Map<String, Object> getPromotions() {
 		Map<String, Object> map = new HashMap<>();
-		List<Promotion> promotions = promotionService.getPromotions();
+		List<Promotion> promotions = promotionService.getAll();
 		map.put("promotions", promotions);
 		map.put("size", promotions.size());
 

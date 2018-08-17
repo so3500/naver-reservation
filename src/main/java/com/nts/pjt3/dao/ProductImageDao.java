@@ -7,11 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import com.nts.pjt3.dto.ProductImage;
 
 public interface ProductImageDao {
-	public List<ProductImage> getProductImagesByDisplayInfoIdAndType(
+	public List<ProductImage> getAllByDisplayInfoIdAndType(
 		@Param("displayInfoId") int displayInfoId,
 		@Param("type") String type);
 
-	public ProductImage getProductImageByDisplayInfoIdAndType(
+	public ProductImage getByDisplayInfoIdAndType(
 		@Param("displayInfoId") int displayInfoId,
 		@Param("type") String type);
 }

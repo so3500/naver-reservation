@@ -16,28 +16,28 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDao productDao;
 
 	@Override
-	public List<Product> getProducts(int start) {
-		return productDao.getProducts(start, ProductService.LIMIT);
+	public List<Product> getAll(int start) {
+		return productDao.getAll(start, ProductService.LIMIT);
 	}
 
 	@Override
-	public List<Product> getProductsByCategoryId(int start, int categoryId) {
-		return productDao.getProductsByCategoryId(start, categoryId, ProductService.LIMIT);
+	public List<Product> getAllByCategoryId(int start, int categoryId) {
+		return productDao.getAllByCategoryId(start, categoryId, ProductService.LIMIT);
 	}
 
 	@Override
-	public int getProductsCount() {
+	public int getAllCount() {
 		return productDao.count();
 	}
 
 	@Override
-	public int getProductsCountByCategoryId(int categoryId) {
+	public int getAllCountByCategoryId(int categoryId) {
 		return productDao.countByCategoryId(categoryId);
 	}
 
 	@Override
-	public Product getProductByDisplayInfoId(int displayInfoId) {
-		return productDao.getProductByDisplayInfoId(displayInfoId);
+	public Product getByDisplayInfoId(int displayInfoId) {
+		return productDao.getByDisplayInfoId(displayInfoId);
 	}
 
 }

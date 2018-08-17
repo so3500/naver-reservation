@@ -16,13 +16,13 @@ public class ProductImageServiceImpl implements ProductImageService {
 	private ProductImageDao productImageDao;
 
 	@Override
-	public List<ProductImage> getProductImagesByDisplayInfoIdAndType(int displayInfoId, String type) {
-		return productImageDao.getProductImagesByDisplayInfoIdAndType(displayInfoId, type);
+	public List<ProductImage> getAllByDisplayInfoIdAndType(int displayInfoId, String type) {
+		return productImageDao.getAllByDisplayInfoIdAndType(displayInfoId, type);
 	}
 	
 	@Override
-	public ProductImage getProductImageByDisplayInfoIdAndType(int displayInfoId, String type) {
-		return productImageDao.getProductImageByDisplayInfoIdAndType(displayInfoId, type);
+	public ProductImage getByDisplayInfoIdAndType(int displayInfoId, String type) {
+		return productImageDao.getByDisplayInfoIdAndType(displayInfoId, type);
 	}
 	
 }

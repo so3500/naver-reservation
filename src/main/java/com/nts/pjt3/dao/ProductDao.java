@@ -7,16 +7,16 @@ import org.apache.ibatis.annotations.Param;
 import com.nts.pjt3.dto.Product;
 
 public interface ProductDao {
-	public List<Product> getProducts(
+	public List<Product> getAll(
 		@Param("start") int start,
 		@Param("limit") int limit);
 
-	public List<Product> getProductsByCategoryId(
+	public List<Product> getAllByCategoryId(
 		@Param("start") int start,
 		@Param("categoryId") int categoryId,
 		@Param("limit") int limit);
 
 	public int count();
 	public int countByCategoryId(int categoryId);
-	public Product getProductByDisplayInfoId(int displayInfoId);
+	public Product getByDisplayInfoId(int displayInfoId);
 }

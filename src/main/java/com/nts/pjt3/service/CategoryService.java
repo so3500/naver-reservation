@@ -5,5 +5,5 @@ import java.util.List;
 import com.nts.pjt3.dto.Category;
 
 public interface CategoryService {
-	public List<Category> getCategories();
+	public List<Category> getAll();
 }

@@ -5,5 +5,5 @@ import java.util.List;
 import com.nts.pjt3.dto.ReservationUserComment;
 
 public interface ReservationUserCommentDao {
-	List<ReservationUserComment> getReservationUserCommentsByProductId(int productId);
+	List<ReservationUserComment> getAllByProductId(int productId);
 }

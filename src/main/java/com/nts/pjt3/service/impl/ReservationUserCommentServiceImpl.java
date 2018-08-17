@@ -20,13 +20,12 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 	private ReservationUserCommentImageDao reservationUserCommentImageDao;
 
 	@Override
-	public List<ReservationUserComment> getReservationUserCommentsByProductId(int productId) {
-		List<ReservationUserComment> comments = reservationUserCommentDao
-			.getReservationUserCommentsByProductId(productId);
+	public List<ReservationUserComment> getAllByProductId(int productId) {
+		List<ReservationUserComment> comments = reservationUserCommentDao.getAllByProductId(productId);
 		for (ReservationUserComment comment : comments) {
-			comment.setReservationUserCommentImages(reservationUserCommentImageDao
-				.getReservationUserCommentImagesByReservationUserCommentId(comment.getId()));
-			
+			comment.setReservationUserCommentImages(
+				reservationUserCommentImageDao.getAllByReservationUserCommentId(comment.getId()));
+
 			String modifiredReservationEmail = getModifidReservationEmail(comment.getReservationEmail());
 			comment.setReservationEmail(modifiredReservationEmail);
 		}
@@ -34,7 +33,7 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 	}
 
 	@Override
-	public double getAvgScoreFromReservationUserComments(List<ReservationUserComment> comments) {
+	public double getAvgScoreFromComments(List<ReservationUserComment> comments) {
 		double sumScore = 0;
 		for (ReservationUserComment comment : comments) {
 			sumScore += comment.getScore();

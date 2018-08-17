@@ -3,7 +3,7 @@
 <mapper
 	namespace="com.nts.pjt3.dao.ReservationUserCommentImageDao">
 	<select
-		id="getReservationUserCommentImagesByReservationUserCommentId"
+		id="getAllByReservationUserCommentId"
 		resultType="ReservationUserCommentImage">
 		SELECT
 			rsvusrcmtimg.id,

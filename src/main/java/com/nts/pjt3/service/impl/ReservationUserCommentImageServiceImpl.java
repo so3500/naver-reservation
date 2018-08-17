@@ -16,10 +16,8 @@ public class ReservationUserCommentImageServiceImpl implements ReservationUserCo
 	private ReservationUserCommentImageDao reservationUserCommentImageDao;
 
 	@Override
-	public List<ReservationUserCommentImage> getReservationUserCommentImagesByReservationUserCommentId(
-		int reservationUserCommentId) {
-		return reservationUserCommentImageDao
-			.getReservationUserCommentImagesByReservationUserCommentId(reservationUserCommentId);
+	public List<ReservationUserCommentImage> getAllByReservationUserCommentId(int reservationUserCommentId) {
+		return reservationUserCommentImageDao.getAllByReservationUserCommentId(reservationUserCommentId);
 	}
 
 }

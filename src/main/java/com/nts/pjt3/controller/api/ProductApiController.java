@@ -69,14 +69,12 @@ public class ProductApiController {
 		@PathVariable(name = "displayInfoId") int displayInfoId) {
 
 		// TODO: product EmptyResultDataAccessException 예외처리
-		Product product = productService.getProductByDisplayInfoId(displayInfoId);
+		Product product = productService.getByDisplayInfoId(displayInfoId);
 		List<ProductImage> productImages = getProductImagesByDisplayInfoId(displayInfoId);
-		List<DisplayInfoImage> displayInfoImages = displayInfoImageService
-			.getDisplayInfoImagesByDisplayInfoId(displayInfoId);
-		List<ProductPrice> productPrices = productPriceService.getProductPricesByDisplayInfoId(displayInfoId);
-		List<ReservationUserComment> comments = reservationUserCommentService
-			.getReservationUserCommentsByProductId(product.getId());
-		double avgScore = reservationUserCommentService.getAvgScoreFromReservationUserComments(comments);
+		List<DisplayInfoImage> displayInfoImages = displayInfoImageService.getAllByDisplayInfoId(displayInfoId);
+		List<ProductPrice> productPrices = productPriceService.getAllByDisplayInfoId(displayInfoId);
+		List<ReservationUserComment> comments = reservationUserCommentService.getAllByProductId(product.getId());
+		double avgScore = reservationUserCommentService.getAvgScoreFromComments(comments);
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("product", product);
@@ -92,24 +90,24 @@ public class ProductApiController {
 
 	private List<Product> getProductsByCategoryId(int start, int categoryId) {
 		if (categoryId != ALL_CATEGORY) {
-			return productService.getProductsByCategoryId(start, categoryId);
+			return productService.getAllByCategoryId(start, categoryId);
 		} else {
-			return productService.getProducts(start);
+			return productService.getAll(start);
 		}
 	}
 
 	private int getProductsCountByCategoryId(int categoryId) {
 		if (categoryId != ALL_CATEGORY) {
-			return productService.getProductsCountByCategoryId(categoryId);
+			return productService.getAllCountByCategoryId(categoryId);
 		} else {
-			return productService.getProductsCount();
+			return productService.getAllCount();
 		}
 	}
 
 	private List<ProductImage> getProductImagesByDisplayInfoId(int displayInfoId) {
 		List<ProductImage> productImages = new LinkedList<>();
-		ProductImage productMainImage = productImageService.getProductImageByDisplayInfoIdAndType(displayInfoId, "ma");
-		List<ProductImage> productThumImages = productImageService.getProductImagesByDisplayInfoIdAndType(displayInfoId,
+		ProductImage productMainImage = productImageService.getByDisplayInfoIdAndType(displayInfoId, "ma");
+		List<ProductImage> productThumImages = productImageService.getAllByDisplayInfoIdAndType(displayInfoId,
 			"et");
 		productImages.add(productMainImage);
 		productImages.addAll(productThumImages);

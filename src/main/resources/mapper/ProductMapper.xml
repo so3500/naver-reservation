@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nts.pjt3.dao.ProductDao">
-	<select id="getProducts" parameterType="map" resultType="Product">
+	<select id="getAll" parameterType="map" resultType="Product">
 		SELECT
 			category.name,
 			category.id AS category_id,
@@ -28,7 +28,7 @@
 			#{start}, #{limit}
 	</select>
 	
-	<select id="getProductsByCategoryId" parameterType="map" resultType="Product">
+	<select id="getAllByCategoryId" parameterType="map" resultType="Product">
 		SELECT
 			category.name,
 			category.id AS category_id,
@@ -56,7 +56,7 @@
 			#{start}, #{limit}
 	</select>
 	
-	<select id="getProductByDisplayInfoId" parameterType="int" resultType="Product">
+	<select id="getByDisplayInfoId" parameterType="int" resultType="Product">
 		SELECT
 			category.name,
 			category.id AS category_id,

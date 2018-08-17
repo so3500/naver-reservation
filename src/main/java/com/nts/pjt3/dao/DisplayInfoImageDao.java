@@ -5,5 +5,5 @@ import java.util.List;
 import com.nts.pjt3.dto.DisplayInfoImage;
 
 public interface DisplayInfoImageDao {
-	List<DisplayInfoImage> getDisplayInfoImagesByDisplayInfoId(int displayInfoId);
+	List<DisplayInfoImage> getAllByDisplayInfoId(int displayInfoId);
 }

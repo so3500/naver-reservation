@@ -24,7 +24,7 @@ public class MainController {
 	public String detail(@RequestParam(name = "id") int displayInfoId, ModelMap model) {
 
 		// TODO: product EmptyResultDataAccessException 예외처리
-		Product product = productService.getProductByDisplayInfoId(displayInfoId);
+		Product product = productService.getByDisplayInfoId(displayInfoId);
 
 		model.put("product", product);
 		model.put("displayInfoId", displayInfoId);
@@ -35,7 +35,7 @@ public class MainController {
 	@GetMapping(path = "/review")
 	public String review(@RequestParam(name = "id") int displayInfoId, ModelMap model) {
 		
-		Product product = productService.getProductByDisplayInfoId(displayInfoId);
+		Product product = productService.getByDisplayInfoId(displayInfoId);
 		
 		model.put("product", product);
 		

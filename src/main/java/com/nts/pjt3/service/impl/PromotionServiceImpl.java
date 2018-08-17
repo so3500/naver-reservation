@@ -16,8 +16,8 @@ public class PromotionServiceImpl implements PromotionService {
 	private PromotionDao promotionDao;
 	
 	@Override
-	public List<Promotion> getPromotions() {
-		return promotionDao.getPromotions();
+	public List<Promotion> getAll() {
+		return promotionDao.getAll();
 	}
 
 }

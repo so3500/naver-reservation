@@ -16,8 +16,8 @@ public class DisplayInfoImageServiceImpl implements DisplayInfoImageService {
 	private DisplayInfoImageDao displayInfoImageDao;
 
 	@Override
-	public List<DisplayInfoImage> getDisplayInfoImagesByDisplayInfoId(int displayInfoId) {
-		return displayInfoImageDao.getDisplayInfoImagesByDisplayInfoId(displayInfoId);
+	public List<DisplayInfoImage> getAllByDisplayInfoId(int displayInfoId) {
+		return displayInfoImageDao.getAllByDisplayInfoId(displayInfoId);
 	}
 
 }

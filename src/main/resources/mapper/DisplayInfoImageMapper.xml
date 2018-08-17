@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nts.pjt3.dao.DisplayInfoImageDao">
-	<select id="getDisplayInfoImagesByDisplayInfoId" parameterType="int" resultType="DisplayInfoImage">
+	<select id="getAllByDisplayInfoId" parameterType="int" resultType="DisplayInfoImage">
 		SELECT
 			dpinfoimg.id,
 			dpinfoimg.display_info_id,
