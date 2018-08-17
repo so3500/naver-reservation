@@ -1,6 +1,9 @@
 package com.nts.pjt3.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ReservationUserComment {
 	private int id;
@@ -9,9 +12,16 @@ public class ReservationUserComment {
 	private int score;
 	private String comment;
 	private String reservationEmail;
-	private String reservationDate;
-	private String createDate;
-	private String modifyDate;
+	
+	@JsonFormat(pattern = "yyyy.MM.dd")
+	private LocalDateTime reservationDate;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	private LocalDateTime  createDate;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	private LocalDateTime  modifyDate;
+	
 	private List<ReservationUserCommentImage> reservationUserCommentImages;
 
 	public int getId() {
@@ -62,27 +72,27 @@ public class ReservationUserComment {
 		this.reservationEmail = reservationName;
 	}
 
-	public String getReservationDate() {
+	public LocalDateTime getReservationDate() {
 		return reservationDate;
 	}
 
-	public void setReservationDate(String reservationDate) {
+	public void setReservationDate(LocalDateTime reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 
-	public String getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
-	public String getModifyDate() {
+	public LocalDateTime getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(String modifyDate) {
+	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 

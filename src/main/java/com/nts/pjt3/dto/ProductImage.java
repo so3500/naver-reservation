@@ -1,5 +1,9 @@
 package com.nts.pjt3.dto;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ProductImage {
 
 	private int productId;
@@ -10,9 +14,13 @@ public class ProductImage {
 	private String fileName;
 	private String saveFileName;
 	private String contentType;
-	private String createDate;
-	private String modifyDate;
-
+	
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	private LocalDateTime  createDate;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	private LocalDateTime  modifyDate;
+	
 	public int getProductId() {
 		return productId;
 	}
@@ -77,21 +85,22 @@ public class ProductImage {
 		this.contentType = contentType;
 	}
 
-	public String getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
-	public String getModifyDate() {
+	public LocalDateTime getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(String modifyDate) {
+	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+
 
 	@Override
 	public String toString() {

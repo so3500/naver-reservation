@@ -1,5 +1,9 @@
 package com.nts.pjt3.dto;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ProductPrice {
 
 	private int id;
@@ -7,8 +11,12 @@ public class ProductPrice {
 	private int price;
 	private double discountRate;
 	private String priceTypeName;
-	private String createDate;
-	private String modifyDate;
+
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	private LocalDateTime  createDate;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	private LocalDateTime  modifyDate;
 
 	public int getId() {
 		return id;
@@ -50,19 +58,19 @@ public class ProductPrice {
 		this.priceTypeName = priceTypeName;
 	}
 
-	public String getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
-	public String getModifyDate() {
+	public LocalDateTime getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(String modifyDate) {
+	public void setModifyDate(LocalDateTime modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 

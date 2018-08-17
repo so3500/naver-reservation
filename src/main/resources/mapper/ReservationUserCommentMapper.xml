@@ -9,7 +9,7 @@
 		rsvusrcmt.score,
 		rsvusrcmt.comment,
 		rsvinfo.reservation_email,
-		DATE_FORMAT(rsvinfo.reservation_date, '%Y.%m.%d') AS reservation_date,
+		rsvinfo.reservation_date,
 		rsvusrcmt.create_date,
 		rsvusrcmt.modify_date
 	FROM
