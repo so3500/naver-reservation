@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.pjt3.dao.ReservationInfoDao">
+	<select id="getAllByReservationEmail" resultType="ReservationInfo">
+		SELECT
+			rsvinfo.id
+			, product.id AS product_id
+			, product.description AS product_description
+			, product.content AS product_content
+			, rsvinfo.reservation_name
+			, rsvinfo.reservation_tel
+			, rsvinfo.reservation_email
+			, rsvinfo.reservation_date
+			, rsvinfo.create_date
+			, rsvinfo.modify_date
+			, SUM(rsvinfoprice.count * prdprice.price) AS sum_price
+		FROM
+			reservation_info rsvinfo
+			, product
+			, reservation_info_price rsvinfoprice
+			, product_price prdprice
+		WHERE
+			rsvinfo.product_id = product.id AND
+			rsvinfo.id = rsvinfoprice.reservation_info_id AND
+			rsvinfoprice.product_price_id = prdprice.id AND
+			prdprice.product_id = product.id AND
+			rsvinfo.reservation_email = #{reservationEmail}
+		GROUP BY
+			rsvinfo.id;
+	</select>
+</mapper>
+
