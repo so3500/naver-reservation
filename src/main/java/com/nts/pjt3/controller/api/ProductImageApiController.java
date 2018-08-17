@@ -30,7 +30,7 @@ public class ProductImageApiController {
 		HttpServletRequest request) {
 		ProductImage productImage = productImageService.getByDisplayInfoIdAndType(displayInfoId, type);
 		String filePath = productImage.getSaveFileName();
-		String filePathURL = String.format("%s/%s", request.getContextPath(), filePath);
+		String filePathURL = request.getContextPath() + "/" + filePath;
 
 		return new RedirectView(filePathURL);
 	}

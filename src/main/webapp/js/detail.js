@@ -7,6 +7,7 @@ let detail = {
         this.infoTab.init();
         this.productImage.init();
         this.review.init();
+        this.ReserveButton.setReserveButtonEvent();
         this.infoTab.setInfoTabClickEvent();
         this.detailContent.setCloseDetailEvent();
         this.detailContent.setOpenDetailEvent();
@@ -14,9 +15,9 @@ let detail = {
         this.loadDetailPage();
     },
 
+    displayInfoId: document.querySelector("#detail_main").dataset.displayInfoId,
     loadDetailPage() {
-        displayInfoId = document.querySelector("#detail_main").dataset.displayInfoId;
-        const GET_PRODUCT_URL = `/api/products/${displayInfoId}`;
+        const GET_PRODUCT_URL = `/api/products/${detail.displayInfoId}`;
         let productRequest = new XMLHttpRequest();
         productRequest.addEventListener("load", function() {
             const response = JSON.parse(this.responseText);
@@ -27,6 +28,16 @@ let detail = {
         })
         productRequest.open("GET", GET_PRODUCT_URL);
         productRequest.send();
+    },
+
+    ReserveButton: {
+        reserve_btn: document.querySelector("#reserve_btn"),
+
+        setReserveButtonEvent() {
+            reserve_btn.addEventListener("click", function(event) {
+                document.location.href = `/reserve?id=${detail.displayInfoId}`;
+            });
+        },
     },
 
     productImage: {
