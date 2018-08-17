@@ -18,7 +18,7 @@ import com.nts.pjt3.service.ReservationUserCommentService;
 public class ReservationUserCommentServiceApiController {
 
 	@Autowired
-	ReservationUserCommentService reservationUserCommentService;
+	private ReservationUserCommentService reservationUserCommentService;
 
 	@GetMapping("/{productId}")
 	public Map<String, Object> getReservationUserComments(@PathVariable(name = "productId") int productId) {
