@@ -2,28 +2,25 @@
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.nts.pjt3.dao.ReservationUserCommentImageDao">
-	<select
-		id="getAllByReservationUserCommentId"
-		resultType="ReservationUserCommentImage">
+	<select id="getAllByReservationUserCommentId" resultType="ReservationUserCommentImage">
 		SELECT
-			rsvusrcmtimg.id,
-			rsvusrcmtimg.reservation_info_id,
-			rsvusrcmtimg.reservation_user_comment_id,
-			finfo.id AS fild_id,
-			finfo.file_name,
-			finfo.save_file_name,
-			finfo.content_type,
-			finfo.delete_flag,
-			finfo.create_date,
-			finfo.modify_date
+			rsvusrcmtimg.id
+			, rsvusrcmtimg.reservation_info_id
+			, rsvusrcmtimg.reservation_user_comment_id
+			, finfo.id AS fild_id
+			, finfo.file_name
+			, finfo.save_file_name
+			, finfo.content_type
+			, finfo.delete_flag
+			, finfo.create_date
+			, finfo.modify_date
 		FROM
-			reservation_user_comment_image rsvusrcmtimg,
-			reservation_user_comment rsvusrcmt,
-			file_info finfo
+			reservation_user_comment_image rsvusrcmtimg
+			, reservation_user_comment rsvusrcmt
+			, file_info finfo
 		WHERE
-			rsvusrcmtimg.reservation_user_comment_id = rsvusrcmt.id AND
-			rsvusrcmtimg.file_id = finfo.id AND
-			rsvusrcmt.id = #{reservationUserCommentId};
+			rsvusrcmtimg.reservation_user_comment_id = rsvusrcmt.id
+			AND rsvusrcmtimg.file_id = finfo.id 
+			AND rsvusrcmt.id = #{reservationUserCommentId};
 	</select>
 </mapper>
-    

@@ -3,21 +3,20 @@
 <mapper namespace="com.nts.pjt3.dao.ProductPriceDao">
 	<select id="getAllByDisplayInfoId" parameterType="int" resultType="ProductPrice">
 		SELECT
-			pprice.id,
-			pprice.product_id,
-			pprice.price_type_name,
-			pprice.price,
-			pprice.discount_rate,
-			pprice.create_date,
-			pprice.modify_date
+			pprice.id
+			, pprice.product_id
+			, pprice.price_type_name
+			, pprice.price
+			, pprice.discount_rate
+			, pprice.create_date
+			, pprice.modify_date
 		FROM
-			product_price pprice,
-			product,
-			display_info dpinfo
+			product_price pprice
+			, product
+			, display_info dpinfo
 		WHERE
-			pprice.product_id = product.id AND
-			product.id = dpinfo.product_id AND
-			dpinfo.id = #{displayInfoId}
+			pprice.product_id = product.id
+			AND product.id = dpinfo.product_id
+			AND dpinfo.id = #{displayInfoId}
 	</select>
 </mapper>
-    

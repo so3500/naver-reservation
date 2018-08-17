@@ -3,46 +3,51 @@
 <mapper namespace="com.nts.pjt3.dao.ProductImageDao">
 	<select id="getAllByDisplayInfoIdAndType" parameterType="map" resultType="ProductImage">
 		SELECT
-			prdimg.product_id,
-			prdimg.id AS product_image_id,
-			prdimg.type,
-			prdimg.file_id AS file_info_id,
-			finfo.file_name,
-			finfo.save_file_name,
-			finfo.content_type,
-			finfo.delete_flag,
-			finfo.create_date,
-			finfo.modify_date
+			prdimg.product_id
+			, prdimg.id AS product_image_id
+			, prdimg.type
+			, prdimg.file_id AS file_info_id
+			, finfo.file_name
+			, finfo.save_file_name
+			, finfo.content_type
+			, finfo.delete_flag
+			, finfo.create_date
+			, finfo.modify_date
 		FROM
-			product_image prdimg, file_info finfo, product, display_info dpinfo
+			product_image prdimg
+			, file_info finfo
+			, product
+			, display_info dpinfo
 		WHERE
-			product.id = prdimg.product_id AND
-			dpinfo.product_id = product.id AND
-			prdimg.file_id = finfo.id AND
-			prdimg.type = #{type} AND
-			dpinfo.id = #{displayInfoId}
+			product.id = prdimg.product_id
+			AND dpinfo.product_id = product.id
+			AND prdimg.file_id = finfo.id
+			AND prdimg.type = #{type}
+			AND dpinfo.id = #{displayInfoId}
 	</select>
-	
+
 	<select id="getByDisplayInfoIdAndType" parameterType="map" resultType="ProductImage">
 		SELECT
-			prdimg.product_id,
-			prdimg.id AS product_image_id,
-			prdimg.type,
-			prdimg.file_id AS file_info_id,
-			finfo.file_name,
-			finfo.save_file_name,
-			finfo.content_type,
-			finfo.delete_flag,
-			finfo.create_date,
-			finfo.modify_date
+			prdimg.product_id
+			, prdimg.id AS product_image_id
+			, prdimg.type
+			, prdimg.file_id AS file_info_id
+			, finfo.file_name
+			, finfo.save_file_name
+			, finfo.content_type
+			, finfo.delete_flag
+			, finfo.create_date
+			, finfo.modify_date
 		FROM
-			product_image prdimg, file_info finfo, product, display_info dpinfo
+			product_image prdimg
+			, file_info finfo
+			, product
+			, display_info dpinfo
 		WHERE
-			product.id = prdimg.product_id AND
-			dpinfo.product_id = product.id AND
-			prdimg.file_id = finfo.id AND
-			prdimg.type = #{type} AND
-			dpinfo.id = #{displayInfoId}
+			product.id = prdimg.product_id
+			AND dpinfo.product_id = product.id
+			AND prdimg.file_id = finfo.id
+			AND prdimg.type = #{type}
+			AND dpinfo.id = #{displayInfoId}
 	</select>
 </mapper>
-    

@@ -3,14 +3,15 @@
 <mapper namespace="com.nts.pjt3.dao.CategoryDao">
 	<select id="getAll" resultType="Category">
 		SELECT
-			category.id,
-			category.name,
-			COUNT(*) AS count
+			category.id
+			, category.name
+			, COUNT(*) AS count
 		FROM
-			category, product, display_info disinfo
+			category, product
+			, display_info disinfo
 		WHERE
-			category.id = product.category_id AND
-			product.id = disinfo.product_id
+			category.id = product.category_id 
+			AND product.id = disinfo.product_id
 		GROUP BY
 			category.id
 	</select>

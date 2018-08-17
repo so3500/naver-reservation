@@ -3,104 +3,113 @@
 <mapper namespace="com.nts.pjt3.dao.ProductDao">
 	<select id="getAll" parameterType="map" resultType="Product">
 		SELECT
-			category.name,
-			category.id AS category_id,
-			product.id,
-			product.description,
-			product.content,
-			product.event,
-			product.create_date,
-			product.modify_date,
-			dpinfo.id AS display_info_id,
-			dpinfo.opening_hours,
-			dpinfo.place_name,
-			dpinfo.place_lot,
-			dpinfo.place_street,
-			dpinfo.tel,
-			dpinfo.homepage,
-			dpinfo.email
+			category.name
+			, category.id AS category_id
+			, product.id
+			, product.description
+			, product.content
+			, product.event
+			, product.create_date
+			, product.modify_date
+			, dpinfo.id AS display_info_id
+			, dpinfo.opening_hours
+			, dpinfo.place_name
+			, dpinfo.place_lot
+			, dpinfo.place_street
+			, dpinfo.tel
+			, dpinfo.homepage
+			, dpinfo.email
 		FROM
-			product, display_info dpinfo, category
+			product
+			, display_info dpinfo
+			, category
 		WHERE
-			product.id = dpinfo.product_id AND
-			product.category_id = category.id
+			product.id = dpinfo.product_id
+			AND	product.category_id = category.id
 		LIMIT
 			#{start}, #{limit}
 	</select>
-	
+
 	<select id="getAllByCategoryId" parameterType="map" resultType="Product">
 		SELECT
-			category.name,
-			category.id AS category_id,
-			product.id,
-			product.description,
-			product.content,
-			product.event,
-			product.create_date,
-			product.modify_date,
-			dpinfo.id AS display_info_id,
-			dpinfo.opening_hours,
-			dpinfo.place_name,
-			dpinfo.place_lot,
-			dpinfo.place_street,
-			dpinfo.tel,
-			dpinfo.homepage,
-			dpinfo.email
+			category.name
+			, category.id AS category_id
+			, product.id
+			, product.description
+			, product.content
+			, product.event
+			, product.create_date
+			, product.modify_date
+			, dpinfo.id AS display_info_id
+			, dpinfo.opening_hours
+			, dpinfo.place_name
+			, dpinfo.place_lot
+			, dpinfo.place_street
+			, dpinfo.tel
+			, dpinfo.homepage
+			, dpinfo.email
 		FROM
-			product, display_info dpinfo, category
+			product
+			, display_info dpinfo
+			, category
 		WHERE
-			product.id = dpinfo.product_id AND
-			product.category_id = category.id AND
-			product.category_id = #{categoryId}
+			product.id = dpinfo.product_id
+			AND product.category_id = category.id 
+			AND product.category_id = #{categoryId}
 		LIMIT
 			#{start}, #{limit}
 	</select>
-	
+
 	<select id="getByDisplayInfoId" parameterType="int" resultType="Product">
 		SELECT
-			category.name,
-			category.id AS category_id,
-			product.id,
-			product.description,
-			product.content,
-			product.event,
-			product.create_date,
-			product.modify_date,
-			dpinfo.id AS display_info_id,
-			dpinfo.opening_hours,
-			dpinfo.place_name,
-			dpinfo.place_lot,
-			dpinfo.place_street,
-			dpinfo.tel,
-			dpinfo.homepage,
-			dpinfo.email
+			category.name
+			, category.id AS category_id
+			, product.id
+			, product.description
+			, product.content
+			, product.event
+			, product.create_date
+			, product.modify_date
+			, dpinfo.id AS display_info_id
+			, dpinfo.opening_hours
+			, dpinfo.place_name
+			, dpinfo.place_lot
+			, dpinfo.place_street
+			, dpinfo.tel
+			, dpinfo.homepage
+			, dpinfo.email
 		FROM
-			product, display_info dpinfo, category
+			product
+			, display_info dpinfo
+			, category
 		WHERE
-			product.id = dpinfo.product_id AND
-			product.category_id = category.id AND
-			dpinfo.id = #{displayInfoId}
+			product.id = dpinfo.product_id
+			AND product.category_id = category.id 
+			AND dpinfo.id = #{displayInfoId}
 	</select>
-	
+
 	<select id="count" resultType="int">
 		SELECT
 			count(*)
 		FROM
-			product, display_info dpinfo, category
+			product
+			, display_info dpinfo
+			, category
 		WHERE
-			product.id = dpinfo.product_id AND
-			product.category_id = category.id
+			product.id = dpinfo.product_id
+			AND product.category_id = category.id
 	</select>
-	
+
 	<select id="countByCategoryId" parameterType="int" resultType="int">
 		SELECT
 			count(*)
 		FROM
-			product, display_info dpinfo, category
+			product
+			, display_info dpinfo
+			, category
 		WHERE
-			product.id = dpinfo.product_id AND
-			product.category_id = category.id AND
-			category.id = #{categoryId}
+			product.id = dpinfo.product_id
+			AND product.category_id = category.id 
+			AND category.id = #{categoryId}
 	</select>
 </mapper>
-    
