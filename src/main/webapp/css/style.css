@@ -1237,12 +1237,12 @@ button {
 }
 
 /* added by crong. */
-.form_horizontal .inline_form .inline_control.tel_wrap {
+.form_horizontal .inline_form .inline_control.wrap {
     position: relative;
 }
 
 
-.form_horizontal .inline_form .inline_control.tel_wrap .warning_msg {
+.form_horizontal .inline_form .inline_control.wrap .warning_msg {
     position: relative;
     position: absolute;
     top: 0;

@@ -1,6 +1,7 @@
 package com.nts.pjt3.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -23,6 +24,8 @@ public class ReservationInfo {
 
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime modifyDate;
+
+	private List<ReservationInfoPrice> prices;
 
 	public int getId() {
 		return id;
@@ -120,12 +123,20 @@ public class ReservationInfo {
 		this.modifyDate = modifyDate;
 	}
 
+	public List<ReservationInfoPrice> getPrices() {
+		return prices;
+	}
+
+	public void setPrices(List<ReservationInfoPrice> prices) {
+		this.prices = prices;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
-			"ReservationInfo [id=%s, productId=%s, sumPrice=%s, cancelFlag=%s, productDescription=%s, productContent=%s, reservationName=%s, reservationTel=%s, reservationEmail=%s, reservationDate=%s, createDate=%s, modifyDate=%s]",
+			"ReservationInfo [id=%s, productId=%s, sumPrice=%s, cancelFlag=%s, productDescription=%s, productContent=%s, reservationName=%s, reservationTel=%s, reservationEmail=%s, reservationDate=%s, createDate=%s, modifyDate=%s, prices=%s]",
 			id, productId, sumPrice, cancelFlag, productDescription, productContent, reservationName, reservationTel,
-			reservationEmail, reservationDate, createDate, modifyDate);
+			reservationEmail, reservationDate, createDate, modifyDate, prices);
 	}
 
 }

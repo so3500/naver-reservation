@@ -21,6 +21,22 @@ let utils = {
 
     notBlindElement(element) {
         element.classList.remove("blind");
-    }
+    },
+
+	enableElement(element) {
+		element.classList.remove("disabled");
+	},
+
+	disableElement(element) {
+		element.classList.add("disabled");
+	},
+
+	openElement(element) {
+		element.classList.add("open");
+	},
+
+	closeElement(element) {
+		element.classList.remove("open");
+	},
 
 }
