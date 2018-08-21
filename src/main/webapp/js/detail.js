@@ -7,7 +7,7 @@ let detail = {
         this.infoTab.init();
         this.productImage.init();
         this.review.init();
-        this.ReserveButton.setReserveButtonEvent();
+        this.reserveButton.setReserveButtonEvent();
         this.infoTab.setInfoTabClickEvent();
         this.detailContent.setCloseDetailEvent();
         this.detailContent.setOpenDetailEvent();
@@ -30,7 +30,7 @@ let detail = {
         productRequest.send();
     },
 
-    ReserveButton: {
+    reserveButton: {
         reserve_btn: document.querySelector("#reserve_btn"),
 
         setReserveButtonEvent() {
