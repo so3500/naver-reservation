@@ -10,4 +10,5 @@ public interface ReservationInfoDao {
 	public List<ReservationInfo> getAllByReservationInfoEmail(String reservationEmail);
 	public int createReservationInfo(ReservationInfo reservationInfo);
 	public int createReservationInfoPrice(List<ReservationInfoPrice> reservationInfoPrices);
+	public int cancelByReservationInfoId(int reservationInfoId);
 }

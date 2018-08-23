@@ -11,6 +11,7 @@
 			, rsvinfo.reservation_name
 			, rsvinfo.reservation_tel
 			, rsvinfo.reservation_email
+			, rsvinfo.cancel_flag
 			, rsvinfo.reservation_date
 			, rsvinfo.create_date
 			, rsvinfo.modify_date
@@ -46,7 +47,6 @@
 			, reservation_email
 			, reservation_date
 			, create_date
-			, modify_date
 		)
 		VALUES (
 			#{productId}
@@ -54,8 +54,7 @@
 			, #{reservationTel}
 			, #{reservationEmail}
 			, #{reservationDate}
-			, #{createDate}
-			, #{modifyDate}
+			, NOW()
 		)
 	</insert>
 
@@ -77,5 +76,16 @@
 				</if>
 			</foreach>
 	</insert>
+	
+	<update id="cancelByReservationInfoId" parameterType="int">
+		UPDATE 
+			reservation_info
+		SET
+			cancel_flag = 1
+			, modify_date = NOW()
+		WHERE
+			id = #{reservationInfoId}
+		
+	</update>
 
 </mapper>

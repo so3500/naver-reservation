@@ -1,6 +1,5 @@
 package com.nts.pjt3.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,6 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
 	@Transactional
 	@Override
 	public int createReservationInfo(ReservationInfo reservationInfo) {
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		reservationInfo.setCreateDate(currentDateTime);
-		reservationInfo.setModifyDate(currentDateTime);
 		reservationInfoDao.createReservationInfo(reservationInfo);
 		
 		int reservationInfoId = reservationInfo.getId();
@@ -45,4 +41,9 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
 		return reservationInfoDao.getByReservationInfoId(reservationInfoId);
 	}
 	
+	@Transactional
+	@Override
+	public int cancelByReservationInfoId(int reservationInfoId) {
+		return reservationInfoDao.cancelByReservationInfoId(reservationInfoId);
+	}
 }
