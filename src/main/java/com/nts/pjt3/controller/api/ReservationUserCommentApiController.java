@@ -15,7 +15,7 @@ import com.nts.pjt3.service.ReservationUserCommentService;
 
 @RestController
 @RequestMapping(path = "/api/reservationUserComments")
-public class ReservationUserCommentServiceApiController {
+public class ReservationUserCommentApiController {
 
 	@Autowired
 	private ReservationUserCommentService reservationUserCommentService;

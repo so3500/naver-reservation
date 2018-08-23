@@ -17,6 +17,6 @@
 			, reservation_info rsvinfo
 		WHERE
 			rsvinfo.id = rsvusrcmt.reservation_info_id
-			AND rsvusrcmt.product_id = #{productId};
+			AND rsvusrcmt.product_id = #{productId}
 	</select>
 </mapper>

@@ -37,9 +37,8 @@ public class ReservationInfoApiController {
 
 	@PostMapping
 	public ReservationInfo addReservationInfo(@RequestBody ReservationInfo reservationInfo) {
-		ReservationInfo info = null;
-		System.out.println(reservationInfo);
-		return info;
+		reservationInfoService.createReservationInfo(reservationInfo);
+		return reservationInfo;
 	}
 	
 }

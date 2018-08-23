@@ -21,6 +21,6 @@
 		WHERE
 			rsvusrcmtimg.reservation_user_comment_id = rsvusrcmt.id
 			AND rsvusrcmtimg.file_id = finfo.id 
-			AND rsvusrcmt.id = #{reservationUserCommentId};
+			AND rsvusrcmt.id = #{reservationUserCommentId}
 	</select>
 </mapper>

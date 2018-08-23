@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nts.pjt3.dao.ReservationInfoDao">
-	<select id="getAllByReservationEmail" resultType="ReservationInfo">
-		SELECT
+
+	<select id="getAllByReservationInfoEmail" resultType="ReservationInfo">
+		SELECT DISTINCT
 			rsvinfo.id
 			, product.id AS product_id
 			, product.description AS product_description
@@ -13,20 +14,68 @@
 			, rsvinfo.reservation_date
 			, rsvinfo.create_date
 			, rsvinfo.modify_date
-			, SUM(rsvinfoprice.count * prdprice.price) AS sum_price
+			, ( 
+				SELECT
+					SUM(prdprice.price * rsvinfoprice.count) AS sum_price
+				FROM
+					product_price prdprice
+					, reservation_info_price rsvinfoprice
+				WHERE
+					rsvinfoprice.product_price_id = prdprice.id
+					AND rsvinfoprice.reservation_info_id = rsvinfo.id
+			) AS sum_price
 		FROM
 			reservation_info rsvinfo
 			, product
 			, reservation_info_price rsvinfoprice
 			, product_price prdprice
 		WHERE
-			rsvinfo.product_id = product.id AND
-			rsvinfo.id = rsvinfoprice.reservation_info_id AND
-			rsvinfoprice.product_price_id = prdprice.id AND
-			prdprice.product_id = product.id AND
-			rsvinfo.reservation_email = #{reservationEmail}
-		GROUP BY
-			rsvinfo.id;
+			rsvinfo.product_id = product.id
+			AND rsvinfo.id = rsvinfoprice.reservation_info_id
+			AND rsvinfoprice.product_price_id = prdprice.id
+			AND prdprice.product_id = product.id
+			AND rsvinfo.reservation_email = #{reservationEmail}
 	</select>
-</mapper>
+	
+	<insert id="createReservationInfo" useGeneratedKeys="true" keyProperty="id" parameterType="ReservationInfo">
+		INSERT INTO
+		reservation_info (
+			product_id
+			, reservation_name
+			, reservation_tel
+			, reservation_email
+			, reservation_date
+			, create_date
+			, modify_date
+		)
+		VALUES (
+			#{productId}
+			, #{reservationName}
+			, #{reservationTel}
+			, #{reservationEmail}
+			, #{reservationDate}
+			, #{createDate}
+			, #{modifyDate}
+		)
+	</insert>
 
+	<insert id="createReservationInfoPrice" useGeneratedKeys="true" keyProperty="id" parameterType="java.util.List">
+		INSERT INTO 
+			reservation_info_price (
+				reservation_info_id
+				, product_price_id
+				, count
+			)
+		VALUES
+			<foreach collection="list" item="reservationPrice" separator=",">
+				<if test="reservationPrice.count > 0">
+				(
+					#{reservationPrice.reservationInfoId}
+					, #{reservationPrice.productPriceId}
+					, #{reservationPrice.count}
+				)
+				</if>
+			</foreach>
+	</insert>
+
+</mapper>

@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                                     <div class="inline_control">
-                                        <p id="rsv_year_month_day" class="inline_txt selected" data-rsv-year-month-day="2017.2.17">2017.2.17, 총 <span id="total_count">0</span>매</p>
+                                        <p id="rsv_year_month_day" class="inline_txt selected" data-rsv-year-month-day="${reservationDate}">${reservationDate}, 총 <span id="total_count">0</span>매</p>
                                     </div>
                                 </div>
                             </form>

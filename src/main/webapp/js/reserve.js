@@ -58,6 +58,7 @@ let reserve = {
 			if (ticketCount === 1) {
 				utils.enableElement(ticketCountInput);
 				utils.enableElement(subOneTicketBtn);
+				ticket.querySelector("div.individual_price").classList.add("on_color");
 				reserve.bookingForm.checkAllCondition();
 			}
 		},
@@ -80,6 +81,7 @@ let reserve = {
 			if (ticketCount === 0) {
 				utils.disableElement(ticketCountInput);
 				utils.disableElement(subOneTicketBtn);
+				ticket.querySelector("div.individual_price").classList.remove("on_color");
 				reserve.bookingForm.checkAllCondition();
 			}
 		},
@@ -212,11 +214,12 @@ let reserve = {
 		setTermClickEvent() {
 			reserve.bookingForm.termAgreementBody.addEventListener("click", function(event) {
 				const clickedTagName = event.target.tagName;
-				if (clickedTagName === "SPAN" || clickedTagName === "A" || clickedTagName === "I") {
+				if ((clickedTagName === "SPAN" && event.target.classList.contains("btn_text")) 
+				|| clickedTagName === "A" || clickedTagName === "I") {
 					event.preventDefault();
 					event.stopPropagation();
 					const agreement = event.target.closest("div.agreement");
-					if(agreement.classList.contains("open")){
+					if (agreement.classList.contains("open")) {
 						this.hideAgreement(agreement);
 					} else {
 						this.showAgreement(agreement);
@@ -246,9 +249,9 @@ let reserve = {
 
 		sendPostAjax(url, reqBody, callback) {
 			let rsvPostReq = new XMLHttpRequest();
-			rsvPostReq.addEventListener("load", callback);
+			rsvPostReq.onreadystatechange = this.rsvPostCallBack;
 			rsvPostReq.open("POST", url);
-			rsvPostReq.setRequestHeader("Content-Type", "application/json");
+			rsvPostReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			rsvPostReq.send(JSON.stringify(reqBody));
 		},
 
@@ -258,8 +261,8 @@ let reserve = {
 				"reservationName": this.rsvForm.name.value,
 				"reservationTel": this.rsvForm.tel.value,
 				"reservationEmail": this.rsvForm.email.value,
-				"reservationYearMonthDay": this.rsvYearMonthDay,
-				"prices": this.getProductPrices()
+				"reservationDate": this.rsvYearMonthDay,
+				"reservationPrices": this.getProductPrices()
 			}
 			return rsvReqData;
 		},
@@ -278,8 +281,14 @@ let reserve = {
 		},
 
 		rsvPostCallBack() {
-			// TODO 요청 성공 시 메인으로 리다이렉트
-			// TODO 요청 실패 시 alert
+			if(this.readyState == 4) {
+				if (this.status == 200) {
+					alert("예약이 완료되었습니다.");
+					window.location.href = `/mainpage`;
+				} else {
+					alert("예약이 되지않았습니다");
+				}
+			}
 		},
 
 	},

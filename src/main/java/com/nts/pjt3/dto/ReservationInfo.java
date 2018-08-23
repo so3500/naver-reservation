@@ -1,5 +1,6 @@
 package com.nts.pjt3.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,8 +17,8 @@ public class ReservationInfo {
 	private String reservationTel;
 	private String reservationEmail;
 
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-	private LocalDateTime reservationDate;
+	@JsonFormat(pattern = "yyyy.M.dd")
+	private LocalDate reservationDate;
 
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime createDate;
@@ -25,7 +26,7 @@ public class ReservationInfo {
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime modifyDate;
 
-	private List<ReservationInfoPrice> prices;
+	private List<ReservationInfoPrice> reservationPrices;
 
 	public int getId() {
 		return id;
@@ -42,7 +43,7 @@ public class ReservationInfo {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-
+	
 	public int getSumPrice() {
 		return sumPrice;
 	}
@@ -99,11 +100,11 @@ public class ReservationInfo {
 		this.reservationEmail = reservationEmail;
 	}
 
-	public LocalDateTime getReservationDate() {
+	public LocalDate getReservationDate() {
 		return reservationDate;
 	}
 
-	public void setReservationDate(LocalDateTime reservationDate) {
+	public void setReservationDate(LocalDate reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 
@@ -123,20 +124,20 @@ public class ReservationInfo {
 		this.modifyDate = modifyDate;
 	}
 
-	public List<ReservationInfoPrice> getPrices() {
-		return prices;
+	public List<ReservationInfoPrice> getReservationPrices() {
+		return reservationPrices;
 	}
 
-	public void setPrices(List<ReservationInfoPrice> prices) {
-		this.prices = prices;
+	public void setReservationPrices(List<ReservationInfoPrice> reservationPrices) {
+		this.reservationPrices = reservationPrices;
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
-			"ReservationInfo [id=%s, productId=%s, sumPrice=%s, cancelFlag=%s, productDescription=%s, productContent=%s, reservationName=%s, reservationTel=%s, reservationEmail=%s, reservationDate=%s, createDate=%s, modifyDate=%s, prices=%s]",
-			id, productId, sumPrice, cancelFlag, productDescription, productContent, reservationName, reservationTel,
-			reservationEmail, reservationDate, createDate, modifyDate, prices);
+			"ReservationInfo [id=%s, productId=%s, sumPrice=%s, cancelFlag=%s, productDescription=%s, productContent=%s, reservationName=%s, reservationTel=%s, reservationEmail=%s, reservationDate=%s, createDate=%s, modifyDate=%s, reservationPrices=%s]",
+			id, productId, sumPrice, cancelFlag, productDescription, productContent, reservationName,
+			reservationTel, reservationEmail, reservationDate, createDate, modifyDate, reservationPrices);
 	}
 
 }
