@@ -6,6 +6,9 @@ let reserve = {
 	productId: document.querySelector("div.ct").dataset.productId,
 
 	init() {
+		this.elementClassUtil = new ElementClassUtil();
+		this.ajaxUtil = new AjaxUtil();
+		
 		this.bookingTicket.setTickectBodyClickEvent();
 		this.bookingForm.setBookingFormChangeEvent();
 		this.bookingForm.setTermClickEvent();
@@ -56,8 +59,8 @@ let reserve = {
 			ticketCountInput.value = ticketCount;
 
 			if (ticketCount === 1) {
-				utils.enableElement(ticketCountInput);
-				utils.enableElement(subOneTicketBtn);
+				reserve.elementClassUtil.enableElement(ticketCountInput);
+				reserve.elementClassUtil.enableElement(subOneTicketBtn);
 				ticket.querySelector("div.individual_price").classList.add("on_color");
 				reserve.bookingForm.checkAllCondition();
 			}
@@ -79,8 +82,8 @@ let reserve = {
 			}
 
 			if (ticketCount === 0) {
-				utils.disableElement(ticketCountInput);
-				utils.disableElement(subOneTicketBtn);
+				reserve.elementClassUtil.disableElement(ticketCountInput);
+				reserve.elementClassUtil.disableElement(subOneTicketBtn);
 				ticket.querySelector("div.individual_price").classList.remove("on_color");
 				reserve.bookingForm.checkAllCondition();
 			}
@@ -243,16 +246,17 @@ let reserve = {
 		setFormSubmitEvent() {
 			this.rsvFormSummitBtn.addEventListener("click", function() {
 				const RSV_POST_URL = "/api/reservationInfos";
-				this.sendPostAjax(RSV_POST_URL, this.getRsvReqBody(), this.rsvPostCallBack);
+				let reservDate = JSON.stringify(this.getRsvReqBody());
+				reserve.ajaxUtil.sendPostAjax(RSV_POST_URL, reservDate)
+						.then(responseText => {
+							alert("예약이 완료되었습니다.");
+							window.location.href = `/mainpage`;
+						})
+						.catch(status => {
+							alert("예약이 실패하였습니다");
+							console.log(`then err: ${status}`);
+						});
 			}.bind(this));
-		},
-
-		sendPostAjax(url, reqBody, callback) {
-			let rsvPostReq = new XMLHttpRequest();
-			rsvPostReq.onreadystatechange = this.rsvPostCallBack;
-			rsvPostReq.open("POST", url);
-			rsvPostReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			rsvPostReq.send(JSON.stringify(reqBody));
 		},
 
 		getRsvReqBody() {
@@ -278,17 +282,6 @@ let reserve = {
 				prices.push(price);
 			});
 			return prices;
-		},
-
-		rsvPostCallBack() {
-			if(this.readyState == 4) {
-				if (this.status == 200) {
-					alert("예약이 완료되었습니다.");
-					window.location.href = `/mainpage`;
-				} else {
-					alert("예약이 되지않았습니다");
-				}
-			}
 		},
 
 	},

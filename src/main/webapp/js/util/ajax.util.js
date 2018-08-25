@@ -1,6 +1,6 @@
-function ajaxUtil() {}
+function AjaxUtil() {}
 
-ajaxUtil.prototype.sendGetAjax = function() {
+AjaxUtil.prototype.sendGetAjax = function(url) {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		req.open("GET", url);
@@ -10,7 +10,7 @@ ajaxUtil.prototype.sendGetAjax = function() {
 	});
 }
 
-ajaxUtil.prototype.sendPostAjax = function() {
+AjaxUtil.prototype.sendPostAjax = function(url, data) {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		req.open("POST", url);
@@ -21,7 +21,7 @@ ajaxUtil.prototype.sendPostAjax = function() {
 	});
 }
 
-ajaxUtil.prototype.sendPutAjax = function() {
+AjaxUtil.prototype.sendPutAjax = function(url) {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		req.open("PUT", url);

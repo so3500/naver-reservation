@@ -30,8 +30,8 @@ myReservInfo.prototype.cancelReservInfo = function(reserv) {
 	const RESERV_PUT_URL = `/api/reservaionInfos?reservationId=${reservId}`;
 	const ajaxUtil = new ajaxUtil();
 	ajaxUtil.sendPutAjax("/api/reservationInfos/" + rsvId)
-			.then(msg => {
-				console.log(mst);
+			.then(responseText => {
+				console.log(responseText);
 			});
 
 }

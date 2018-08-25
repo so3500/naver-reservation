@@ -11,6 +11,9 @@ let main = {
 
 
     init() {
+    	this.elementClassUtil = new ElementClassUtil();
+    	this.ajaxUtil = new AjaxUtil();
+    	
         this.leftEventBox = this.eventBox[this.LEFT];
         this.rightEventBox = this.eventBox[this.RIGHT];
 
@@ -26,6 +29,7 @@ let main = {
 
         this.moreProductsButton.addEventListener("click", this.loadProducts);
         this.category.setCategoryClickEvent();
+        
     },
 
     promotion: {
@@ -37,23 +41,22 @@ let main = {
 
         loadPromotions() {
             const GET_PROMOTIONS_URL = "/api/promotions";
-            let promotionRequest = new XMLHttpRequest();
-            promotionRequest.addEventListener("load", function() {
-                const response = JSON.parse(this.responseText);
-                const promotions = response.promotions;
-                const promotionCount = response.size;
+            main.ajaxUtil.sendGetAjax(GET_PROMOTIONS_URL)
+            			.then(responseText => {
+                            const response = JSON.parse(responseText);
+                            const promotions = response.promotions;
+                            const promotionCount = response.size;
 
-                let promotionsHtml = "";
-                promotions.forEach((promotionItem) => {
-                    promotionsHtml += main.promotion.bindPromotionTemplate(promotionItem);
-                });
-                main.promotion.promotionBox.innerHTML = promotionsHtml;
-
-                main.promotion.setPromotionBoxSlideShow(promotionCount);
-            });
-
-            promotionRequest.open("GET", GET_PROMOTIONS_URL);
-            promotionRequest.send();
+                            let promotionsHtml = "";
+                            promotions.forEach((promotionItem) => {
+                                promotionsHtml += main.promotion.bindPromotionTemplate(promotionItem);
+                            });
+                            main.promotion.promotionBox.innerHTML = promotionsHtml;
+                            main.promotion.setPromotionBoxSlideShow(promotionCount);
+            			})
+            			.catch(status => {
+            				console.log(`get err(promotion): ${status}`);
+            			});
         },
 
         setPromotionBoxSlideShow(promotionCount) {
@@ -96,7 +99,14 @@ let main = {
         },
 
         loadCateogires() {
-            const GET_CATEGORIES_URL = "/api/categories"
+            const GET_CATEGORIES_URL = "/api/categories";
+            main.ajaxUtil.sendGetAjax(GET_CATEGORIES_URL)
+            			.then(responseText => {
+            				main.category.addCategoryToEventTab(responseText);
+            			})
+            			.catch(status => {
+            				console.log(`get err(category): ${status}`);
+            			});
             let categoryRequest = new XMLHttpRequest();
             categoryRequest.addEventListener("load", this.addCategoryToEventTab);
             categoryRequest.open("GET", GET_CATEGORIES_URL);
@@ -122,8 +132,8 @@ let main = {
             }.bind(this));
         },
 
-        addCategoryToEventTab() {
-            const response = JSON.parse(this.responseText);
+        addCategoryToEventTab(responseText) {
+            const response = JSON.parse(responseText);
             const categories = response.categories;
             let categoriesHtml = "";
 
@@ -137,8 +147,8 @@ let main = {
 
         activateCategoryTab(toActivatingCategoryTab) {
             let currentActivatingCategoryTab = document.querySelector("a.anchor.active");
-            utils.deactivateElement(currentActivatingCategoryTab);
-            utils.activateElement(toActivatingCategoryTab);
+            main.elementClassUtil.deactivateElement(currentActivatingCategoryTab);
+            main.elementClassUtil.activateElement(toActivatingCategoryTab);
         }
     },
 
@@ -146,24 +156,25 @@ let main = {
         let startProductNo = parseInt(main.eventSection.dataset.startProductNo);
         let categoryId = main.eventSection.dataset.categoryId;
         const GET_PRODUCTS_URL = `/api/products?categoryId=${categoryId}&start=${startProductNo}`;
-        let productRequest = new XMLHttpRequest();
-        productRequest.addEventListener("load", function() {
-            const response = JSON.parse(this.responseText);
-            const totalCount = response.totalCount;
-            const products = response.products;
-            const productsCount = response.productsCount;
+        main.ajaxUtil.sendGetAjax(GET_PRODUCTS_URL)
+        		.then(responseText => {
+                    const response = JSON.parse(responseText);
+                    const totalCount = response.totalCount;
+                    const products = response.products;
+                    const productsCount = response.productsCount;
 
-            main.addProductsToEventBox(products);
-            startProductNo = main.updateStartProudctNo(productsCount);
-            main.updateEventCount(totalCount);
-            if (startProductNo >= totalCount) {
-                utils.blindElement(main.moreProductsButton);
-            } else {
-                utils.notBlindElement(main.moreProductsButton);
-            }
-        });
-        productRequest.open("GET", GET_PRODUCTS_URL);
-        productRequest.send();
+                    main.addProductsToEventBox(products);
+                    startProductNo = main.updateStartProudctNo(productsCount);
+                    main.updateEventCount(totalCount);
+                    if (startProductNo >= totalCount) {
+                        main.elementClassUtil.blindElement(main.moreProductsButton);
+                    } else {
+                        main.elementClassUtil.notBlindElement(main.moreProductsButton);
+                    }
+        		})
+        		.catch(status => {
+        			console.log(`get err(product): ${status}`);
+        		});
     },
 
     addProductsToEventBox(products) {

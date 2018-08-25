@@ -12,23 +12,26 @@ let review = {
     TOTAL_AVG_SCORE: 5.0,
 
     init() {
+    	this.ajaxUtil = new AjaxUtil();
+    	
         let reviewTemplate = document.querySelector("#review_template").innerText;
         this.bindReviewTemplate = Handlebars.compile(reviewTemplate);
         Handlebars.registerHelper("firstImageSaveFileName", function(reservationUserCommentImages) {
             return reservationUserCommentImages[0].saveFileName;
-        })
+        });
     },
 
     loadReviewPage() {
         productId = document.querySelector("#review_main").dataset.productId;
         const GET_REVIEWS_URL = `/api/reservationUserComments/${productId}`;
-        let reviewRequest = new XMLHttpRequest();
-        reviewRequest.addEventListener("load", function() {
-            const response = JSON.parse(this.responseText);
-            review.loadReviews(response.comments, response.avgScore);
-        })
-        reviewRequest.open("GET", GET_REVIEWS_URL);
-        reviewRequest.send();
+        this.ajaxUtil.sendGetAjax(GET_REVIEWS_URL)
+        			.then(responseText => {
+        	            const response = JSON.parse(responseText);
+        	            review.loadReviews(response.comments, response.avgScore);
+        			})
+        			.catch(status => {
+        				console.log(`then err: ${status}`);
+        			});
     },
 
     loadReviews(reviews, avgScore) {

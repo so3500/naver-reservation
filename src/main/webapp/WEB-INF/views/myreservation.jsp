@@ -327,7 +327,7 @@
 	</div>
 	<!--// 취소 팝업 -->
 
-	<script src="/js/utils.js"></script>
+	<script src="/js/util/elementClass.util.js"></script>
 	<script src="/js/util/ajax.util.js"></script>
 	<script src="/js/myreservation.js"></script>
 </body>

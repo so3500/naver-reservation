@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 let detail = {
     init() {
+    	this.elementClassUtil = new ElementClassUtil();
+    	this.ajaxUtil = new AjaxUtil();
+    	
         this.infoTab.init();
         this.productImage.init();
         this.review.init();
@@ -18,16 +21,16 @@ let detail = {
     displayInfoId: document.querySelector("#detail_main").dataset.displayInfoId,
     loadDetailPage() {
         const GET_PRODUCT_URL = `/api/products/${detail.displayInfoId}`;
-        let productRequest = new XMLHttpRequest();
-        productRequest.addEventListener("load", function() {
-            const response = JSON.parse(this.responseText);
-
-            detail.productImage.loadImages(response.productImages, response.product.description);
-            detail.infoTab.loadDisplayInfoImage(response.displayInfoImages);
-            detail.review.loadComments(response.comments, response.avgScore);
-        })
-        productRequest.open("GET", GET_PRODUCT_URL);
-        productRequest.send();
+        this.ajaxUtil.sendGetAjax(GET_PRODUCT_URL)
+        		.then(responseText => {
+        			const response = JSON.parse(responseText);
+                    detail.productImage.loadImages(response.productImages, response.product.description);
+                    detail.infoTab.loadDisplayInfoImage(response.displayInfoImages);
+                    detail.review.loadComments(response.comments, response.avgScore);
+        		})
+        		.catch(status => {
+        			console.log(`then err: ${status}`);
+        		});
     },
 
     reserveButton: {
@@ -66,8 +69,8 @@ let detail = {
                 this.setProductImageBoxSlideShow();
             } else {
                 this.setElementInnerTextValue(this.rightImageNumber, 1);
-                utils.blindElement(this.prevButton);
-                utils.blindElement(this.nextButton);
+                detail.elementClassUtil.blindElement(this.prevButton);
+                detail.elementClassUtil.blindElement(this.nextButton);
             }
         },
 
@@ -221,7 +224,7 @@ let detail = {
                 this.reviewList.innerHTML = reviewHtml;
             }
             if (comments.length <= 3) {
-                utils.blindElement(this.reviewMoreButton);
+                detail.elementClassUtil.blindElement(this.reviewMoreButton);
             }
         }
     },
@@ -272,28 +275,28 @@ let detail = {
 
         toggleInfo(activatedInfoTabItem) {
             if (activatedInfoTabItem.classList.contains("_detail")) {
-                utils.hideElement(this.detailArea);
-                utils.notHideElement(this.detailLocation);
+                detail.elementClassUtil.hideElement(this.detailArea);
+                detail.elementClassUtil.notHideElement(this.detailLocation);
                 this.currentActivatedInfoTabItem = "_path";
             } else if (activatedInfoTabItem.classList.contains("_path")) {
-                utils.hideElement(this.detailLocation);
-                utils.notHideElement(this.detailArea);
+                detail.elementClassUtil.hideElement(this.detailLocation);
+                detail.elementClassUtil.notHideElement(this.detailArea);
                 this.currentActivatedInfoTabItem = "_detail";
             }
         },
 
         toggleInfoTab(activatedInfoTabItem, clickedTarget, clickedTagName) {
-            utils.deactivateElement(activatedInfoTabItem.querySelector("a.anchor"));
-            utils.deactivateElement(activatedInfoTabItem);
+            detail.elementClassUtil.deactivateElement(activatedInfoTabItem.querySelector("a.anchor"));
+            detail.elementClassUtil.deactivateElement(activatedInfoTabItem);
             if (clickedTagName === "SPAN") {
-                utils.activateElement(clickedTarget.closest("a.anchor"));
-                utils.activateElement(clickedTarget.closest("li.item"));
+                detail.elementClassUtil.activateElement(clickedTarget.closest("a.anchor"));
+                detail.elementClassUtil.activateElement(clickedTarget.closest("li.item"));
             } else if (clickedTagName === "A") {
-                utils.activateElement(clickedTarget);
-                utils.activateElement(clickedTarget.closest("li.item"));
+                detail.elementClassUtil.activateElement(clickedTarget);
+                detail.elementClassUtil.activateElement(clickedTarget.closest("li.item"));
             } else if (clickedTagName === "LI") {
-                utils.activateElement(clickedTarget.querySelector("a.anchor"));
-                utils.activateElement(clickedTarget);
+                detail.elementClassUtil.activateElement(clickedTarget.querySelector("a.anchor"));
+                detail.elementClassUtil.activateElement(clickedTarget);
             }
         },
 
