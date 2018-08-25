@@ -66,7 +66,7 @@ public class ProductApiController {
 
 	@GetMapping("/{displayInfoId}")
 	public Map<String, Object> getProduct(
-		@PathVariable(name = "displayInfoId") int displayInfoId) {
+		@PathVariable("displayInfoId") int displayInfoId) {
 
 		// TODO: product EmptyResultDataAccessException 예외처리
 		Product product = productService.getByDisplayInfoId(displayInfoId);

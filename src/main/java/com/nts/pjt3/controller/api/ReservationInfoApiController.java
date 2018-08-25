@@ -25,7 +25,7 @@ public class ReservationInfoApiController {
 
 	@GetMapping
 	public Map<String, Object> getReservationInfos(
-		@RequestParam(name = "reservationEmail", required = true) String reservationEmail) {
+		@RequestParam("reservationEmail") String reservationEmail) {
 
 		List<ReservationInfo> reservInfos = reservationInfoService.getAllByReservationEmail(reservationEmail);
 

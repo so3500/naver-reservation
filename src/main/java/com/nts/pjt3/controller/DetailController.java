@@ -17,7 +17,7 @@ public class DetailController {
 	private ProductService productService;
 
 	@GetMapping(path = "/detail")
-	public String detail(@RequestParam(name = "id") int displayInfoId, ModelMap model) {
+	public String detail(@RequestParam("id") int displayInfoId, ModelMap model) {
 		// TODO: product EmptyResultDataAccessException 예외처리
 		Product product = productService.getByDisplayInfoId(displayInfoId);
 

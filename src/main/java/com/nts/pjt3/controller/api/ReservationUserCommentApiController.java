@@ -21,7 +21,7 @@ public class ReservationUserCommentApiController {
 	private ReservationUserCommentService reservationUserCommentService;
 
 	@GetMapping("/{productId}")
-	public Map<String, Object> getReservationUserComments(@PathVariable(name = "productId") int productId) {
+	public Map<String, Object> getReservationUserComments(@PathVariable("productId") int productId) {
 		List<ReservationUserComment> comments = reservationUserCommentService.getAllByProductId(productId);
 		double avgScore = reservationUserCommentService.getAvgScoreFromComments(comments);
 

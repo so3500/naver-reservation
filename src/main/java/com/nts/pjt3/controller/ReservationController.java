@@ -39,7 +39,7 @@ public class ReservationController {
 	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.M.dd");
 
 	@GetMapping(path = "/reserve")
-	public String reserve(@RequestParam(name = "id") int displayInfoId, ModelMap model) {
+	public String reserve(@RequestParam("id") int displayInfoId, ModelMap model) {
 		Product product = productService.getByDisplayInfoId(displayInfoId);
 		ProductImage productImage = productImageService.getByDisplayInfoIdAndType(displayInfoId, "ma");
 		List<ProductPrice> productPrices = productPriceService.getAllByDisplayInfoId(displayInfoId);
@@ -54,7 +54,7 @@ public class ReservationController {
 	}
 
 	@GetMapping(path = "/myreservation")
-	public String myreservation(@RequestParam(name = "reservationEmail") String reservEmail, ModelMap model) {
+	public String myreservation(@RequestParam("reservationEmail") String reservEmail, ModelMap model) {
 		model.put("reservationEmail", reservEmail);
 
 		List<ReservationInfo> reservInfos = reservationInfoService.getAllByReservationEmail(reservEmail);

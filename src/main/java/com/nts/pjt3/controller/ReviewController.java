@@ -17,7 +17,7 @@ public class ReviewController {
 	private ProductService productService;
 
 	@GetMapping(path = "/review")
-	public String review(@RequestParam(name = "id") int displayInfoId, ModelMap model) {
+	public String review(@RequestParam("id") int displayInfoId, ModelMap model) {
 		Product product = productService.getByDisplayInfoId(displayInfoId);
 
 		model.put("product", product);

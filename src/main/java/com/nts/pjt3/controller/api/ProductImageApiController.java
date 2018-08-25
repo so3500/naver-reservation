@@ -25,7 +25,7 @@ public class ProductImageApiController {
 	 * 사용처: 메인페이지의 썸네일이미지(th)
 	 */
 	@GetMapping(value = "/{displayInfoId}")
-	public RedirectView getProductImageFilePath(@PathVariable(name = "displayInfoId") int displayInfoId,
+	public RedirectView getProductImageFilePath(@PathVariable("displayInfoId") int displayInfoId,
 		@RequestParam(name = "type", required = true) String type,
 		HttpServletRequest request) {
 		ProductImage productImage = productImageService.getByDisplayInfoIdAndType(displayInfoId, type);
