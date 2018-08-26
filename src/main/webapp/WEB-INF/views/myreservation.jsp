@@ -187,7 +187,7 @@
 															</em>
 														</div>
 														<div class="booking_cancel">
-															<a href="./reviewWrite"><button class="btn"><span>예매자 리뷰 남기기</span></button></a>
+															<a href="/reviewWrite"><button class="btn"><span>예매자 리뷰 남기기</span></button></a>
 														</div>
 													</div>
 												</div>

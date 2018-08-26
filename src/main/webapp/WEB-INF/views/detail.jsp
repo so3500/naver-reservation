@@ -32,7 +32,7 @@
                 		<a href="/myreservation?reservationEmail=${loginEmail}" class="btn_my"> <span class="viewReservation" title="예약확인">${loginEmail}</span> </a>
                 	</c:when>
                 	<c:when test="${loginEmail eq null}">
-                		<a href="/bookinglogin" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+                		<a href="/login" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
                 	</c:when>
                 </c:choose>
             </header>
@@ -45,7 +45,14 @@
                             <a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                             <a href="/mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                         </h1>
-                        <a href="/myreservation" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+		                <c:choose>
+		                	<c:when test="${loginEmail ne null}">
+		                		<a href="/myreservation?reservationEmail=${loginEmail}" class="btn_my"> <span class="viewReservation" title="예약확인">${loginEmail}</span> </a>
+		                	</c:when>
+		                	<c:when test="${loginEmail eq null}">
+		                		<a href="/login" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+		                	</c:when>
+		                </c:choose>
                     </header>
                     <div class="pagination">
                         <div class="bg_pagination"></div>

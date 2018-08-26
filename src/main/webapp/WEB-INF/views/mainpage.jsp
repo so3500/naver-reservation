@@ -27,7 +27,7 @@
                 		<a href="/myreservation?reservationEmail=${loginEmail}" class="btn_my"> <span class="viewReservation" title="예약확인">${loginEmail}</span> </a>
                 	</c:when>
                 	<c:when test="${loginEmail eq null}">
-                		<a href="/bookinglogin" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+                		<a href="/login" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
                 	</c:when>
                 </c:choose>
             </header>

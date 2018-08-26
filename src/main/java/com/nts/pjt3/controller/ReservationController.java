@@ -38,7 +38,7 @@ public class ReservationController {
 
 	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.M.dd");
 
-	@GetMapping(path = "/reserve")
+	@GetMapping("/reserve")
 	public String reserve(@RequestParam("id") int displayInfoId, ModelMap model) {
 		Product product = productService.getByDisplayInfoId(displayInfoId);
 		ProductImage productImage = productImageService.getByDisplayInfoIdAndType(displayInfoId, "ma");
@@ -53,7 +53,7 @@ public class ReservationController {
 		return "reserve";
 	}
 
-	@GetMapping(path = "/myreservation")
+	@GetMapping("/myreservation")
 	public String myreservation(@RequestParam("reservationEmail") String reservEmail, ModelMap model) {
 		model.put("reservationEmail", reservEmail);
 

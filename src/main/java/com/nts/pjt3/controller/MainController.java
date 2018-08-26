@@ -12,9 +12,4 @@ public class MainController {
 		return "mainpage";
 	}
 
-	@GetMapping(path = "/bookinglogin")
-	public String bookinglogin() {
-		return "bookinglogin";
-	}
-
 }

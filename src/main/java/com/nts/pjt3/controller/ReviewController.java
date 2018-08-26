@@ -25,8 +25,8 @@ public class ReviewController {
 		return "review";
 	}
 	
-	@GetMapping(path = "/reviweWrite")
+	@GetMapping(path = "/reviewWrite")
 	public String reviweWrite() {
-		return "reviweWrite";
+		return "reviewWrite";
 	}
 }
