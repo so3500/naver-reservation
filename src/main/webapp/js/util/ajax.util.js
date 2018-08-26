@@ -1,10 +1,10 @@
 function AjaxUtil() {}
 
-AjaxUtil.prototype.sendGetAjax = function(url) {
+AjaxUtil.prototype.sendGetAjax = (url) => {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		req.open("GET", url);
-	    req.onload = function () {
+	    req.onload = () => {
 	        if (req.status === 200) {
 	          resolve(req.responseText);
 	        } else {
@@ -16,12 +16,12 @@ AjaxUtil.prototype.sendGetAjax = function(url) {
 	});
 }
 
-AjaxUtil.prototype.sendPostAjax = function(url, data) {
+AjaxUtil.prototype.sendPostAjax = (url, data) => {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		req.open("POST", url);
-		req.setRequestHeader("Content-type", "application/json;charset=utf-8");
-	    req.onload = function () {
+		req.setRequestHeader("Content-type", "application/json; charset=utf-8");
+	    req.onload = () => {
 	        if (req.status === 200 || req.status === 201) {
 	          resolve(req.responseText);
 	        } else {
@@ -33,11 +33,12 @@ AjaxUtil.prototype.sendPostAjax = function(url, data) {
 	});
 }
 
-AjaxUtil.prototype.sendPutAjax = function(url) {
+AjaxUtil.prototype.sendPutAjax = (url) => {
 	return new Promise((resolve, reject) => {
 		const req = new XMLHttpRequest();
 		req.open("PUT", url);
-	    req.onload = function () {
+		req.setRequestHeader("Content-type", "application/json; charset=utf-8");
+	    req.onload = () => {
 	        if (req.status === 200 || req.status === 202 || req.status === 204) {
 	          resolve(req.responseText);
 	        } else {

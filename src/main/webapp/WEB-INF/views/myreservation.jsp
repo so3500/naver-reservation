@@ -40,14 +40,14 @@
 							<!--[D] 선택 후 .on 추가 link_summary_board -->
 							<a href="#" class="link_summary_board on"> <i class="spr_book2 ico_book2"></i> <em class="tit">전체</em> <span class="figure">${reservInfosCount}</span> </a>
 						</li>
-						<li class="item">
-							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_book_ss"></i> <em class="tit">이용예정</em> <span class="figure">${fn:length(confirmedReservInfos)}</span> </a>
+						<li class="item summary_confirmed">
+							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_book_ss"></i> <em class="tit">이용예정</em> <span id="confirmed_reserv_cnt" class="figure">${fn:length(confirmedReservInfos)}</span> </a>
 						</li>
 						<li class="item">
 							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em> <span class="figure">${fn:length(usedReservInfos)}</span> </a>
 						</li>
-						<li class="item">
-							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em> <span class="figure">${fn:length(canceldReservInfos)}</span> </a>
+						<li class="item summary_canceled">
+							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em> <span id="canceled_reserv_cnt" class="figure">${fn:length(canceldReservInfos)}</span> </a>
 						</li>
 					</ul>
 				</div>
@@ -72,7 +72,7 @@
 									</div>
 								</div>
 								<c:forEach var="reservInfo" items="${confirmedReservInfos}">
-									<article class="card_item" date-reserv-id=${reservInfo.id}>
+									<article class="card_item" data-reserv-info-id=${reservInfo.id}>
 										<a href="#" class="link_booking_details">
 											<div class="card_body">
 												<div class="left"></div>
@@ -101,7 +101,7 @@
 															</li>
 															<li class="item">
 																<span class="item_tit">예약날짜</span>
-																<em class="item_dsc">
+																<em class="item_dsc date">
 																	${reservInfo.reservationDate}
 																</em>
 															</li>
@@ -145,7 +145,7 @@
 									</div>
 								</div>
 								<c:forEach var="reservInfo" items="${usedReservInfos}">
-									<article class="card_item" date-reserv-id=${reservInfo.id}>
+									<article class="card_item" data-reserv-info-id=${reservInfo.id}>
 										<a href="#" class="link_booking_details">
 											<div class="card_body">
 												<div class="left"></div>
@@ -216,7 +216,7 @@
 									</div>
 								</div>
 								<c:forEach var="reservInfo" items="${canceldReservInfos}">
-									<article class="card_item" date-reserv-id=${reservInfo.id}>
+									<article class="card_item" data-reserv-info-id=${reservInfo.id}>
 										<a href="#" class="link_booking_details">
 											<div class="card_body">
 												<div class="left"></div>
@@ -305,7 +305,7 @@
 			<h1 class="pop_tit">
 				<span>서비스명/상품명</span>
 				<small class="sm">2000.0.00.(월)2000.0.00.(일)</small>
-				<small class="sm">예약날짜: </small>
+				<small class="sm">예약날짜:<span class="reserv_date"></span></small>
 			</h1>
 			<div class="nomember_alert">
 				<p>취소하시겠습니까?</p>

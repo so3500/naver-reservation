@@ -43,7 +43,7 @@ public class ReservationInfoApiController {
 	}
 	
 	@PutMapping
-	public int cancelReservationInfo(@RequestParam("reservationInfoId") int reservationInfoId) {
+	public int cancelReservationInfo(@RequestParam("reservationId") int reservationInfoId) {
 		return reservationInfoService.cancelByReservationInfoId(reservationInfoId);
 	}
 	
