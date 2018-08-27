@@ -112,4 +112,19 @@
 			AND product.category_id = category.id 
 			AND category.id = #{categoryId}
 	</select>
+	
+	<select id="getByProductId" parameterType="int" resultType="Product">
+		SELECT
+			id
+			, category_id
+			, description
+			, content
+			, event
+			, create_date
+			, modify_date
+		FROM
+			product
+		WHERE
+			id = #{productId}
+	</select>
 </mapper>

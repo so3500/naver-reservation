@@ -23,4 +23,18 @@
 			AND rsvusrcmtimg.file_id = finfo.id 
 			AND rsvusrcmt.id = #{reservationUserCommentId}
 	</select>
+	
+	<insert id="createCommentImage" useGeneratedKeys="true" keyProperty="id" parameterType="ReservationUserCommentImage">
+		INSERT INTO
+		reservation_user_comment_image (
+			reservation_info_id
+			, reservation_user_comment_id
+			, file_id
+		)
+		VALUES (
+			#{reservationInfoId}
+			, #{reservationUserCommentId}
+			, #{fileId}
+		)
+	</insert>
 </mapper>

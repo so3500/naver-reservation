@@ -19,4 +19,22 @@
 			rsvinfo.id = rsvusrcmt.reservation_info_id
 			AND rsvusrcmt.product_id = #{productId}
 	</select>
+	
+	<insert id="createComment" useGeneratedKeys="true" keyProperty="id" parameterType="ReservationUserComment">
+		INSERT INTO
+		reservation_user_comment (
+			product_id
+			, reservation_info_id
+			, score
+			, comment
+			, create_date
+		)
+		VALUES (
+			#{productId}
+			, #{reservationInfoId}
+			, #{score}
+			, #{comment}
+			, NOW()
+		)
+	</insert>
 </mapper>

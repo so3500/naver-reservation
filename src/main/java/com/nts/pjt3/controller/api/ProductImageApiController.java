@@ -24,15 +24,25 @@ public class ProductImageApiController {
 	 * url을 통해 이미지를 가져오기 어려울 때 사용
 	 * 사용처: 메인페이지의 썸네일이미지(th)
 	 */
-	@GetMapping(value = "/{displayInfoId}")
-	public RedirectView getProductImageFilePath(@PathVariable("displayInfoId") int displayInfoId,
-		@RequestParam(name = "type", required = true) String type,
-		HttpServletRequest request) {
+	@GetMapping("/{displayInfoId}")
+	public RedirectView getProductImageByDisplayInfoIdAndType(@PathVariable("displayInfoId") int displayInfoId,
+		@RequestParam("type") String type, HttpServletRequest request) {
 		ProductImage productImage = productImageService.getByDisplayInfoIdAndType(displayInfoId, type);
 		String filePath = productImage.getSaveFileName();
 		String filePathURL = request.getContextPath() + "/" + filePath;
 
 		return new RedirectView(filePathURL);
 	}
-	
+
+	@GetMapping("/{productId}/{productImageId}")
+	public RedirectView getProductImageByProductIdAndProductImageId(
+		@PathVariable(name = "productId") int productId, @PathVariable(name = "productImageId") int productImageId,
+		HttpServletRequest request) {
+		ProductImage productImage = productImageService.getByProductIdAndProductImageId(productId, productImageId);
+		String filePath = productImage.getSaveFileName();
+		String filePathURL = request.getContextPath() + "/" + filePath;
+		
+		return new RedirectView(filePathURL);
+	}
+
 }

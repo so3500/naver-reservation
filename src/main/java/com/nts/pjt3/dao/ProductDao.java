@@ -19,4 +19,5 @@ public interface ProductDao {
 	public int count();
 	public int countByCategoryId(int categoryId);
 	public Product getByDisplayInfoId(int displayInfoId);
+	public Product getByProductId(int productId);
 }

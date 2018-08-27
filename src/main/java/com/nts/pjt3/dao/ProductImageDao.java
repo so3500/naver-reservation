@@ -8,10 +8,15 @@ import com.nts.pjt3.dto.ProductImage;
 
 public interface ProductImageDao {
 	public List<ProductImage> getAllByDisplayInfoIdAndType(
-		@Param("displayInfoId") int displayInfoId,
-		@Param("type") String type);
+		@Param("displayInfoId") int displayInfoId
+		, @Param("type") String type);
 
 	public ProductImage getByDisplayInfoIdAndType(
-		@Param("displayInfoId") int displayInfoId,
-		@Param("type") String type);
+		@Param("displayInfoId") int displayInfoId
+		, @Param("type") String type);
+	
+	public ProductImage getByProductIdAndProductImageId(
+		@Param("productId") int productId
+		, @Param("productImageId") int productImageId);
+		
 }

@@ -1,6 +1,12 @@
 package com.nts.pjt3.service.impl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +22,8 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
 
 	@Autowired
 	private ReservationInfoDao reservationInfoDao;
+	
+	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.M.dd");
 	
 	@Override
 	public List<ReservationInfo> getAllByReservationEmail(String reservationEmail) {
@@ -46,4 +54,44 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
 	public int cancelByReservationInfoId(int reservationInfoId) {
 		return reservationInfoDao.cancelByReservationInfoId(reservationInfoId);
 	}
+	
+	@Override
+	public Map<String, Object> getClassifiedReservInfos(List<ReservationInfo> reservInfos) {
+		HashMap<String, Object> classifiedReservInfoMap = new HashMap<>();
+		
+		List<ReservationInfo> confirmedReservInfos = new LinkedList<>();
+		List<ReservationInfo> usedReservInfos = new LinkedList<>();
+		List<ReservationInfo> canceldReservInfos = new LinkedList<>();
+		final int CANCEL = 1;
+		LocalDate nowDate = LocalDate.now();
+
+		for (ReservationInfo reservInfo : reservInfos) {
+			if (reservInfo.getCancelFlag() == CANCEL) {
+				canceldReservInfos.add(reservInfo);
+				continue;
+			}
+
+			LocalDate reserveDate = reservInfo.getReservationDate();
+			if (reserveDate.isBefore(nowDate)) {
+				usedReservInfos.add(reservInfo);
+			} else {
+				confirmedReservInfos.add(reservInfo);
+			}
+		}
+
+		classifiedReservInfoMap.put("confirmedReservInfos", confirmedReservInfos);
+		classifiedReservInfoMap.put("usedReservInfos", usedReservInfos);
+		classifiedReservInfoMap.put("canceldReservInfos", canceldReservInfos);
+		
+		return classifiedReservInfoMap;
+	}
+	
+	@Override
+	public String getReservDate() {
+		Random random = new Random();
+		String localDate = dateTimeFormatter.format(LocalDate.now().plusDays(random.nextInt(4) + 1));
+		return localDate;
+	}
+	
+	
 }

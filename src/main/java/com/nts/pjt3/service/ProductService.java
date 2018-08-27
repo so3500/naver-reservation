@@ -11,4 +11,5 @@ public interface ProductService {
 	public int getAllCount();
 	public int getAllCountByCategoryId(int categoryId);
 	public Product getByDisplayInfoId(int displayInfoId);
+	Product getByProductId(int productId);
 }

@@ -39,5 +39,10 @@ public class ProductServiceImpl implements ProductService {
 	public Product getByDisplayInfoId(int displayInfoId) {
 		return productDao.getByDisplayInfoId(displayInfoId);
 	}
+	
+	@Override
+	public Product getByProductId(int productId) {
+		return productDao.getByProductId(productId);
+	}
 
 }

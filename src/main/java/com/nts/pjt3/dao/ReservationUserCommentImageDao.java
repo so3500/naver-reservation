@@ -6,4 +6,5 @@ import com.nts.pjt3.dto.ReservationUserCommentImage;
 
 public interface ReservationUserCommentImageDao {
 	public List<ReservationUserCommentImage> getAllByReservationUserCommentId(int reservationUserCommentId);
+	public int createCommentImage(ReservationUserCommentImage commentImage);
 }
