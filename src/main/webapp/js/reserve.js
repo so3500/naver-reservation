@@ -270,7 +270,6 @@ let reserve = {
 				"reservationDate": this.rsvYearMonthDay,
 				"reservationPrices": this.getProductPrices()
 			}
-			debugger;
 			return rsvReqData;
 		},
 
