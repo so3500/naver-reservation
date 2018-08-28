@@ -64,7 +64,7 @@
                 <div class="section_booking_ticket">
                     <div id="ticket_body" class="ticket_body">
                     	<c:forEach var="productPrice" items="${productPrices}">
-	                    	<div class="qty" data-product-price-id=${productPrice.id} data-product-price=${productPrice.price}>
+	                    	<div class="qty" data-product-price-id="${productPrice.id}" data-product-price="${productPrice.price}">
 	                            <div class="count_control">
 	                                <!-- [D] 수량이 최소 값이 일때 ico_minus3, count_control_input에 disabled 각각 추가, 수량이 최대 값일 때는 ico_plus3에 disabled 추가 -->
 	                                <div class="clearfix">

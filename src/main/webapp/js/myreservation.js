@@ -30,6 +30,25 @@ MyReservInfo.prototype.setSummaryBoardEvent = function() {
 			
 			this.summaryBoard.querySelector("a.link_summary_board.on").classList.remove("on");
 			linkSummaryBoard.classList.add("on");
+			
+			let summaryBoard = linkSummaryBoard.parentNode;
+			if(summaryBoard.classList.contains("summary_all")) {
+				this.confirmedReservInfos.style.display = "block";
+				this.usedReservInfos.style.display = "block";
+				this.canceledReservInfos.style.display = "block";
+			} else if (summaryBoard.classList.contains("summary_confirmed")) {
+				this.confirmedReservInfos.style.display = "block";
+				this.usedReservInfos.style.display = "none";
+				this.canceledReservInfos.style.display = "none";
+			} else if (summaryBoard.classList.contains("summary_used")) {
+				this.confirmedReservInfos.style.display = "none";
+				this.usedReservInfos.style.display = "block";
+				this.canceledReservInfos.style.display = "none";
+			} else if (summaryBoard.classList.contains("summary_canceled")) {
+				this.confirmedReservInfos.style.display = "none";
+				this.usedReservInfos.style.display = "none";
+				this.canceledReservInfos.style.display = "block";
+			}
 		}
 	}.bind(this));
 }

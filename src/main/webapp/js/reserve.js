@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 let reserve = {
-	productId: document.querySelector("div.ct").dataset.productId,
-	displayInfoId: document.querySelector("div.ct").dataset.displayInfoId,
+	productId: parseInt(document.querySelector("div.ct").dataset.productId),
+	displayInfoId: parseInt(document.querySelector("div.ct").dataset.displayInfoId),
 
 	init() {
 		this.elementClassUtil = new ElementClassUtil();
