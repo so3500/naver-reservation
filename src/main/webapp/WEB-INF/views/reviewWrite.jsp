@@ -46,7 +46,7 @@
 							<input type="checkbox" name="rating6" value="5" class="rating_rdo" title="5점">
 							<span class="span"></span>
 							<!-- [D] 0점일 때 gray_star 추기 -->
-							<span class="star_rank gray_star">0</span>
+							<span id="review_score" class="star_rank gray_star">0</span>
 						</div>
 					</div>
 				</div>
@@ -64,20 +64,20 @@
 						</span>
 						<span class="left_space">(단, 리뷰 포인트는 ID 당 1일 최대 5건까지 지급됩니다.)</span>
 					</a>
-					<textarea cols="30" rows="10" class="review_textarea"></textarea>
+					<textarea maxlength="400"cols="30" rows="10" class="review_textarea"></textarea>
 				</div>
 				<!-- //리뷰 입력 -->
 
 				<!-- 리뷰 작성 푸터 -->
 				<div class="review_write_footer_wrap">
 					<div class="review_write_footer">
-						<label class="btn_upload" for="reviewImageFileOpenInput">
+						<label class="btn_upload" for="review_image_file_open_input">
 							<i class="fn fn-image1" aria-hidden="true"></i>
 							<span class="text_add_photo">사진 추가</span>
 						</label>
-						<input type="file" class="hidden_input" id="reviewImageFileOpenInput" accept="image/*" multiple>
+						<input type="file" class="hidden_input" id="review_image_file_open_input" accept="image/*" multiple>
 						<div class="guide_review">
-							<span>0</span>/400
+							<span id="content_length">0</span>/400
 							<span>(최소5자이상)</span>
 						</div>
 					</div>
@@ -88,9 +88,9 @@
 							<ul class="lst_thumb">
 								<li class="item" style="display: none;">
 									<a href="#" class="anchor">
-										<span class="spr_book ico_del">삭제</span>
+										<span id="delete_image_btn" class="spr_book ico_del">삭제</span>
 									</a>
-									<img src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" width="130" alt="" class="item_thumb">
+									<img src="" width="130" alt="" class="item_thumb">
 									<span class="img_border"></span>
 								</li>
 							</ul>
@@ -118,5 +118,8 @@
 			<span class="copyright">© NAVER Corp.</span>
 		</div>
 	</footer>
+	
+	<script src="/js/util/ajax.util.js"></script>
+	<script src="/js/reviewWrite.js"></script>
 </body>
 </html>

@@ -25,6 +25,24 @@ AjaxUtil.prototype.sendPostAjax = (url, data) => {
 	        if (req.status === 200 || req.status === 201) {
 	          resolve(req.responseText);
 	        } else {
+	        	debugger;
+	          reject(req.status);
+	        }
+	    };
+		req.onerror = () => reject(req.status);
+		req.send(data);
+	});
+}
+
+AjaxUtil.prototype.sendFormDataPostAjax = (url, data) => {
+	return new Promise((resolve, reject) => {
+		const req = new XMLHttpRequest();
+		req.open("POST", url);
+	    req.onload = () => {
+	        if (req.status === 200 || req.status === 201) {
+	          resolve(req.responseText);
+	        } else {
+	        	debugger;
 	          reject(req.status);
 	        }
 	    };

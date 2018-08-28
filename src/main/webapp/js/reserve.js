@@ -246,15 +246,15 @@ let reserve = {
 		setFormSubmitEvent() {
 			this.rsvFormSummitBtn.addEventListener("click", function() {
 				const RSV_POST_URL = "/api/reservationInfos";
-				let reservDate = JSON.stringify(this.getRsvReqBody());
-				reserve.ajaxUtil.sendPostAjax(RSV_POST_URL, reservDate)
+				let reservData = JSON.stringify(this.getRsvReqBody());
+				reserve.ajaxUtil.sendPostAjax(RSV_POST_URL, reservData)
 						.then(responseText => {
 							alert("예약이 완료되었습니다.");
 							window.location.href = `/mainpage`;
 						})
 						.catch(status => {
 							alert("예약이 실패하였습니다");
-							console.log(`then err: ${status}`);
+							console.log(`reserv post err: ${status}`);
 						});
 			}.bind(this));
 		},

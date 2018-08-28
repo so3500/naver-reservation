@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
-	const loginObj = new login();
-	loginObj.checkFormEmail();
+	const login = new Login();
+	login.checkFormEmail();
 });
 
-function login() {
+function Login() {
 	this.formEmail = document.querySelector("#resrv_id");
 	this.loginFormBtn = document.querySelector("#login_form_btn");
 	this.warningMsg = document.querySelector("#email_validation_warning_msg");
 }
 
-login.prototype.checkFormEmail = function() {
+Login.prototype.checkFormEmail = function() {
 	this.formEmail.addEventListener("change", function(event) {
 		let emailRegex = /^\w+(\.\w+)?@(\w+)(-\w+)?\.([a-z]+.)?[a-z]+$/; // e.g. my.email@nts-corp.co.kr
 		if (emailRegex.test(this.formEmail.value)) {
