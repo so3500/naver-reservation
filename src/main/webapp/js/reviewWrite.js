@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function ReviewWrite() {
 	this.productId = parseInt(document.querySelector("div.ct").dataset.productId);
+	this.displayInfoId = parseInt(document.querySelector("div.ct").dataset.displayInfoId);
 	this.reservInfoId = parseInt(document.querySelector("div.ct").dataset.reservInfoId);
 	this.formSubmitBtn = document.querySelector("button.bk_btn");
 }
@@ -33,8 +34,7 @@ ReviewWrite.prototype.setFormSubmitEvent = function() {
 		}
 		ajaxUtil.sendFormDataPostAjax(REVIEW_POST_URL, reviewFormData)
 				.then(responseText => {
-//					location.replace(`/review?id=${this.displayInfoId}`);
-					location.replace("/mainpage");
+					location.replace(`/review?id=${this.displayInfoId}`);
 				})
 				.catch(status => {
 					alert("리뷰 작성이 실패하였습니다");

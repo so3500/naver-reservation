@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ReservationInfo {
 	private int id;
 	private int productId;
+	private int displayInfoId;
 	private int sumPrice;
 	private int cancelFlag;
 	private String productDescription;
@@ -131,12 +132,21 @@ public class ReservationInfo {
 	public void setReservationPrices(List<ReservationInfoPrice> reservationPrices) {
 		this.reservationPrices = reservationPrices;
 	}
+	
+
+	public int getDisplayInfoId() {
+		return displayInfoId;
+	}
+
+	public void setDisplayInfoId(int displayInfoId) {
+		this.displayInfoId = displayInfoId;
+	}
 
 	@Override
 	public String toString() {
 		return String.format(
-			"ReservationInfo [id=%s, productId=%s, sumPrice=%s, cancelFlag=%s, productDescription=%s, productContent=%s, reservationName=%s, reservationTel=%s, reservationEmail=%s, reservationDate=%s, createDate=%s, modifyDate=%s, reservationPrices=%s]",
-			id, productId, sumPrice, cancelFlag, productDescription, productContent, reservationName,
+			"ReservationInfo [id=%s, productId=%s, displayInfoId=%s, sumPrice=%s, cancelFlag=%s, productDescription=%s, productContent=%s, reservationName=%s, reservationTel=%s, reservationEmail=%s, reservationDate=%s, createDate=%s, modifyDate=%s, reservationPrices=%s]",
+			id, productId, displayInfoId, sumPrice, cancelFlag, productDescription, productContent, reservationName,
 			reservationTel, reservationEmail, reservationDate, createDate, modifyDate, reservationPrices);
 	}
 

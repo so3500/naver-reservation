@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 let reserve = {
 	productId: document.querySelector("div.ct").dataset.productId,
+	displayInfoId: document.querySelector("div.ct").dataset.displayInfoId,
 
 	init() {
 		this.elementClassUtil = new ElementClassUtil();
@@ -262,12 +263,14 @@ let reserve = {
 		getRsvReqBody() {
 			const rsvReqData = {
 				"productId": reserve.productId,
+				"displayInfoId": reserve.displayInfoId,
 				"reservationName": this.rsvForm.name.value,
 				"reservationTel": this.rsvForm.tel.value,
 				"reservationEmail": this.rsvForm.email.value,
 				"reservationDate": this.rsvYearMonthDay,
 				"reservationPrices": this.getProductPrices()
 			}
+			debugger;
 			return rsvReqData;
 		},
 

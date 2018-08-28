@@ -8,6 +8,7 @@
 			, product.id AS product_id
 			, product.description AS product_description
 			, product.content AS product_content
+			, rsvinfo.display_info_id
 			, rsvinfo.reservation_name
 			, rsvinfo.reservation_tel
 			, rsvinfo.reservation_email
@@ -42,6 +43,7 @@
 		INSERT INTO
 		reservation_info (
 			product_id
+			, display_info_id
 			, reservation_name
 			, reservation_tel
 			, reservation_email
@@ -50,6 +52,7 @@
 		)
 		VALUES (
 			#{productId}
+			, #{displayInfoId}
 			, #{reservationName}
 			, #{reservationTel}
 			, #{reservationEmail}

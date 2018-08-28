@@ -27,16 +27,18 @@ public class ReservationUserCommentController {
 	}
 
 	@GetMapping("/reviewWrite")
-	public String reviweWrite(@RequestParam("productId") int productId, @RequestParam("reservInfoId") int reservInfoId,
+	public String reviweWrite(@RequestParam("displayInfoId") int displayInfoId,
+		@RequestParam("reservInfoId") int reservInfoId,
 		ModelMap model, HttpSession session) {
-		Product product = productService.getByProductId(productId);
-
-		model.put("productId", productId);
+		Product product = productService.getByDisplayInfoId(displayInfoId);
+		
+		model.put("productId", product.getId());
+		model.put("displayInfoId", displayInfoId);
 		model.put("description", product.getDescription());
 		model.put("reservInfoId", reservInfoId);
 		model.put("loginEmail", session.getAttribute("loginEmail"));
 
 		return "reviewWrite";
 	}
-	
+
 }

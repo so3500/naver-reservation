@@ -187,7 +187,7 @@
 															</em>
 														</div>
 														<div class="booking_cancel">
-															<a href="/reviewWrite?productId=${reservInfo.productId}&reservInfoId=${reservInfo.id}"><button class="btn"><span>예매자 리뷰 남기기</span></button></a>
+															<a href="/reviewWrite?displayInfoId=${reservInfo.displayInfoId}&reservInfoId=${reservInfo.id}"><button class="btn"><span>예매자 리뷰 남기기</span></button></a>
 														</div>
 													</div>
 												</div>
