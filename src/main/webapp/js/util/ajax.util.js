@@ -25,7 +25,6 @@ AjaxUtil.prototype.sendPostAjax = (url, data) => {
 	        if (req.status === 200 || req.status === 201) {
 	          resolve(req.responseText);
 	        } else {
-	        	debugger;
 	          reject(req.status);
 	        }
 	    };
@@ -42,7 +41,6 @@ AjaxUtil.prototype.sendFormDataPostAjax = (url, data) => {
 	        if (req.status === 200 || req.status === 201) {
 	          resolve(req.responseText);
 	        } else {
-	        	debugger;
 	          reject(req.status);
 	        }
 	    };
