@@ -7,10 +7,13 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.nts.pjt3.interceptor.LogInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -42,6 +45,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	public void addViewControllers(final ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("index");
 	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new LogInterceptor());
+	}
 
 	@Bean
 	public InternalResourceViewResolver getInternalResourceViewResolver() {
@@ -57,4 +65,5 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 		multipartResolver.setMaxUploadSize(10 * 1024 * 1024);
 		return multipartResolver;
 	}
+	
 }
