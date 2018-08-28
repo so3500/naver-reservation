@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class File {
+public class FileInfo {
 	private int id;
 	private String fileName;
 	private String saveFileName;

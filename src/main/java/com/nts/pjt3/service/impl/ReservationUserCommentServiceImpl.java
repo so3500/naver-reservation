@@ -1,7 +1,5 @@
 package com.nts.pjt3.service.impl;
 
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -11,13 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nts.pjt3.dao.FileDao;
+import com.nts.pjt3.dao.FileInfoDao;
 import com.nts.pjt3.dao.ReservationUserCommentDao;
 import com.nts.pjt3.dao.ReservationUserCommentImageDao;
-import com.nts.pjt3.dto.File;
+import com.nts.pjt3.dto.FileInfo;
 import com.nts.pjt3.dto.ReservationUserComment;
 import com.nts.pjt3.dto.ReservationUserCommentImage;
 import com.nts.pjt3.service.ReservationUserCommentService;
+import com.nts.pjt3.util.ImageUtil;
 
 @Service
 public class ReservationUserCommentServiceImpl implements ReservationUserCommentService {
@@ -29,8 +28,8 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 	private ReservationUserCommentImageDao reservationUserCommentImageDao;
 
 	@Autowired
-	private FileDao fileDao;
-	
+	private FileInfoDao fileInfoDao;
+
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
 	@Override
@@ -57,8 +56,8 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 	}
 
 	private String getModifidReservationEmail(String reservationEmail) {
-		if(reservationEmail.length() > 4) {
-			return reservationEmail.substring(0, 4).concat("****");			
+		if (reservationEmail.length() > 4) {
+			return reservationEmail.substring(0, 4).concat("****");
 		} else {
 			return "****";
 		}
@@ -66,56 +65,37 @@ public class ReservationUserCommentServiceImpl implements ReservationUserComment
 
 	@Transactional
 	@Override
-	public ReservationUserComment createComment(ReservationUserComment review, MultipartFile reviewImage) {
-		reservationUserCommentDao.createComment(review);
-		
-		if(reviewImage != null) {
-			File reviewImageFile = createReviewImageFile(reviewImage);
-			createReviewImage(review.getReservationInfoId(), review.getId(),
-				reviewImageFile.getId());
+	public ReservationUserComment createComment(ReservationUserComment comment, MultipartFile commentImageFile) {
+		reservationUserCommentDao.createComment(comment);
+
+		if (commentImageFile != null) {
+			String nowDate = LocalDateTime.now().format(formatter);
+			String fileName = commentImageFile.getOriginalFilename();
+			String saveFileName = "img_review/" + nowDate + fileName;
+			
+			ImageUtil.getInstance().saveImageFileAtFileSystem(commentImageFile, saveFileName);
+			int imageFileInfoId = createFileInfo(fileName, saveFileName, commentImageFile.getContentType());
+			createCommentImage(comment.getReservationInfoId(), comment.getId(), imageFileInfoId);
 		}
-		
-		return review;
+		return comment;
 	}
 
-	private File createReviewImageFile(MultipartFile reviewImage) {
-		String nowDate = LocalDateTime.now().format(formatter);
-		String fileName = reviewImage.getOriginalFilename();
-		String saveFileName = "img_review/" + nowDate + fileName;
-		String filePath = "C:/reservation/" + saveFileName;
-		saveAtFileSystem(reviewImage, filePath);
-		
-		File reviewImageFile = new File();
-		reviewImageFile.setFileName(fileName);
-		reviewImageFile.setSaveFileName(saveFileName);
-		reviewImageFile.setContentType(reviewImage.getContentType());
-		fileDao.createFile(reviewImageFile);
-
-		return reviewImageFile;
+	private int createFileInfo(String fileName, String saveFileName, String contentType) {
+		FileInfo imageFileInfo = new FileInfo();
+		imageFileInfo.setFileName(fileName);
+		imageFileInfo.setSaveFileName(saveFileName);
+		imageFileInfo.setContentType(contentType);
+		fileInfoDao.createFileInfo(imageFileInfo);
+		return imageFileInfo.getId();
 	}
 
-	private void saveAtFileSystem(MultipartFile reviewImage, String saveFileName) {
-		try (
-			FileOutputStream fos = new FileOutputStream(saveFileName);
-			InputStream is = reviewImage.getInputStream();) {
-			int readCount = 0;
-			byte[] buffer = new byte[1024 * 1024 * 10];
-			while ((readCount = is.read(buffer)) != -1) {
-				fos.write(buffer, 0, readCount);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("file Save Error");
-		}
-	}
-
-	private ReservationUserCommentImage createReviewImage(int reservInfoId, int commentId, int fileId) {
-		ReservationUserCommentImage reviewImage = new ReservationUserCommentImage();
-		reviewImage.setReservationInfoId(reservInfoId);
-		reviewImage.setReservationUserCommentId(commentId);
-		reviewImage.setFileId(fileId);
-		reservationUserCommentImageDao.createCommentImage(reviewImage);
-		return reviewImage;
+	private int createCommentImage(int reservInfoId, int commentId, int fileId) {
+		ReservationUserCommentImage commentImage = new ReservationUserCommentImage();
+		commentImage.setReservationInfoId(reservInfoId);
+		commentImage.setReservationUserCommentId(commentId);
+		commentImage.setFileId(fileId);
+		reservationUserCommentImageDao.createCommentImage(commentImage);
+		return commentImage.getId();
 	}
 
 }

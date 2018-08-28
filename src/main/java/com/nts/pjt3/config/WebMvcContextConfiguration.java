@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.nts.pjt3.interceptor.LogInterceptor;
+import com.nts.pjt3.util.ImageUtil;
 
 @Configuration
 @EnableWebMvc
@@ -62,7 +63,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		multipartResolver.setMaxUploadSize(10 * 1024 * 1024);
+		multipartResolver.setMaxUploadSize(ImageUtil.MAX_IMAGE_SIZE);
 		return multipartResolver;
 	}
 	
