@@ -102,15 +102,11 @@ let main = {
             const GET_CATEGORIES_URL = "/api/categories";
             main.ajaxUtil.sendGetAjax(GET_CATEGORIES_URL)
             			.then(responseText => {
-            				main.category.addCategoryToEventTab(responseText);
+        					main.category.addCategoryToEventTab(responseText);
             			})
             			.catch(status => {
             				console.log(`get err(category): ${status}`);
             			});
-            let categoryRequest = new XMLHttpRequest();
-            categoryRequest.addEventListener("load", this.addCategoryToEventTab);
-            categoryRequest.open("GET", GET_CATEGORIES_URL);
-            categoryRequest.send();
         },
 
         setCategoryClickEvent() {
