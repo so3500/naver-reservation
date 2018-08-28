@@ -25,7 +25,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/css/**").addResourceLocations("/css/")
 			.setCachePeriod(31556926);
-		registry.addResourceHandler("/img/**").addResourceLocations("file:///C:/reservation/img/")
+		registry.addResourceHandler("/img/**").addResourceLocations("/img/")
 			.setCachePeriod(31556926);
 		registry.addResourceHandler("/img_map/**").addResourceLocations("file:///C:/reservation/img_map/")
 			.setCachePeriod(31556926);
