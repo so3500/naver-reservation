@@ -52,5 +52,5 @@ public class ReservationUserCommentRestController {
 		ReservationUserComment reservationUserComment = reservationUserCommentService.createComment(review, reviewImage);
 		return Collections.singletonMap("reservationUserComment", reservationUserComment);
 	}
-
+	
 }

@@ -24,6 +24,11 @@ public class ImageUtil {
 		return Singleton.INSTANCE;
 	}
 
+	/**
+	 * @param imagePath 이미지가 저장된 경로
+	 * @return imagePath에 저장된 이미지
+	 * @exception imagePath에 해당하는 이지미가 없을 경우
+	 */
 	public byte[] getImageByteArray(String imagePath) {
 		try (
 			FileInputStream imageStream = new FileInputStream(ROOT_PATH + imagePath)) {
@@ -33,6 +38,10 @@ public class ImageUtil {
 		}
 	}
 
+	/**
+	 * @param imageFile 이미지 파일
+	 * @param filePath 이미지 파일이 저장될 경로
+	 */
 	public void saveImageFileAtFileSystem(MultipartFile imageFile, String filePath) {
 		try (
 			FileOutputStream fos = new FileOutputStream(ROOT_PATH + filePath);

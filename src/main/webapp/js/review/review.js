@@ -16,8 +16,8 @@ let review = {
     	
         let reviewTemplate = document.querySelector("#review_template").innerText;
         this.bindReviewTemplate = Handlebars.compile(reviewTemplate);
-        Handlebars.registerHelper("firstImageSaveFileName", function(reservationUserCommentImages) {
-            return reservationUserCommentImages[0].saveFileName;
+        Handlebars.registerHelper("firstCommentImageId", function(reservationUserCommentImages) {
+            return reservationUserCommentImages[0].id;
         });
     },
 

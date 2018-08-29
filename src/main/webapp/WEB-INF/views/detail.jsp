@@ -6,38 +6,48 @@
 <html lang="ko">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-    <title>네이버 예약</title>
-    <link href="/css/style.css" rel="stylesheet">
-    <style>
-        .container_visual {
-            height: 414px;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="description"
+	content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+<title>네이버 예약</title>
+<link href="/css/style.css" rel="stylesheet">
+<style>
+.container_visual {
+	height: 414px;
+}
+</style>
 </head>
 
 <body>
-    <div id="container">
-        <div class="header fade">
-            <header class="header_tit">
-                <h1 class="logo">
-                    <a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="/mainpage" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
-                </h1>
-                <c:set var="loginEmail" value="${sessionScope.loginEmail}" />
-                <c:choose>
-                	<c:when test="${loginEmail ne null}">
-                		<a href="/myreservation?reservationEmail=${loginEmail}" class="btn_my"> <span class="viewReservation" title="예약확인">${loginEmail}</span> </a>
-                	</c:when>
-                	<c:when test="${loginEmail eq null}">
-                		<a href="/login" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
-                	</c:when>
-                </c:choose>
-            </header>
-        </div>
-        <div id="detail_main" class="ct main" data-display-info-id=${displayInfoId} data-product-id=${product.id}>
+	<div id="container">
+		<div class="header fade">
+			<header class="header_tit">
+				<h1 class="logo">
+					<a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span
+						class="spr_bi ico_n_logo">네이버</span>
+					</a> <a href="/mainpage" class="lnk_logo" title="예약"> <span
+						class="spr_bi ico_bk_logo">예약</span>
+					</a>
+				</h1>
+				<c:set var="loginEmail" value="${sessionScope.loginEmail}" />
+				<c:choose>
+					<c:when test="${loginEmail ne null}">
+						<a href="/myreservation?reservationEmail=${loginEmail}"
+							class="btn_my"> <span class="viewReservation" title="예약확인">${loginEmail}</span>
+						</a>
+					</c:when>
+					<c:when test="${loginEmail eq null}">
+						<a href="/login" class="btn_my"> <span class="viewReservation"
+							title="예약확인">예약확인</span>
+						</a>
+					</c:when>
+				</c:choose>
+			</header>
+		</div>
+		<div id="detail_main" class="ct main"
+			data-display-info-id=${displayInfoId } data-product-id=${product.id}>
             <div>
                 <div class="section_visual">
                     <header>
@@ -155,7 +165,7 @@
                                     </li>
                                     <li class="detail_info_lst"> <strong class="in_tit">[공지사항]</strong>
                                         <ul class="in_img_group">
-                                            <li class="in_img_lst"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170131_238/14858250829398Pnx6_JPEG/%B0%F8%C1%F6%BB%E7%C7%D7.jpg?type=a1000"> </li>
+                                            <li class="in_img_lst"> <img alt="" class="img_thumb" src="/img/notice_display_info.jpg"> </li>
                                         </ul>
                                     </li>
                                     <!-- <li class="detail_info_lst"> <strong class="in_tit">[공연정보]</strong>
@@ -204,17 +214,19 @@
                 </div>
             </div>
         </div>
-    </div>
-    <footer>
-        <div class="gototop">
-            <a href="#" class="lnk_top"> <span class="lnk_top_text">TOP</span> </a>
-        </div>
-        <div class="footer">
-            <p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
-            <span class="copyright">© NAVER Corp.</span>
-        </div>
-    </footer>
-    <div id="photoviwer"></div>
+	</div>
+	<footer>
+		<div class="gototop">
+			<a href="#" class="lnk_top"> <span class="lnk_top_text">TOP</span>
+			</a>
+		</div>
+		<div class="footer">
+			<p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및
+				환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
+			<span class="copyright">© NAVER Corp.</span>
+		</div>
+	</footer>
+	<div id="photoviwer"></div>
 
 	<script type="rv-template" id="product_image_template">
 		<li class="item" style="width: 414px; height:{{IMAGE_BOX_HEIGHT}}px" data-image-number="{{imageNumber}}"> <img alt="" class="img_thumb" src="/api/productImages/{{productId}}/{{productImageId}}"> <span class="img_bg"></span>
@@ -227,7 +239,7 @@
 		</li>
 	</script>
 
-	<script type="rv-template" id ="review_template">
+	<script type="rv-template" id="review_template">
 		{{#each this}}
 			<li class="list_item">
 			    <div>
@@ -235,7 +247,7 @@
 					<div class="review_area">
 			        	<div class="thumb_area">
 			            	<a href="#" class="thumb" title="이미지 크게 보기">
-								<img width="90" height="90" class="img_vertical_top" src="/{{firstImageSaveFileName reservationUserCommentImages}}" alt="리뷰이미지">
+								<img width="90" height="90" class="img_vertical_top" src="/api/commentImage/{{firstCommentImageId reservationUserCommentImages}}" alt="리뷰이미지">
 							</a>
 							<span class="img_count" style="display:none;">1</span>
 						</div>
@@ -260,17 +272,17 @@
 
 	<script type="rv-template" id="display_info_image_template">
 		<a href="#" class="store_location" title="지도웹으로 연결">
-			<img class="store_map img_thumb" alt="map" src="/{{saveFileName}}">
+			<img class="store_map img_thumb" alt="map" src="/api/displayInfoImages/{{displayInfoId}}">
 			<span class="img_border"></span>
 			<span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
 		</a>
 	</script>
 
-    <script src="/js/lib/handlebars-v4.0.11.js"></script>
-    <script src="/js/lib/jquery-3.3.1.min.js"></script>
+	<script src="/js/lib/handlebars-v4.0.11.js"></script>
+	<script src="/js/lib/jquery-3.3.1.min.js"></script>
 	<script src="/js/util/elementClass.util.js"></script>
 	<script src="/js/util/ajax.util.js"></script>
-    <script src="/js/detail/detail.js"></script>
+	<script src="/js/detail/detail.js"></script>
 </body>
 
 

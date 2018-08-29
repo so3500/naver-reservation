@@ -18,8 +18,13 @@ public class ReservationUserCommentImageService {
 		return reservationUserCommentImageDao.getAllByReservationUserCommentId(reservationUserCommentId);
 	}
 	
+	public ReservationUserCommentImage getByReservationUserCommentImageId(int reservationUserCommentImageId) {
+		return reservationUserCommentImageDao.getByReservationUserCommentImageId(reservationUserCommentImageId);
+	}
+	
 	public int createCommentImage(ReservationUserCommentImage commentImage) {
 		return reservationUserCommentImageDao.createCommentImage(commentImage);
 	}
+	
 
 }

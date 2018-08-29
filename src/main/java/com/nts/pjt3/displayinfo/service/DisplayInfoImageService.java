@@ -17,5 +17,9 @@ public class DisplayInfoImageService {
 	public List<DisplayInfoImage> getAllByDisplayInfoId(int displayInfoId) {
 		return displayInfoImageDao.getAllByDisplayInfoId(displayInfoId);
 	}
+	
+	public DisplayInfoImage getByDisplayInfoId(int displayInfoId) {
+		return displayInfoImageDao.getByDisplayInfoId(displayInfoId);
+	}
 
 }

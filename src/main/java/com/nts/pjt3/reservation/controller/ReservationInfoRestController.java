@@ -19,7 +19,7 @@ import com.nts.pjt3.reservation.dto.ReservationInfo;
 import com.nts.pjt3.reservation.service.ReservationInfoService;
 
 @RestController
-@RequestMapping(path = "/api/reservationInfos")
+@RequestMapping("/api/reservationInfos")
 public class ReservationInfoRestController {
 
 	@Autowired

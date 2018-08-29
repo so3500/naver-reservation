@@ -19,4 +19,24 @@
 			dpinfoimg.file_id = finfo.id
 			AND dpinfoimg.display_info_id = #{displayInfoId}
 	</select>
+	
+	<select id="getByDisplayInfoId" parameterType="int" resultType="DisplayInfoImage">
+		SELECT
+			dpinfoimg.id
+			, dpinfoimg.display_info_id
+			, finfo.id AS file_id
+			, finfo.file_name
+			, finfo.save_file_name
+			, finfo.content_type
+			, finfo.delete_flag
+			, finfo.create_date
+			, finfo.modify_date
+		FROM
+			display_info_image dpinfoimg
+			, file_info finfo
+		WHERE
+			dpinfoimg.file_id = finfo.id
+			AND dpinfoimg.display_info_id = #{displayInfoId}
+		LIMIT 1
+	</select>
 </mapper>
