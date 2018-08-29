@@ -270,7 +270,7 @@
     <script src="/js/lib/jquery-3.3.1.min.js"></script>
 	<script src="/js/util/elementClass.util.js"></script>
 	<script src="/js/util/ajax.util.js"></script>
-    <script src="/js/detail.js"></script>
+    <script src="/js/detail/detail.js"></script>
 </body>
 
 

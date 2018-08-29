@@ -156,7 +156,7 @@
 
 	<script src="/js/util/elementClass.util.js"></script>
 	<script src="/js/util/ajax.util.js"></script>
-	<script src="/js/reserve.js"></script>
+	<script src="/js/reserve/reserve.js"></script>
 </body>
 
 </html>

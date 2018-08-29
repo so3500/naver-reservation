@@ -147,7 +147,7 @@
 	<script src="/js/lib/handlebars-v4.0.11.js"></script>
 	<script src="/js/util/elementClass.util.js"></script>
 	<script src="/js/util/ajax.util.js"></script>
-	<script src="/js/mainpage.js"></script>
+	<script src="/js/mainpage/mainpage.js"></script>
 </body>
 
 </html>

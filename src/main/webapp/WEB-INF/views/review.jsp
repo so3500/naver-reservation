@@ -74,7 +74,7 @@
 	<script src="/js/lib/handlebars-v4.0.11.js"></script>
 	<script src="/js/util/elementClass.util.js"></script>
 	<script src="/js/util/ajax.util.js"></script>
-	<script src="/js/review.js"></script>
+	<script src="/js/review/review.js"></script>
 	<script type="rv-template" id="review_template">
 		{{#each this}}
 			<li class="list_item">

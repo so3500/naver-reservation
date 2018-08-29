@@ -120,6 +120,6 @@
 	</footer>
 	
 	<script src="/js/util/ajax.util.js"></script>
-	<script src="/js/reviewWrite.js"></script>
+	<script src="/js/reviewWrite/reviewWrite.js"></script>
 </body>
 </html>

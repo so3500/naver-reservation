@@ -18,7 +18,7 @@ import com.nts.pjt3.util.ImageUtil;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.nts.pjt3.controller"})
+@ComponentScan(basePackages = {"com.nts.pjt3"})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Override
@@ -44,7 +44,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(final ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("index");
+		registry.addViewController("/").setViewName("mainpage");
 	}
 	
 	@Override

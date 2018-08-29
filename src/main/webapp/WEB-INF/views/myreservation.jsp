@@ -329,7 +329,7 @@
 
 	<script src="/js/util/elementClass.util.js"></script>
 	<script src="/js/util/ajax.util.js"></script>
-	<script src="/js/myreservation.js"></script>
+	<script src="/js/myreservation/myreservation.js"></script>
 </body>
 
 </html>

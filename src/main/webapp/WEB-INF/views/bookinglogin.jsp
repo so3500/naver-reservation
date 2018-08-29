@@ -112,6 +112,6 @@
       </app>
 
 		<script src="/js/util/elementClass.util.js"></script>
-		<script src="/js/bookinglogin.js"></script>
+		<script src="/js/login/bookinglogin.js"></script>
    </body>
 </html>
