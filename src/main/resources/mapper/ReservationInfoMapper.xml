@@ -29,13 +29,8 @@
 		FROM
 			reservation_info rsvinfo
 			, product
-			, reservation_info_price rsvinfoprice
-			, product_price prdprice
 		WHERE
 			rsvinfo.product_id = product.id
-			AND rsvinfo.id = rsvinfoprice.reservation_info_id
-			AND rsvinfoprice.product_price_id = prdprice.id
-			AND prdprice.product_id = product.id
 			AND rsvinfo.reservation_email = #{reservationEmail}
 	</select>
 	
