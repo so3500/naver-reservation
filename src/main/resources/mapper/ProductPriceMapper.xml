@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.pjt3.product.dao.ProductPriceDao">
+	<select id="getAllByDisplayInfoId" parameterType="int" resultType="ProductPrice">
+		SELECT
+			pprice.id
+			, pprice.product_id
+			, pprice.price_type_name
+			, pprice.price
+			, pprice.discount_rate
+			, pprice.create_date
+			, pprice.modify_date
+		FROM
+			product_price pprice
+			, product
+			, display_info dpinfo
+		WHERE
+			pprice.product_id = product.id
+			AND product.id = dpinfo.product_id
+			AND dpinfo.id = #{displayInfoId}
+	</select>
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.pjt3.reservation.dao.ReservationInfoDao">
+
+	<select id="getAllByReservationInfoEmail" resultType="ReservationInfo">
+		SELECT DISTINCT
+			rsvinfo.id
+			, product.id AS product_id
+			, product.description AS product_description
+			, product.content AS product_content
+			, rsvinfo.display_info_id
+			, rsvinfo.reservation_name
+			, rsvinfo.reservation_tel
+			, rsvinfo.reservation_email
+			, rsvinfo.cancel_flag
+			, rsvinfo.reservation_date
+			, rsvinfo.create_date
+			, rsvinfo.modify_date
+			, ( 
+				SELECT
+					SUM(prdprice.price * rsvinfoprice.count) AS sum_price
+				FROM
+					product_price prdprice
+					, reservation_info_price rsvinfoprice
+				WHERE
+					rsvinfoprice.product_price_id = prdprice.id
+					AND rsvinfoprice.reservation_info_id = rsvinfo.id
+			) AS sum_price
+		FROM
+			reservation_info rsvinfo
+			, product
+		WHERE
+			rsvinfo.product_id = product.id
+			AND rsvinfo.reservation_email = #{reservationEmail}
+	</select>
+	
+	<insert id="createReservationInfo" useGeneratedKeys="true" keyProperty="id" parameterType="ReservationInfo">
+		INSERT INTO
+		reservation_info (
+			product_id
+			, display_info_id
+			, reservation_name
+			, reservation_tel
+			, reservation_email
+			, reservation_date
+			, create_date
+		)
+		VALUES (
+			#{productId}
+			, #{displayInfoId}
+			, #{reservationName}
+			, #{reservationTel}
+			, #{reservationEmail}
+			, #{reservationDate}
+			, NOW()
+		)
+	</insert>
+
+	<insert id="createReservationInfoPrice" useGeneratedKeys="true" keyProperty="id" parameterType="java.util.List">
+		INSERT INTO 
+			reservation_info_price (
+				reservation_info_id
+				, product_price_id
+				, count
+			)
+		VALUES
+			<foreach collection="list" item="reservationPrice" separator=",">
+				<if test="reservationPrice.count > 0">
+				(
+					#{reservationPrice.reservationInfoId}
+					, #{reservationPrice.productPriceId}
+					, #{reservationPrice.count}
+				)
+				</if>
+			</foreach>
+	</insert>
+	
+	<update id="cancelByReservationInfoId" parameterType="int">
+		UPDATE 
+			reservation_info
+		SET
+			cancel_flag = 1
+			, modify_date = NOW()
+		WHERE
+			id = #{reservationInfoId}
+		
+	</update>
+
+</mapper>

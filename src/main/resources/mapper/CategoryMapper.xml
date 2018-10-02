@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.pjt3.category.dao.CategoryDao">
+	<select id="getAll" resultType="Category">
+		SELECT
+			category.id
+			, category.name
+			, COUNT(*) AS count
+		FROM
+			category, product
+			, display_info disinfo
+		WHERE
+			category.id = product.category_id 
+			AND product.id = disinfo.product_id
+		GROUP BY
+			category.id
+	</select>
+</mapper>
+    
